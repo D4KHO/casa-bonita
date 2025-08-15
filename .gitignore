@@ -1,0 +1,24 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de entorno
+.env
+
+# Dependencias
+node_modules/
+
+# Archivos de editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Archivos de depuración
+*.log
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+*~

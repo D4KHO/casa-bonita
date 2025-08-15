@@ -1,0 +1,1312 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Bonita | Inmobiliaria en Piura con Techo Propio</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+    <meta name="description" content="Casa Bonita es una inmobiliaria en Piura que trabaja bajo el formato Techo Propio del Fondo Mivivienda, Construcción y Saneamiento de Perú: lotes más módulos de alta calidad con planes accesibles, ubicación estratégica y planes accesibles para que tengas tu casa propia en Piura.">
+    <meta name="author" content="Casa Bonita Residencial">
+    <meta name="keywords" content="inmobiliaria en Piura, techo propio, medidas del terreno, terrenos en Piura, terrenos para familias, Bono Familiar Habitacional, proyectos de vivienda en Piura">
+    
+    <meta property="og:title" content="Casa Bonita | Inmobiliaria en Piura con Techo Propio">
+    <meta property="og:description" content="Lotes más módulos de alta calidad con planes accesibles, ubicación estratégica para que tengas tu casa propia en Piura.">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="styleprueba.css">
+</head>
+<body>
+
+    <!-- Main header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <img src="assets/LOGO PNG NEGRO.png" alt="Casa Bonita Logo" class="logo-img" >
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
+                    <button onclick="scrollToSection('inicio')">Inicio</button>
+                    <button onclick="scrollToSection('proyecto')">Proyecto</button>
+                    <button onclick="scrollToSection('modelos')">Modelos</button>
+                    <button onclick="scrollToSection('techo-propio')">Techo Propio</button>
+                    <button onclick="scrollToSection('proceso')">Proceso</button>
+                    <button onclick="scrollToSection('contacto')">Contacto</button>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="cta-button">
+                    <button class="btn btn-hero" onclick="scrollToSection('contacto')">
+                        ¡Consulta Aquí!
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                    <svg class="close-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav class="mobile-nav hidden" id="mobileNav">
+                <div class="mobile-nav-content">
+                    <button onclick="scrollToSection('inicio'); closeMobileMenu()">Inicio</button>
+                    <button onclick="scrollToSection('proyecto'); closeMobileMenu()">Proyecto</button>
+                    <button onclick="scrollToSection('modelos'); closeMobileMenu()">Modelos</button>
+                    <button onclick="scrollToSection('techo-propio'); closeMobileMenu()">Techo Propio</button>
+                    <button onclick="scrollToSection('proceso'); closeMobileMenu()">Proceso</button>
+                    <button onclick="scrollToSection('contacto'); closeMobileMenu()">Contacto</button>
+                    <button class="btn btn-hero" onclick="scrollToSection('contacto'); closeMobileMenu()">
+                        ¡Consulta Aquí!
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-background">
+            <video src="assets/Recorrido hero 1_optimized.mp4" autoplay loop muted></video>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <!-- Badge -->
+                    <div class="hero-badge">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="6"/>
+                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+                        </svg>
+                        <span>Programa Techo Propio Aprobado</span>
+                    </div>
+
+                <!-- Main Heading -->
+                <h1 class="hero-title">
+                    <strong>Casa Bonita</strong> <span class="title-accent">Residencial</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="hero-subtitle">
+                    Tu casa propia en Piura empieza en Casa Bonita Residencial
+                </p>
+                
+                <p class="hero-description">
+                    Casa Bonita es una inmobiliaria en Piura que trabaja bajo el formato Techo Propio del Fondo Mivivienda, Construcción y Saneamiento de Perú: lotes más módulos de alta calidad con planes accesibles y ubicación estratégica para que tengas tu casa propia en Piura.
+                </p>
+
+                <!-- Location -->
+                <div class="hero-location">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span>Piura, Perú</span>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hero-buttons">
+                    <button class="btn btn-accent" onclick="scrollToSection('contacto')">
+                        📍 Quiero mi casa propia
+                    </button>
+                    <button class="btn btn-nature" onclick="scrollToSection('modelos')">
+                        Ver modelos
+                    </button>
+                </div>
+
+                <!-- Stats moved to between sections -->
+                </div>
+
+                <!-- Right Content - Search Form -->
+                <div class="hero-search">
+                    <h2>Solicita información y conoce tu nuevo hogar</h2>
+                    <form id="heroContactForm" class="search-form">
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <input type="text" name="nombre" class="form-input" placeholder="Nombre completo *" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </div>
+                            <input type="tel" name="telefono" class="form-input" placeholder="Teléfono *" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <input type="email" name="email" class="form-input" placeholder="Correo electrónico">
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                            </div>
+                            <textarea name="mensaje" class="form-input" rows="3" placeholder="Mensaje (opcional)"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="form-submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                            Solicitar contacto
+                        </button>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+        </div>
+        </section>
+
+    <!-- Stats Section (Between Hero and Project) -->
+    <!-- Stats Section overlapping with Hero and Project sections -->
+    <section class="stats-section">
+        <div class="hero-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="stat-number">108 m²</div>
+                <div class="stat-label">Área del terreno</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 9h18M9 9v12" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="stat-number">35 m²</div>
+                <div class="stat-label">Área construida</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Financiamiento</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Section -->
+    <section id="proyecto" class="project-section">
+        <div class="container">
+            <!-- Header mejorado -->
+            <div class="project-header">
+                  <h2 class="project-title">¿Por qué elegir Casa Bonita Residencial?</h2>
+                <p class="project-subtitle">Descubre las ventajas únicas que hacen de Casa Bonita la mejor opción para tu familia en Piura</p>
+            </div>
+
+            <!-- Sección principal con imagen y contenido -->
+            <div class="project-showcase">
+                <div class="showcase-content">
+                    <div class="showcase-text">
+                        <h3>Tu hogar ideal en el corazón de Piura</h3>
+                        <p>Casa Bonita Residencial combina la tranquilidad de vivir en un entorno natural con la comodidad de estar en el casco urbano. Nuestros lotes + módulos están estratégicamente ubicados para ofrecerte lo mejor de ambos mundos.</p>
+                        
+                        <div class="highlight-stats">
+                            <div class="highlight-stat">
+                                <div class="stat-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                        <polyline points="9,22 9,12 15,12 15,22"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-number">150+</span>
+                                    <span class="stat-label">Familias felices</span>
+                                </div>
+                            </div>
+                            <div class="highlight-stat">
+                                <div class="stat-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12,6 12,12 16,14"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-number">3-4</span>
+                                    <span class="stat-label">Meses de construcción</span>
+                                </div>
+                            </div>
+                            <div class="highlight-stat">
+                                <div class="stat-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                        <polyline points="22,4 12,14.01 9,11.01"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-number">100%</span>
+                                    <span class="stat-label">Aprobación Techo Propio</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showcase-image">
+                        <div class="model-container" style="position: relative; width: 100%; height: 100%;">
+                            <!-- Placeholder de carga -->
+                            <div class="model-loading" style="position: absolute; inset: 0; background: #f5f5f5; display: flex; align-items: center; justify-content: center;">
+                                <div class="spinner"></div>
+                            </div>
+                            
+                            <!-- Modelo 3D optimizado -->
+                            <model-viewer 
+                                id="casa-model"
+                                src="assets/casa.glb" 
+                                alt="Modelo 3D de Casa Bonita Residencial"
+                                auto-rotate
+                                camera-controls
+                                shadow-intensity="0.7"
+                                camera-orbit="45deg 60deg 100%"
+                                field-of-view="45deg"
+                                min-camera-orbit="auto 30deg auto"
+                                max-camera-orbit="auto 75deg auto"
+                                exposure="1"
+                                environment-intensity="0.8"
+                                shadow-softness="0.6"
+                                loading="eager"
+                                reveal="auto"
+                                style="width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
+                                
+                                <!-- Mensaje de carga -->
+                                <div slot="poster" class="model-poster">
+                                    <div class="spinner"></div>
+                                    <p>Cargando modelo 3D...</p>
+                                </div>
+                            </model-viewer>
+                        </div>
+                        
+                        <!-- Estilos para el spinner de carga -->
+                        <style>
+                            @keyframes spin {
+                                0% { transform: rotate(0deg); }
+                                100% { transform: rotate(360deg); }
+                            }
+                            .spinner {
+                                width: 40px;
+                                height: 40px;
+                                border: 4px solid rgba(0, 0, 0, 0.1);
+                                border-left-color: #000;
+                                border-radius: 50%;
+                                animation: spin 1s linear infinite;
+                            }
+                        </style>
+                        
+                        <!-- Script para manejar la carga -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const modelViewer = document.querySelector('model-viewer');
+                                const loadingElement = document.querySelector('.model-loading');
+                                
+                                if (modelViewer) {
+                                    modelViewer.addEventListener('load', () => {
+                                        modelViewer.style.opacity = '1';
+                                        if (loadingElement) {
+                                            loadingElement.style.display = 'none';
+                                        }
+                                    });
+                                    
+                                    // Mostrar mensaje de error si falla la carga
+                                    modelViewer.addEventListener('error', () => {
+                                        console.error('Error al cargar el modelo 3D');
+                                        if (loadingElement) {
+                                            loadingElement.textContent = 'No se pudo cargar el modelo 3D';
+                                        }
+                                    });
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid de características mejorado -->
+            <div class="features-section">
+                <div class="features-header">
+                    <h3>Ventajas exclusivas de Casa Bonita</h3>
+                    <p>Cada detalle pensado para tu comodidad y tranquilidad</p>
+                </div>
+
+                <div class="features-grid-enhanced">
+                    <div class="feature-card-enhanced primary">
+                        <div class="feature-header">
+                            <div class="feature-icon-enhanced" style="background: #1e40af">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                    <path d="M3 9h18M9 21V9"/>
+                                </svg>
+                            </div>
+                            <div class="feature-badge">Transparencia</div>
+                        </div>
+                        <h4>Medidas del terreno claras</h4>
+                        <p>Lotes desde 66 m² hasta 108 m² con 35 m² de vivienda construida. Documentación completa y medidas exactas garantizadas.</p>
+                        <div class="feature-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📐</span>
+                                <span>Planos arquitectónicos incluidos</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📋</span>
+                                <span>Documentación legal al día</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card-enhanced secondary">
+                        <div class="feature-header">
+                            <div class="feature-icon-enhanced" style="background: #7c3aed">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <div class="feature-badge">Ubicación</div>
+                        </div>
+                        <h4>Ubicación estratégica premium</h4>
+                        <p>En el casco urbano de Piura, cerca de servicios esenciales pero rodeado de naturaleza. Lo mejor de la ciudad y el campo.</p>
+                        <div class="feature-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">🏥</span>
+                                <span>Centros de salud cercanos</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">🛒</span>
+                                <span>Comercios y mercados</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card-enhanced accent">
+                        <div class="feature-header">
+                            <div class="feature-icon-enhanced" style="background: #d97706">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <div class="feature-badge">Financiamiento</div>
+                        </div>
+                        <h4>Facilidades de pago únicas</h4>
+                        <p>100% financiado con Techo Propio. Sin cuota inicial, sin intereses. Planes diseñados para familias peruanas.</p>
+                        <div class="feature-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">💰</span>
+                                <span>0% de cuota inicial</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📊</span>
+                                <span>Hasta 20 años de plazo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card-enhanced nature">
+                        <div class="feature-header">
+                            <div class="feature-icon-enhanced" style="background: #16a34a">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2a3 3 0 0 0-3 3c0 1.5.5 2.5 1 3l2 2 2-2c.5-.5 1-1.5 1-3a3 3 0 0 0-3-3z"/>
+                                    <path d="M12 15a3 3 0 0 1-3-3c0-1.5.5-2.5 1-3l2-2 2 2c.5.5 1 1.5 1 3a3 3 0 0 1-3 3z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-badge">Naturaleza</div>
+                        </div>
+                        <h4>Entorno natural privilegiado</h4>
+                        <p>Rodeado del bosque de algarrobos, patrimonio natural de Piura. Áreas verdes, parques y espacios para toda la familia.</p>
+                        <div class="feature-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">🌳</span>
+                                <span>Bosque de algarrobos</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">🏞️</span>
+                                <span>Parques y áreas recreativas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card-enhanced services">
+                        <div class="feature-header">
+                            <div class="feature-icon-enhanced" style="background: #dc2626">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-badge">Servicios</div>
+                        </div>
+                        <h4>Servicios básicos completos</h4>
+                        <p>Agua potable, electricidad, desagüe y pistas pavimentadas. Infraestructura moderna desde el primer día.</p>
+                        <div class="feature-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">💧</span>
+                                <span>Agua potable 24/7</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">🛣️</span>
+                                <span>Pistas pavimentadas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card-enhanced education">
+                        <div class="feature-header">
+                            <div class="feature-icon-enhanced" style="background: #8b5cf6">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-badge">Educación</div>
+                        </div>
+                        <h4>Zona educativa de calidad</h4>
+                        <p>Colegios, institutos y universidades en la zona. Educación de calidad al alcance de tus hijos.</p>
+                        <div class="feature-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">🎓</span>
+                                <span>Universidades cercanas</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📚</span>
+                                <span>Colegios de prestigio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to action mejorado -->
+            <div class="project-cta">
+                <div class="cta-content">
+                    <div class="cta-text">
+                        <h3>¿Listo para conocer tu futuro hogar?</h3>
+                        <p>Agenda una visita personalizada y descubre por qué Casa Bonita es la mejor opción para tu familia</p>
+                    </div>
+                    <div class="cta-buttons">
+                        <button class="btn btn-accent" onclick="scrollToSection('contacto')">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            Agendar visita
+                        </button>
+                        <button class="btn btn-model" onclick="scrollToSection('modelos')">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            Ver modelos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modelos Section -->
+    <section id="modelos" class="modelos-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Modelos de Vivienda</h2>
+                <p>Conoce nuestros diseños funcionales y modernos, perfectos para tu familia y con posibilidad de ampliación.</p>
+            </div>
+
+            <div class="modelos-grid">
+                <!-- Casa Modelo -->
+                <div class="modelo-card">
+                    <div class="modelo-image">
+                        <img src="assets/casa-modelo-1-DNVuwG2y.jpg" alt="Casa Modelo 1">
+                        <div class="modelo-badge">Modelo Popular</div>
+                    </div>
+                    <div class="modelo-content">
+                        <h3>Casa Familiar</h3>
+                        
+                        <!-- Specs -->
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                </svg>
+                                <div>
+                                    <p class="spec-label">Área construida</p>
+                                    <p class="spec-value">35 m²</p>
+                                </div>
+                            </div>
+                            <div class="spec-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15,3 21,3 21,9"/>
+                                    <polyline points="9,21 3,21 3,15"/>
+                                </svg>
+                                <div>
+                                    <p class="spec-label">Lote total</p>
+                                    <p class="spec-value">108 m²</p>
+                                </div>
+                            </div>
+                            <div class="spec-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                                </svg>
+                                <div>
+                                    <p class="spec-label">Dormitorios</p>
+                                    <p class="spec-value">2</p>
+                                </div>
+                            </div>
+                            <div class="spec-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/>
+                                    <line x1="10" y1="5" x2="8" y2="7"/>
+                                    <line x1="2" y1="12" x2="22" y2="12"/>
+                                    <line x1="7" y1="19" x2="7" y2="12"/>
+                                    <line x1="17" y1="19" x2="17" y2="12"/>
+                                </svg>
+                                <div>
+                                    <p class="spec-label">Baños</p>
+                                    <p class="spec-value">1 completo</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="features-list">
+                            <h4>Incluye:</h4>
+                            <ul>
+                                <li>• Sala y comedor integrados</li>
+                                <li>• Cocina con muebles básicos</li>
+                                <li>• Patio posterior para ampliación</li>
+                                <li>• Cerco perimétrico incluido</li>
+                                <li>• Conexiones de agua, luz y desagüe</li>
+                            </ul>
+                        </div>
+
+                        <div class="modelo-buttons">
+                            <button class="btn btn-hero" onclick="scrollToSection('contacto')">
+                                Consultar precio
+                            </button>
+                            <button class="btn btn-outline" onclick="scrollToSection('techo-propio')">
+                                Ver financiamiento
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plano -->
+                <div class="modelo-card">
+                    <div class="modelo-image">
+                        <img src="assets/plano-casa-BYny3jnq.jpg" alt="Plano de casa">
+                        <div class="modelo-badge">Plano Arquitectónico</div>
+                    </div>
+                    <div class="modelo-content">
+                        <h3>Distribución Inteligente</h3>
+                        
+                        <div class="distribution-info">
+                            <h4>Espacios optimizados:</h4>
+                            <div class="distribution-grid">
+                                <div class="distribution-item">
+                                    <span>Dormitorio principal:</span>
+                                    <span>12 m²</span>
+                                </div>
+                                <div class="distribution-item">
+                                    <span>Dormitorio 2:</span>
+                                    <span>8 m²</span>
+                                </div>
+                                <div class="distribution-item">
+                                    <span>Sala-comedor:</span>
+                                    <span>10 m²</span>
+                                </div>
+                                <div class="distribution-item">
+                                    <span>Cocina:</span>
+                                    <span>4 m²</span>
+                                </div>
+                                <div class="distribution-item">
+                                    <span>Baño:</span>
+                                    <span>3 m²</span>
+                                </div>
+                                <div class="distribution-item">
+                                    <span>Patio/jardín:</span>
+                                    <span>70 m²</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="expansion-info">
+                            <h4>💡 Posibilidades de ampliación:</h4>
+                            <ul>
+                                <li>• Segundo piso (35 m² adicionales)</li>
+                                <li>• Ampliación horizontal (hasta 25 m²)</li>
+                                <li>• Cochera techada</li>
+                                <li>• Área de lavandería</li>
+                            </ul>
+                        </div>
+
+                        <button class="btn btn-accent full-width" onclick="scrollToSection('contacto')">
+                            Solicitar visita personalizada
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Techo Propio Section -->
+    <section id="techo-propio" class="techo-propio-section">
+        <div class="container">
+            <!-- Header Section -->
+            <div class="section-header">
+                <div class="section-badge">Programa Gubernamental</div>
+                <h2>Programa Techo Propio</h2>
+                <p>Conoce todo sobre el programa gubernamental que te ayudará a obtener tu casa propia con el apoyo del Estado peruano.</p>
+            </div>
+
+            <!-- Benefits Overview -->
+            <div class="benefits-overview">
+                <h3>Beneficios del Programa</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <h4>Bono Familiar Habitacional</h4>
+                        <div class="benefit-highlight">S/ 35,000</div>
+                        <p>Hasta S/ 35,000 del Estado peruano</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9,22 9,12 15,12 15,22"/>
+                            </svg>
+                        </div>
+                        <h4>Financiamiento Total</h4>
+                        <div class="benefit-highlight">0% inicial</div>
+                        <p>100% financiado sin cuota inicial</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                        </div>
+                        <h4>Plazo Cómodo</h4>
+                        <div class="benefit-highlight">20 años</div>
+                        <p>Hasta 20 años para pagar</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Requirements Section -->
+            <div class="requirements-section">
+                <div class="requirements-header">
+                    <h3>Requisitos para Acceder al Bono</h3>
+                    <p>Para postular al programa Techo Propio y acceder al Bono Familiar Habitacional, es importante cumplir con las siguientes condiciones:</p>
+                </div>
+
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <div class="requirement-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <div class="requirement-content">
+                            <h4>Sin Propiedades a tu Nombre</h4>
+                            <p>No contar con una propiedad a tu nombre, ya sea casa, departamento o terreno en cualquier parte del país.</p>
+                        </div>
+                    </div>
+
+                    <div class="requirement-card">
+                        <div class="requirement-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <div class="requirement-content">
+                            <h4>Primer Beneficio</h4>
+                            <p>No haber recibido antes ningún beneficio de programas estatales de vivienda.</p>
+                        </div>
+                    </div>
+
+                    <div class="requirement-card">
+                        <div class="requirement-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <div class="requirement-content">
+                            <h4>Carga Familiar</h4>
+                            <p>Tener carga familiar, que puede estar conformada por hijos, padres, abuelos o hermanos que dependan de ti.</p>
+                        </div>
+                    </div>
+
+                    <div class="requirement-card">
+                        <div class="requirement-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <div class="requirement-content">
+                            <h4>Ingresos Familiares</h4>
+                            <p>Contar con ingresos familiares mensuales que no superen los S/ 3,715.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefits-note">
+                    <p>Cumplir con estos requisitos es el primer paso para acceder a tu hogar propio con el apoyo del Estado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proceso Section -->
+    <section id="proceso" class="proceso-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>¿Cómo obtener tu casa?</h2>
+                <p>Te acompañamos en cada paso del proceso. Desde la evaluación inicial hasta la entrega de llaves, nuestro equipo te brinda asesoría personalizada y gratuita.</p>
+            </div>
+
+            <div class="timeline">
+                <!-- Línea central con números -->
+                <div class="timeline-line">
+                    <div class="timeline-dot">01</div>
+                    <div class="timeline-dot">02</div>
+                    <div class="timeline-dot">03</div>
+                    <div class="timeline-dot">04</div>
+                    <div class="timeline-dot">05</div>
+                    <div class="timeline-dot">06</div>
+                </div>
+
+                <!-- Contenido de la línea de tiempo -->
+                <div class="timeline-container">
+                    <!-- Fila 1 -->
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-time">1 día</div>
+                            <h3>Evaluación inicial</h3>
+                            <p>Completa nuestro formulario y verifica si cumples con los requisitos del programa Techo Propio</p>
+                        </div>
+                    </div>
+
+                    <!-- Fila 2 -->
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-time">3-5 días</div>
+                            <h3>Verificación de documentos</h3>
+                            <p>Nuestros asesores revisan tu documentación y te guían en el proceso de postulación</p>
+                        </div>
+                    </div>
+
+                    <!-- Fila 3 -->
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-time">1-2 semanas</div>
+                            <h3>Inscripción al programa</h3>
+                            <p>Te ayudamos a inscribirte oficialmente en el programa Techo Propio del Ministerio de Vivienda</p>
+                        </div>
+                    </div>
+
+                    <!-- Fila 4 -->
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-time">2-4 semanas</div>
+                            <h3>Aprobación del bono</h3>
+                            <p>El Estado aprueba tu bono familiar habitacional y seleccionas tu lote en Casa Bonita</p>
+                        </div>
+                    </div>      
+
+                    <!-- Fila 5 -->
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-time">1 día</div>
+                            <h3>Firma de contrato</h3>
+                            <p>Firmamos el contrato de compraventa y se inicia la construcción de tu vivienda</p>
+                        </div>
+                    </div>
+
+                    <!-- Fila 6 -->
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-time">3-4 meses</div>
+                            <h3>Entrega de llaves</h3>
+                            <p>¡Recibe las llaves de tu casa propia! Mudanza e inicio de tu nueva vida</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="proceso-cta">
+                <h3>¿Listo para empezar?</h3>
+                <p>Inicia tu proceso hoy mismo. Nuestros asesores especializados te esperan para hacer realidad el sueño de tu casa propia.</p>
+                <div class="proceso-buttons">
+                    <button class="btn btn-accent" onclick="scrollToSection('contacto')">
+                        Iniciar mi proceso
+                    </button>
+                    <button class="btn btn-nature" onclick="openWhatsApp()">
+                        WhatsApp directo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios Section -->
+    <section class="testimonios-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Familias felices en Casa Bonita</h2>
+                <p>Conoce las historias de éxito de nuestros vecinos que ya disfrutan de su casa propia gracias al programa Techo Propio.</p>
+            </div>
+
+            <div class="testimonios-grid">
+                <div class="testimonio-card">
+                    <div class="testimonio-quote">
+                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+                            <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+                        </svg>
+                        <div class="stars">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                    <p>"Gracias a Casa Bonita Residencial pudimos tener nuestra casa propia. El proceso fue muy fácil y nos ayudaron con todos los trámites del programa Techo Propio. ¡Estamos muy felices!"</p>
+                    <div class="testimonio-author">
+                        <div class="author-avatar">
+                            <img src="assets/familia-feliz-COGM3Pca.jpg" alt="María González">
+                        </div>
+                        <div class="author-info">
+                            <h4>María González</h4>
+                            <p>Familia de 4 personas</p>
+                            <span>Casa Bonita - Lote 15</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonio-card">
+                    <div class="testimonio-quote">
+                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+                            <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+                        </svg>
+                        <div class="stars">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                    <p>"Siempre soñamos con tener nuestra propia casa. Con el programa Techo Propio y la ayuda del equipo de Casa Bonita lo logramos sin cuota inicial. La casa es hermosa y la zona muy tranquila."</p>
+                    <div class="testimonio-author">
+                        <div class="author-avatar">
+                            <span>CR</span>
+                        </div>
+                        <div class="author-info">
+                            <h4>Carlos Ramírez</h4>
+                            <p>Pareja joven</p>
+                            <span>Casa Bonita - Lote 23</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonio-card">
+                    <div class="testimonio-quote">
+                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+                            <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+                        </svg>
+                        <div class="stars">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                    <p>"Como madre soltera pensé que nunca podría tener casa propia. Pero Casa Bonita me explicó todo sobre Techo Propio y ahora mis hijos tienen su hogar. ¡Mil gracias!"</p>
+                    <div class="testimonio-author">
+                        <div class="author-avatar">
+                            <span>AT</span>
+                        </div>
+                        <div class="author-info">
+                            <h4>Ana Luisa Torres</h4>
+                            <p>Madre soltera con 2 hijos</p>
+                            <span>Casa Bonita - Lote 8</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonio-card">
+                    <div class="testimonio-quote">
+                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+                            <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+                        </svg>
+                        <div class="stars">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                    <p>"La atención fue excelente desde el primer día. Nos explicaron todo paso a paso y siempre estuvieron disponibles para resolver nuestras dudas. Recomiendo Casa Bonita 100%."</p>
+                    <div class="testimonio-author">
+                        <div class="author-avatar">
+                            <span>RS</span>
+                        </div>
+                        <div class="author-info">
+                            <h4>Roberto Silva</h4>
+                            <p>Familia extendida</p>
+                            <span>Casa Bonita - Lote 31</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="satisfaction-stats">
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <p>Familias satisfechas</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <p>Casas entregadas</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <p>Casos aprobados por Techo Propio</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.9★</div>
+                    <p>Calificación promedio</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="contacto-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>¡Contáctanos Ahora!</h2>
+                <p>Completa el formulario y nuestros asesores especializados te contactarán en menos de 24 horas para evaluar tu caso sin compromiso.</p>
+            </div>
+
+            <div class="contacto-content">
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-header">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            <h3>Contacto directo</h3>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                                <div>
+                                    <p class="contact-label">Ventas</p>
+                                    <p class="contact-value">+51 946 552 086</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                                <div>
+                                    <p class="contact-label">Email</p>
+                                    <p class="contact-value">ventas@casabonita.pe</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                <div>
+                                    <p class="contact-label">Oficina</p>
+                                    <p class="contact-value">Av. Principal 123, Piura</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12,6 12,12 16,14"/>
+                                </svg>
+                                <div>
+                                    <p class="contact-label">Horarios</p>
+                                    <p class="contact-value">Lun - Sab: 9:00 - 18:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="whatsapp-card">
+                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        <h3>¿Necesitas respuesta inmediata?</h3>
+                        <p>Chatea con nosotros por WhatsApp y obtén respuestas al instante</p>
+                        <button class="btn btn-hero full-width" onclick="openWhatsApp()">
+                            💬 Chatear ahora
+                        </button>
+                    </div>
+
+                    <div class="promo-card">
+                        <h3>🎉 Promoción Especial</h3>
+                        <p>¡Los primeros 10 contactos de este mes reciben asesoría personalizada gratuita y evaluación express!</p>
+                        <p class="promo-disclaimer">*Válido hasta fin de mes</p>
+                    </div>
+                </div>
+
+                <!-- Formulario -->
+                <div class="contact-form-container">
+                    <div class="form-card">
+                        <div class="form-header">
+                            <h3>Formulario de contacto</h3>
+                            <p>Llena todos los campos para una evaluación más precisa</p>
+                        </div>
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre completo *</label>
+                                    <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez García">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dni">DNI *</label>
+                                    <input type="text" id="dni" name="dni" required placeholder="12345678" maxlength="8">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="telefono">Teléfono *</label>
+                                    <input type="tel" id="telefono" name="telefono" required placeholder="946 552 086">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Correo electrónico</label>
+                                    <input type="email" id="email" name="email" placeholder="juan@email.com">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="grupoFamiliar">¿Tienes grupo familiar? *</label>
+                                    <select id="grupoFamiliar" name="grupoFamiliar" required>
+                                        <option value="">Selecciona una opción</option>
+                                        <option value="soltero">Soltero/a</option>
+                                        <option value="pareja">En pareja (sin hijos)</option>
+                                        <option value="familia-1">Familia con 1 hijo</option>
+                                        <option value="familia-2">Familia con 2 hijos</option>
+                                        <option value="familia-3">Familia con 3+ hijos</option>
+                                        <option value="madre-soltera">Madre/Padre soltero</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ingresoMensual">Ingreso familiar mensual *</label>
+                                    <select id="ingresoMensual" name="ingresoMensual" required>
+                                        <option value="">Selecciona tu rango</option>
+                                        <option value="800-1200">S/ 800 - S/ 1,200</option>
+                                        <option value="1200-1800">S/ 1,200 - S/ 1,800</option>
+                                        <option value="1800-2500">S/ 1,800 - S/ 2,500</option>
+                                        <option value="2500+">Más de S/ 2,500</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mensaje">Mensaje adicional</label>
+                                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos sobre tu situación actual, dudas específicas, o cualquier información adicional que consideres importante..."></textarea>
+                            </div>
+
+                            <div class="form-checkbox">
+                                <input type="checkbox" id="terminos" name="terminos" required>
+                                <label for="terminos">
+                                    Acepto que Casa Bonita Residencial me contacte para brindarme información sobre sus servicios y el programa Techo Propio *
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-hero full-width">
+                                🏠 Solicitar asesoría gratuita
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Logo y descripción -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/LOGO PNG BLANCO.png" alt="Casa Bonita Logo" class="footer-logo-img" >
+                    </div>
+                    <p class="footer-description">
+                        Tu hogar soñado en Piura te espera. Más de 150 familias ya viven felices en Casa Bonita Residencial gracias al programa Techo Propio.
+                    </p>
+                    <div class="social-links">
+                        <button class="social-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </button>
+                        <button class="social-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.042-3.441.219-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.653 2.567-.992 3.992-.282 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.111.221.082.343-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z"/>
+                            </svg>
+                        </button>
+                        <button class="social-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Enlaces rápidos -->
+                <div class="footer-section">
+                    <h4>Enlaces rápidos</h4>
+                    <ul class="footer-links">
+                        <li><button onclick="scrollToSection('inicio')">Inicio</button></li>
+                        <li><button onclick="scrollToSection('proyecto')">Sobre el proyecto</button></li>
+                        <li><button onclick="scrollToSection('modelos')">Modelos de vivienda</button></li>
+                        <li><button onclick="scrollToSection('techo-propio')">Programa Techo Propio</button></li>
+                        <li><button onclick="scrollToSection('proceso')">Proceso de compra</button></li>
+                    </ul>
+                </div>
+
+                <!-- Información -->
+                <div class="footer-section">
+                    <h4>Información</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Preguntas frecuentes</a></li>
+                        <li><a href="#">Términos y condiciones</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                        <li><a href="#">Financiamiento</a></li>
+                        <li><a href="#">Testimonios</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacto -->
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            <span>+51 946 552 086</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>Piura, Perú</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                            <span>@casabonita.residencial</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                            <span>Lun - Sab: 9:00 - 18:00</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            <span>ventas@casabonita.pe</span>
+                        </div>
+                        <div class="footer-whatsapp-button">
+                            <button class="btn btn-whatsapp-footer" onclick="openWhatsApp()">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                                    <path d="M19.2,4.8C17.1,2.7,14.4,1.5,11.5,1.5c-5.5,0-10,4.5-10,10c0,1.8,0.5,3.5,1.4,5l-1.5,5.5l5.6-1.5 c1.4,0.8,3,1.3,4.6,1.3h0c5.5,0,10-4.5,10-10C21.5,9.1,20.4,6.9,19.2,4.8z M11.5,19.5c-1.5,0-2.9-0.4-4.2-1.2l-0.3-0.2l-3.1,0.8 l0.8-3l-0.2-0.3c-0.9-1.3-1.4-2.8-1.4-4.4c0-4.4,3.6-8,8-8c2.2,0,4.2,0.9,5.7,2.3c1.5,1.5,2.3,3.5,2.3,5.7 C19.5,15.9,15.9,19.5,11.5,19.5z M16.4,13.4c-0.2-0.1-1.4-0.7-1.6-0.8c-0.2-0.1-0.4-0.1-0.5,0.1c-0.2,0.2-0.6,0.8-0.8,0.9 c-0.1,0.1-0.3,0.2-0.5,0.1c-0.2-0.1-1-0.4-1.9-1.2c-0.7-0.6-1.2-1.4-1.3-1.6c-0.1-0.2,0-0.4,0.1-0.5c0.1-0.1,0.2-0.3,0.4-0.4 c0.1-0.1,0.2-0.2,0.2-0.4c0.1-0.1,0.1-0.3,0-0.4c-0.1-0.1-0.5-1.3-0.7-1.8c-0.2-0.5-0.4-0.4-0.5-0.4c-0.1,0-0.3,0-0.5,0 s-0.5,0.1-0.8,0.4c-0.3,0.3-1,1-1,2.5c0,1.5,1,2.9,1.2,3.1c0.2,0.2,2,3.1,4.9,4.3c0.7,0.3,1.2,0.4,1.6,0.6 c0.7,0.2,1.4,0.2,1.9,0.1c0.6-0.1,1.8-0.7,2-1.4c0.2-0.7,0.2-1.3,0.1-1.4C16.9,13.6,16.7,13.5,16.4,13.4z"/>
+                                </svg>
+                                <span>Escríbenos por WhatsApp</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer bottom -->
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2024 Casa Bonita Residencial. Todos los derechos reservados.
+                </div>
+                <div class="footer-approval">
+                    <span>Proyecto aprobado por:</span>
+                    <div class="approval-badge">
+                        <div class="approval-icon">MV</div>
+                        <span>Ministerio de Vivienda</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp flotante -->
+    <div class="whatsapp-float">
+        <button onclick="openWhatsApp()" class="whatsapp-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.106"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
