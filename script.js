@@ -229,7 +229,7 @@ function animateOnScroll() {
 }
 
 function animateCounters() {
-    const counters = document.querySelectorAll('.stat-number');
+     const counters = document.querySelectorAll('.stat-number:not(.highlight-stats .stat-number)');
     const observerOptions = {
         threshold: 0.4,
         rootMargin: '0px 0px -20px 0px'
