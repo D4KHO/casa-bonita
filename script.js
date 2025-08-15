@@ -50,19 +50,25 @@ function openWhatsApp() {
 function handleFormSubmit(event) {
     event.preventDefault();
     
-    const formData = new FormData(event.target);
+    const form = event.target;
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData);
     
+    // Validar campos obligatorios
     if (!data.terminos) {
         showToast('Error: Debes aceptar los términos y condiciones', 'error');
         return;
     }
     
-    if (!data.nombre || !data.dni || !data.telefono || !data.grupoFamiliar || !data.ingresoMensual) {
+    const requiredFields = ['nombre', 'dni', 'telefono', 'grupoFamiliar', 'ingresoMensual'];
+    const missingFields = requiredFields.filter(field => !data[field]);
+    
+    if (missingFields.length > 0) {
         showToast('Error: Por favor completa todos los campos obligatorios', 'error');
         return;
     }
     
+    // Construir mensaje para WhatsApp
     const mensaje = `Hola, soy ${data.nombre}. Estoy interesado en Casa Bonita Residencial.
 
 📋 Mis datos:
@@ -75,25 +81,33 @@ function handleFormSubmit(event) {
 
 ¿Podrían brindarme más información?`;
 
-    showToast('¡Formulario enviado! Nos contactaremos contigo en las próximas 24 horas.', 'success');
+    // Mostrar feedback al usuario
+    showToast('¡Formulario enviado! Redirigiendo a WhatsApp...', 'success');
     
+    // Abrir WhatsApp con el mensaje
     const whatsappUrl = `https://wa.me/51946552086?text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
     
-    event.target.reset();
+    // Limpiar el formulario
+    form.reset();
+    
+    return false;
 }
 
 function handleHeroFormSubmit(event) {
     event.preventDefault();
     
-    const formData = new FormData(event.target);
+    const form = event.target;
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData);
     
+    // Validar campos obligatorios
     if (!data.nombre || !data.telefono) {
         showToast('Error: Por favor completa tu nombre y teléfono', 'error');
         return;
     }
     
+    // Construir mensaje para WhatsApp
     const mensaje = `Hola, soy ${data.nombre}. Quiero información sobre Casa Bonita Residencial.
 
 📞 Mi teléfono: ${data.telefono}
@@ -102,12 +116,17 @@ function handleHeroFormSubmit(event) {
 
 ¿Podrían contactarme para brindarme más detalles?`;
 
-    showToast('¡Contacto enviado! Te llamaremos en las próximas horas.', 'success');
+    // Mostrar feedback al usuario
+    showToast('¡Formulario enviado! Redirigiendo a WhatsApp...', 'success');
     
+    // Abrir WhatsApp con el mensaje
     const whatsappUrl = `https://wa.me/51946552086?text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
     
-    event.target.reset();
+    // Limpiar el formulario
+    form.reset();
+    
+    return false;
 }
 
 function getGroupFamiliarText(value) {
@@ -439,6 +458,7 @@ function trackEvent(eventName, parameters = {}) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize animations and effects
     animateOnScroll();
     animateCounters();
     animateHeroElements();
@@ -446,6 +466,18 @@ document.addEventListener('DOMContentLoaded', function() {
     enhanceHoverEffects();
     enhanceButtonAnimations();
     lazyLoadImages();
+    
+    // Add form submission handlers
+    const heroForm = document.getElementById('heroContactForm');
+    const contactForm = document.getElementById('contactForm');
+    
+    if (heroForm) {
+        heroForm.addEventListener('submit', handleHeroFormSubmit);
+    }
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleFormSubmit);
+    }
 });
 
 // Manejo de errores globales
