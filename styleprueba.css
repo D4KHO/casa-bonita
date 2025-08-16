@@ -935,16 +935,24 @@ section {
     background-color: rgb(185 185 0 / 98%);
     color: #fff;
     backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    font-weight: 600;
+    padding: 0.7rem 1rem;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    min-width: 280px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     border: 1px solid rgba(255, 255, 255, .2);
     box-shadow: 0 4px 15px rgb(204 202 0 / 30%);
-    font-weight: 600
 }
 
 .btn-accent:hover {
     background-color: rgba(206, 206, 4, .98);
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgb(204 202 0 / 30%);
+    box-shadow: 0 8px 25px rgb(204 202 0 / 35%);
     transition: var(--transition-smooth)
 }
 

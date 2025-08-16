@@ -116,12 +116,9 @@
 
                 <!-- CTA Buttons -->
                 <div class="hero-buttons">
-                    <button class="btn btn-accent" onclick="scrollToSection('contacto')">
+                    <a href="https://wa.me/51946552086?text=Hola%2C%20estoy%20interesado%20en%20obtener%20mi%20casa%20propia%20con%20Casa%20Bonita%20Residencial.%20Por%20favor%20br%C3%ADndame%20m%C3%A1s%20informaci%C3%B3n." class="btn btn-accent" target="_blank" rel="noopener noreferrer">
                         📍 Quiero mi casa propia
-                    </button>
-                    <button class="btn btn-nature" onclick="scrollToSection('modelos')">
-                        Ver modelos
-                    </button>
+                    </a>
                 </div>
 
                 <!-- Stats moved to between sections -->
@@ -235,133 +232,10 @@
                 <p class="project-subtitle">Descubre las ventajas únicas que hacen de Casa Bonita la mejor opción para tu familia en Piura</p>
             </div>
 
-            <!-- Sección principal con imagen y contenido -->
-            <div class="project-showcase">
-                <div class="showcase-content">
-                    <div class="showcase-text">
-                        <h3>Tu hogar ideal en el corazón de Piura</h3>
-                        <p>Casa Bonita Residencial combina la tranquilidad de vivir en un entorno natural con la comodidad de estar en el casco urbano. Nuestros lotes + módulos están estratégicamente ubicados para ofrecerte lo mejor de ambos mundos.</p>
-                        
-                        <div class="highlight-stats">
-                            <div class="highlight-stat">
-                                <div class="stat-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                                        <polyline points="9,22 9,12 15,12 15,22"/>
-                                    </svg>
-                                </div>
-                                <div class="stat-content">
-                                    <span class="stat-number">150+</span>
-                                    <span class="stat-label">Familias felices</span>
-                                </div>
-                            </div>
-                            <div class="highlight-stat">
-                                <div class="stat-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12,6 12,12 16,14"/>
-                                    </svg>
-                                </div>
-                                <div class="stat-content">
-                                    <span class="stat-number">3-4</span>
-                                    <span class="stat-label">Meses de construcción</span>
-                                </div>
-                            </div>
-                            <div class="highlight-stat">
-                                <div class="stat-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                        <polyline points="22,4 12,14.01 9,11.01"/>
-                                    </svg>
-                                </div>
-                                <div class="stat-content">
-                                    <span class="stat-number">100%</span>
-                                    <span class="stat-label">Aprobación Techo Propio</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="showcase-image">
-                        <div class="model-container" style="position: relative; width: 100%; height: 100%;">
-                            <!-- Placeholder de carga -->
-                            <div class="model-loading" style="position: absolute; inset: 0; background: #f5f5f5; display: flex; align-items: center; justify-content: center;">
-                                <div class="spinner"></div>
-                            </div>
-                            
-                            <!-- Modelo 3D optimizado -->
-                            <model-viewer 
-                                id="casa-model"
-                                src="assets/casa.glb" 
-                                alt="Modelo 3D de Casa Bonita Residencial"
-                                auto-rotate
-                                camera-controls
-                                shadow-intensity="0.7"
-                                camera-orbit="45deg 60deg 100%"
-                                field-of-view="45deg"
-                                min-camera-orbit="auto 30deg auto"
-                                max-camera-orbit="auto 75deg auto"
-                                exposure="1"
-                                environment-intensity="0.8"
-                                shadow-softness="0.6"
-                                reveal="auto"
-                                style="width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
-                                
-                                <!-- Mensaje de carga -->
-                                <div slot="poster" class="model-poster">
-                                    <div class="spinner"></div>
-                                    <p>Cargando modelo 3D...</p>
-                                </div>
-                            </model-viewer>
-                        </div>
-                        
-                        <!-- Estilos para el spinner de carga -->
-                        <style>
-                            @keyframes spin {
-                                0% { transform: rotate(0deg); }
-                                100% { transform: rotate(360deg); }
-                            }
-                            .spinner {
-                                width: 40px;
-                                height: 40px;
-                                border: 4px solid rgba(0, 0, 0, 0.1);
-                                border-left-color: #000;
-                                border-radius: 50%;
-                                animation: spin 1s linear infinite;
-                            }
-                        </style>
-                        
-                        <!-- Script para manejar la carga -->
-                        <script>
-                            document.addEventListener('DOMContentLoaded', () => {
-                                const modelViewer = document.querySelector('model-viewer');
-                                const loadingElement = document.querySelector('.model-loading');
-                                
-                                if (modelViewer) {
-                                    modelViewer.addEventListener('load', () => {
-                                        modelViewer.style.opacity = '1';
-                                        if (loadingElement) {
-                                            loadingElement.style.display = 'none';
-                                        }
-                                    });
-                                    
-                                    // Mostrar mensaje de error si falla la carga
-                                    modelViewer.addEventListener('error', () => {
-                                        console.error('Error al cargar el modelo 3D');
-                                        if (loadingElement) {
-                                            loadingElement.textContent = 'No se pudo cargar el modelo 3D';
-                                        }
-                                    });
-                                }
-                            });
-                        </script>
-                    </div>
-                </div>
-            </div>
-
             <!-- Grid de características mejorado -->
             <div class="features-section">
                 <div class="features-header">
-                    <h3>Ventajas exclusivas de Casa Bonita</h3>
+                    <h3>Beneficios de Casa Bonita Residencial</h3>
                     <p>Cada detalle pensado para tu comodidad y tranquilidad</p>
                 </div>
 
@@ -377,15 +251,17 @@
                             <div class="feature-badge">Transparencia</div>
                         </div>
                         <h4>Medidas del terreno claras</h4>
-                        <p>Lotes desde 66 m² hasta 108 m² con 35 m² de vivienda construida. Documentación completa y medidas exactas garantizadas.</p>
+                        <p>En Casa Bonita Residencial te ofrecemos lotes urbanizados en Piura desde 66 m² hasta 108 m², con un módulo de vivienda de 35 m² ya construido.
+                            Recibe tu propiedad lista para habitar, con planos arquitectónicos incluidos y documentación legal actualizada. 
+                        </p>
                         <div class="feature-details">
                             <div class="detail-item">
                                 <span class="detail-icon">📐</span>
-                                <span>Planos arquitectónicos incluidos</span>
+                                <span>Lote urbanizado + modulo de vivienda</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-icon">📋</span>
-                                <span>Documentación legal al día</span>
+                                <span>Planos y título de propiedad incluidos</span>
                             </div>
                         </div>
                     </div>
@@ -401,7 +277,8 @@
                             <div class="feature-badge">Ubicación</div>
                         </div>
                         <h4>Ubicación estratégica premium</h4>
-                        <p>En el casco urbano de Piura, cerca de servicios esenciales pero rodeado de naturaleza. Lo mejor de la ciudad y el campo.</p>
+                        <p>Lote + módulo dentro del casco urbano de Piura, en una ubicación estratégica cerca de colegios, comercios y transporte público. Invierte en la ciudad con la plusvalía más alta del país y asegura el futuro de tu familia.
+                        </p>
                         <div class="feature-details">
                             <div class="detail-item">
                                 <span class="detail-icon">🏥</span>
@@ -425,7 +302,8 @@
                             <div class="feature-badge">Financiamiento</div>
                         </div>
                         <h4>Facilidades de pago únicas</h4>
-                        <p>100% financiado con Techo Propio. Sin cuota inicial, sin intereses. Planes diseñados para familias peruanas.</p>
+                        <p>Cuotas accesibles desde S/ 390 sin inicial ni interés. Todo pensado para la familia peruana que desee adquirir su primera vivienda en Piura.
+                        </p>
                         <div class="feature-details">
                             <div class="detail-item">
                                 <span class="detail-icon">💰</span>
@@ -449,7 +327,7 @@
                             <div class="feature-badge">Naturaleza</div>
                         </div>
                         <h4>Entorno natural privilegiado</h4>
-                        <p>Rodeado del bosque de algarrobos, patrimonio natural de Piura. Áreas verdes, parques y espacios para toda la familia.</p>
+                        <p>Disfruta de áreas verdes bien cuidadas que mejoran la calidad del aire y el bienestar de toda la comunidad. Vive rodeado de un bosque patrimonio de Piura, el bosque de algarrobos.</p>
                         <div class="feature-details">
                             <div class="detail-item">
                                 <span class="detail-icon">🌳</span>
@@ -510,6 +388,129 @@
                     </div>
                 </div>
             </div>
+
+                        <!-- Sección principal con imagen y contenido -->
+                        <div class="project-showcase">
+                            <div class="showcase-content">
+                                <div class="showcase-text">
+                                    <h3>Tu hogar ideal en el corazón de Piura</h3>
+                                    <p>Casa Bonita Residencial combina la tranquilidad de vivir en un entorno natural con la comodidad de estar en el casco urbano. Nuestros lotes + módulos están estratégicamente ubicados para ofrecerte lo mejor de ambos mundos.</p>
+                                    
+                                    <div class="highlight-stats">
+                                        <div class="highlight-stat">
+                                            <div class="stat-icon">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                                    <polyline points="9,22 9,12 15,12 15,22"/>
+                                                </svg>
+                                            </div>
+                                            <div class="stat-content">
+                                                <span class="stat-number">150+</span>
+                                                <span class="stat-label">Familias felices</span>
+                                            </div>
+                                        </div>
+                                        <div class="highlight-stat">
+                                            <div class="stat-icon">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <circle cx="12" cy="12" r="10"/>
+                                                    <polyline points="12,6 12,12 16,14"/>
+                                                </svg>
+                                            </div>
+                                            <div class="stat-content">
+                                                <span class="stat-number">3-4</span>
+                                                <span class="stat-label">Meses de construcción</span>
+                                            </div>
+                                        </div>
+                                        <div class="highlight-stat">
+                                            <div class="stat-icon">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                                    <polyline points="22,4 12,14.01 9,11.01"/>
+                                                </svg>
+                                            </div>
+                                            <div class="stat-content">
+                                                <span class="stat-number">100%</span>
+                                                <span class="stat-label">Aprobación Techo Propio</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="showcase-image">
+                                    <div class="model-container" style="position: relative; width: 100%; height: 100%;">
+                                        <!-- Placeholder de carga -->
+                                        <div class="model-loading" style="position: absolute; inset: 0; background: #f5f5f5; display: flex; align-items: center; justify-content: center;">
+                                            <div class="spinner"></div>
+                                        </div>
+                                        
+                                        <!-- Modelo 3D optimizado -->
+                                        <model-viewer 
+                                            id="casa-model"
+                                            src="assets/casa.glb" 
+                                            alt="Modelo 3D de Casa Bonita Residencial"
+                                            auto-rotate
+                                            camera-controls
+                                            shadow-intensity="0.7"
+                                            camera-orbit="45deg 60deg 100%"
+                                            field-of-view="45deg"
+                                            min-camera-orbit="auto 30deg auto"
+                                            max-camera-orbit="auto 75deg auto"
+                                            exposure="1"
+                                            environment-intensity="0.8"
+                                            shadow-softness="0.6"
+                                            reveal="auto"
+                                            style="width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
+                                            
+                                            <!-- Mensaje de carga -->
+                                            <div slot="poster" class="model-poster">
+                                                <div class="spinner"></div>
+                                                <p>Cargando modelo 3D...</p>
+                                            </div>
+                                        </model-viewer>
+                                    </div>
+                                    
+                                    <!-- Estilos para el spinner de carga -->
+                                    <style>
+                                        @keyframes spin {
+                                            0% { transform: rotate(0deg); }
+                                            100% { transform: rotate(360deg); }
+                                        }
+                                        .spinner {
+                                            width: 40px;
+                                            height: 40px;
+                                            border: 4px solid rgba(0, 0, 0, 0.1);
+                                            border-left-color: #000;
+                                            border-radius: 50%;
+                                            animation: spin 1s linear infinite;
+                                        }
+                                    </style>
+                                    
+                                    <!-- Script para manejar la carga -->
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', () => {
+                                            const modelViewer = document.querySelector('model-viewer');
+                                            const loadingElement = document.querySelector('.model-loading');
+                                            
+                                            if (modelViewer) {
+                                                modelViewer.addEventListener('load', () => {
+                                                    modelViewer.style.opacity = '1';
+                                                    if (loadingElement) {
+                                                        loadingElement.style.display = 'none';
+                                                    }
+                                                });
+                                                
+                                                // Mostrar mensaje de error si falla la carga
+                                                modelViewer.addEventListener('error', () => {
+                                                    console.error('Error al cargar el modelo 3D');
+                                                    if (loadingElement) {
+                                                        loadingElement.textContent = 'No se pudo cargar el modelo 3D';
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
 
             <!-- Call to action mejorado -->
             <div class="project-cta">
@@ -692,48 +693,6 @@
                 <div class="section-badge">Programa Gubernamental</div>
                 <h2>Programa Techo Propio</h2>
                 <p>Conoce todo sobre el programa gubernamental que te ayudará a obtener tu casa propia con el apoyo del Estado peruano.</p>
-            </div>
-
-            <!-- Benefits Overview -->
-            <div class="benefits-overview">
-                <h3>Beneficios del Programa</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="1" x2="12" y2="23"/>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                            </svg>
-                        </div>
-                        <h4>Bono Familiar Habitacional</h4>
-                        <div class="benefit-highlight">S/ 35,000</div>
-                        <p>Hasta S/ 35,000 del Estado peruano</p>
-                    </div>
-
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                                <polyline points="9,22 9,12 15,12 15,22"/>
-                            </svg>
-                        </div>
-                        <h4>Financiamiento Total</h4>
-                        <div class="benefit-highlight">0% inicial</div>
-                        <p>100% financiado sin cuota inicial</p>
-                    </div>
-
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12,6 12,12 16,14"/>
-                            </svg>
-                        </div>
-                        <h4>Plazo Cómodo</h4>
-                        <div class="benefit-highlight">20 años</div>
-                        <p>Hasta 20 años para pagar</p>
-                    </div>
-                </div>
             </div>
 
             <!-- Requirements Section -->
