@@ -139,7 +139,7 @@
     margin-bottom: .75rem;
     text-align: center;
     font-size: 1.35rem;
-    font-weight: 800;
+    font-weight: 900;
     letter-spacing: .2px;
     text-shadow: none
 }
@@ -151,7 +151,7 @@
     height: 3px;
     margin: .6rem auto 0;
     border-radius: 2px;
-    background: var(--gradient-emerald);
+    background: linear-gradient(135deg, var(--forest-green-dark), hsl(41.41deg 140% 50%));
     box-shadow: 0 2px 8px rgba(16, 185, 129, .35)
 }
 
@@ -248,31 +248,11 @@
 }
 
 /* Style for the submit button */
-.form-submit {
-    width: 100%;
-    padding: 16px 24px;
-    background: linear-gradient(135deg, #065f46, #047857);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-    margin-top: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
-}
 
 .form-submit:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3);
-    background: linear-gradient(135deg, #047857, #065f46);
+    box-shadow: 0 6px 16px rgba(150, 145, 5, 0.3);
+    background: linear-gradient(135deg, #787804, #595f06);
 }
 
 .form-submit:active {
@@ -308,7 +288,7 @@
 .form-submit {
     width: 100%;
     padding: 14px 20px;
-    background: linear-gradient(135deg, var(--forest-green-dark), var(--forest-green-medium));
+    background: linear-gradient(135deg, var(--forest-green-dark), hsl(41.41deg 140% 50%));
     color: white;
     border: none;
     border-radius: 4px;
@@ -322,11 +302,7 @@
     margin-top: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-}
-
-.form-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    gap: 10px;
 }
 
 @media (max-width:1200px) {
@@ -919,7 +895,7 @@ section {
 }
 
 .btn-hero {
-    background: linear-gradient(135deg, var(--forest-green-dark), hsl(67.38deg 100% 28.95%));
+    background: linear-gradient(135deg, var(--forest-green-dark), hsl(41.41deg 100% 50%));
     color: var(--white);
     box-shadow: var(--shadow-emerald);
     font-weight: 600
@@ -2682,7 +2658,7 @@ model-viewer {
 .timeline-item:hover .timeline-content {
     transform: translateY(-5px);
     box-shadow: var(--shadow-medium);
-    border-color: var(--forest-green-light)
+    border-color: hsl(236.42deg 65% 45%)
 }
 
 .timeline-time {
