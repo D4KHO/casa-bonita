@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Casa Bonita Residencial</title>
+    <link rel="stylesheet" href="styleprueba.css">
+    <link rel="stylesheet" href="style_blog.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="assets/LOGO PNG NEGRO.png" alt="Casa Bonita Logo" class="logo-img">
+                    </a>
+                </div>
+                <nav class="desktop-nav">
+                    <a href="index.html">Inicio</a>
+                    <a href="index.html#proyecto">Proyecto</a>
+                    <a href="index.html#modelos">Modelos</a>
+                    <a href="index.html#techo-propio">Techo Propio</a>
+                    <a href="index.html#proceso">Proceso</a>
+                    <a href="blog.html" class="active">Blog</a>
+                    <a href="nosotros.html">Nosotros</a>
+                    <a href="index.html#contacto" class="btn btn-nav">Contacto</a>
+                </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="mobile-nav hidden" id="mobileNav">
+                <div class="mobile-nav-content">
+                    <a href="index.html">Inicio</a>
+                    <a href="index.html#proyecto">Proyecto</a>
+                    <a href="index.html#modelos">Modelos</a>
+                    <a href="index.html#techo-propio">Techo Propio</a>
+                    <a href="index.html#proceso">Proceso</a>
+                    <a href="blog.html" class="active">Blog</a>
+                    <a href="nosotros.html">Nosotros</a>
+                    <a href="index.html#contacto" class="btn btn-nav">Contacto</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="blog-hero">
+        <div class="container">
+            <h1>Blog de Vivienda y Bienestar</h1>
+            <p>Consejos, noticias y tendencias sobre bienes raíces, diseño de interiores y estilo de vida en Casa Bonita Residencial</p>
+        </div>
+    </section>
+
+    <div class="blog-container">
+        <main class="blog-main">
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <article class="blog-card">
+                    <div class="blog-image-container">
+                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Diseño de interiores" class="blog-image">
+                    </div>
+                    <div class="blog-content">
+                        <a href="#" class="blog-category">Diseño de Interiores</a>
+                        <h2 class="blog-title">Tendencias en Diseño para tu Hogar en 2023</h2>
+                        <p class="blog-excerpt">Descubre las últimas tendencias en diseño de interiores que harán de tu hogar en Casa Bonita un espacio único y acogedor. Aprende a combinar colores, texturas y estilos para crear ambientes modernos y funcionales.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="far fa-calendar-alt"></i> 15 Ago 2023</span>
+                            <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-card">
+                    <div class="blog-image-container">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Financiamiento" class="blog-image">
+                    </div>
+                    <div class="blog-content">
+                        <a href="#" class="blog-category">Financiamiento</a>
+                        <h2 class="blog-title">Guía Completa del Programa Techo Propio 2023</h2>
+                        <p class="blog-excerpt">Todo lo que necesitas saber sobre el programa Techo Propio: requisitos, beneficios, montos de financiamiento y cómo postular para hacer realidad el sueño de tu casa propia en Casa Bonita Residencial.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="far fa-calendar-alt"></i> 10 Ago 2023</span>
+                            <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-card">
+                    <div class="blog-image-container">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1453&q=80" alt="Vida en comunidad" class="blog-image">
+                    </div>
+                    <div class="blog-content">
+                        <a href="#" class="blog-category">Comunidad</a>
+                        <h2 class="blog-title">Vivir en Comunidad: Beneficios y Consejos</h2>
+                        <p class="blog-excerpt">Descubre por qué vivir en una comunidad organizada como Casa Bonita Residencial mejora tu calidad de vida. Compartimos consejos para una convivencia armoniosa con tus vecinos.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="far fa-calendar-alt"></i> 5 Ago 2023</span>
+                            <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 4 -->
+                <article class="blog-card">
+                    <div class="blog-image-container">
+                        <img src="https://images.unsplash.com/photo-1583845112203-293299e56ddf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Decoración de exteriores" class="blog-image">
+                    </div>
+                    <div class="blog-content">
+                        <a href="#" class="blog-category">Jardinería</a>
+                        <h2 class="blog-title">Diseño de Jardines para Espacios Pequeños</h2>
+                        <p class="blog-excerpt">Aprende a aprovechar al máximo los espacios exteriores de tu hogar con estas ideas creativas de jardinería para espacios reducidos. Crea un oasis verde en tu patio o balcón.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="far fa-calendar-alt"></i> 28 Jul 2023</span>
+                            <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 5 -->
+                <article class="blog-card">
+                    <div class="blog-image-container">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80" alt="Ahorro energético" class="blog-image">
+                    </div>
+                    <div class="blog-content">
+                        <a href="#" class="blog-category">Sostenibilidad</a>
+                        <h2 class="blog-title">Cómo Hacer tu Hogar más Eficiente Energéticamente</h2>
+                        <p class="blog-excerpt">Consejos prácticos para reducir el consumo de energía en tu hogar, ahorrar en las facturas y contribuir al cuidado del medio ambiente desde Casa Bonita Residencial.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="far fa-calendar-alt"></i> 20 Jul 2023</span>
+                            <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 6 -->
+                <article class="blog-card">
+                    <div class="blog-image-container">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1558&q=80" alt="Mantenimiento del hogar" class="blog-image">
+                    </div>
+                    <div class="blog-content">
+                        <a href="#" class="blog-category">Mantenimiento</a>
+                        <h2 class="blog-title">Mantenimiento Preventivo para tu Vivienda</h2>
+                        <p class="blog-excerpt">Guía mensual de mantenimiento preventivo para mantener tu hogar en Casa Bonita en perfecto estado. Pequeñas acciones que previenen grandes problemas.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="far fa-calendar-alt"></i> 10 Jul 2023</span>
+                            <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <ul class="page-numbers">
+                    <li><span class="current">1</span></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><span class="dots">...</span></li>
+                    <li><a href="#">10</a></li>
+                    <li><a href="#" class="next"><i class="fas fa-chevron-right"></i></a></li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="blog-sidebar">
+            <!-- Search Widget -->
+            <div class="sidebar-widget search-widget">
+                <h3 class="widget-title">Buscar</h3>
+                <form class="search-form">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Buscar en el blog...">
+                        <button type="submit" class="search-submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Categories Widget -->
+            <div class="sidebar-widget categories-widget">
+                <h3 class="widget-title">Categorías</h3>
+                <ul class="category-list">
+                    <li><a href="#">Diseño de Interiores <span class="count">12</span></a></li>
+                    <li><a href="#">Financiamiento <span class="count">8</span></a></li>
+                    <li><a href="#">Comunidad <span class="count">15</span></a></li>
+                    <li><a href="#">Jardinería <span class="count">6</span></a></li>
+                    <li><a href="#">Sostenibilidad <span class="count">9</span></a></li>
+                    <li><a href="#">Mantenimiento <span class="count">11</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Popular Posts Widget -->
+            <div class="sidebar-widget popular-posts">
+                <h3 class="widget-title">Artículos Populares</h3>
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Popular Post" class="post-image">
+                    <div class="post-content">
+                        <h4 class="post-title">Guía Completa del Programa Techo Propio 2023</h4>
+                        <span class="post-date">10 Ago 2023</span>
+                    </div>
+                </div>
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Popular Post" class="post-image">
+                    <div class="post-content">
+                        <h4 class="post-title">Tendencias en Diseño para tu Hogar en 2023</h4>
+                        <span class="post-date">15 Ago 2023</span>
+                    </div>
+                </div>
+                <div class="post-item">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Popular Post" class="post-image">
+                    <div class="post-content">
+                        <h4 class="post-title">Cómo Hacer tu Hogar más Eficiente Energéticamente</h4>
+                        <span class="post-date">20 Jul 2023</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags Widget -->
+            <div class="sidebar-widget tags-widget">
+                <h3 class="widget-title">Etiquetas</h3>
+                <div class="tag-cloud">
+                    <a href="#">Diseño</a>
+                    <a href="#">Decoración</a>
+                    <a href="#">Ahorro</a>
+                    <a href="#">Créditos</a>
+                    <a href="#">Jardín</a>
+                    <a href="#">Comunidad</a>
+                    <a href="#">Techo Propio</a>
+                    <a href="#">Mantenimiento</a>
+                    <a href="#">Sostenibilidad</a>
+                    <a href="#">Vivienda</a>
+                </div>
+            </div>
+
+            <!-- Newsletter Widget -->
+            <div class="sidebar-widget newsletter-widget">
+                <h3 class="widget-title">Suscríbete al Boletín</h3>
+                <p>Recibe las últimas noticias y consejos directamente en tu correo.</p>
+                <form class="newsletter-form">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Tu correo electrónico" required>
+                    </div>
+                    <button type="submit" class="btn-subscribe">Suscribirme</button>
+                </form>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/LOGO PNG BLANCO.png" alt="Casa Bonita Logo" class="footer-logo-img">
+                    <p>Construyendo sueños, creando hogares.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#proyecto">Nuestro Proyecto</a></li>
+                        <li><a href="index.html#modelos">Modelos de Vivienda</a></li>
+                        <li><a href="index.html#techo-propio">Techo Propio</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="index.html#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contáctanos</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Piura, Perú</li>
+                        <li><i class="fas fa-phone"></i> +51 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@casabonitaresidencial.com</li>
+                        <li><i class="fas fa-clock"></i> Lun - Vie: 9:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Casa Bonita Residencial. Todos los derechos reservados.</p>
+                <div class="footer-legal">
+                    <a href="#">Términos y Condiciones</a>
+                    <span>|</span>
+                    <a href="#">Política de Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

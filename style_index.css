@@ -908,7 +908,7 @@ section {
 }
 
 .btn-accent {
-    background-color: rgb(185 185 0 / 98%);
+    background-color: rgb(255 176 0);
     color: #fff;
     backdrop-filter: blur(4px);
     font-weight: 600;
@@ -922,11 +922,11 @@ section {
     justify-content: center;
     gap: 8px;
     border: 1px solid rgba(255, 255, 255, .2);
-    box-shadow: 0 4px 15px rgb(204 202 0 / 30%);
+    box-shadow: 0 4px 15px hsl(41.41deg 97.06% 25.39%);
 }
 
 .btn-accent:hover {
-    background-color: rgba(206, 206, 4, .98);
+    background-color: rgba(234, 183, 16, 0.98);
     transform: scale(1.05);
     box-shadow: 0 8px 25px rgb(204 202 0 / 35%);
     transition: var(--transition-smooth)
@@ -1025,8 +1025,38 @@ section {
     transition: var(--transition-smooth)
 }
 
-.desktop-nav button:hover {
+.desktop-nav button:hover,
+.desktop-nav .nav-link:hover {
     color: var(--forest-green)
+}
+
+.desktop-nav .nav-link {
+    background: 0 0;
+    border: none;
+    color: var(--gray-dark);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+    font-family: var(--font-family);
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.mobile-nav .nav-link {
+    background: 0 0;
+    border: none;
+    color: var(--gray-dark);
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    width: 100%;
+    font-family: var(--font-family);
+    display: block;
 }
 
 .cta-button {
