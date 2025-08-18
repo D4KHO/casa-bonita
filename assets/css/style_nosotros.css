@@ -1,4 +1,42 @@
-        /* Estilos específicos para la página Nosotros */
+/* Estilos específicos para la página Nosotros */
+
+    /* Hero Section */
+
+    .desktop-nav {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+    
+    .desktop-nav a {
+        color: var(--text-color);
+        font-weight: 500;
+        position: relative;
+        padding: 5px 0;
+    }
+    
+    .desktop-nav a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--accent-color);
+        transition: var(--transition);
+    }
+    
+    .desktop-nav a:hover::after,
+    .desktop-nav a.active::after {
+        width: 100%;
+    }
+    
+    .desktop-nav a.active {
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+
         .about-hero {
             background: linear-gradient(135deg, #1a472a, #2d5a3f);
             color: white;

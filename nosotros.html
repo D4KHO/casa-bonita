@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nosotros - Casa Bonita Residencial</title>
-    <link rel="stylesheet" href="style_index.css">
-    <link rel="stylesheet" href="style_nosotros.css">
+    <link rel="stylesheet" href="assets/css/style_index.css">
+    <link rel="stylesheet" href="assets/css/style_nosotros.css">
+    <link rel="stylesheet" href="assets/css/style_header,footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header --> 
     <header class="main-header">
         <div class="container">
             <div class="header-content">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="assets/LOGO PNG NEGRO.png" alt="Casa Bonita Logo" class="logo-img">
+                    <img src="assets/img/LOGO PNG NEGRO.png" alt="Casa Bonita Logo" class="logo-img" >
                 </div>
 
                 <!-- Desktop Navigation -->
@@ -22,15 +25,18 @@
                     <a href="index.html">Inicio</a>
                     <a href="index.html#proyecto">Proyecto</a>
                     <a href="index.html#modelos">Modelos</a>
-                    <a href="index.html#techo-propio">Techo Propio</a>
+                    <a href="index.html#techo-propio">Techo Propio</a>  
                     <a href="index.html#proceso">Proceso</a>
                     <a href="index.html#contacto">Contacto</a>
                     <a href="nosotros.html" class="nav-link active">Nosotros</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
                 </nav>
 
                 <!-- CTA Button -->
                 <div class="cta-button">
-                    <a href="index.html#contacto" class="btn btn-hero">¡Consulta Aquí!</a>
+                    <button class="btn btn-hero" onclick="scrollToSection('contacto')">
+                        ¡Consulta Aquí!
+                    </button>
                 </div>
 
                 <!-- Mobile menu button -->
@@ -50,14 +56,16 @@
             <!-- Mobile Navigation -->
             <nav class="mobile-nav hidden" id="mobileNav">
                 <div class="mobile-nav-content">
-                    <a href="index.html">Inicio</a>
-                    <a href="index.html#proyecto">Proyecto</a>
-                    <a href="index.html#modelos">Modelos</a>
-                    <a href="index.html#techo-propio">Techo Propio</a>
-                    <a href="index.html#proceso">Proceso</a>
-                    <a href="index.html#contacto">Contacto</a>
-                    <a href="nosotros.html" class="active">Nosotros</a>
-                    <a href="index.html#contacto" class="btn btn-hero">¡Consulta Aquí!</a>
+                    <button onclick="scrollToSection('inicio'); closeMobileMenu()">Inicio</button>
+                    <button onclick="scrollToSection('proyecto'); closeMobileMenu()">Proyecto</button>
+                    <button onclick="scrollToSection('modelos'); closeMobileMenu()">Modelos</button>
+                    <button onclick="scrollToSection('techo-propio'); closeMobileMenu()">Techo Propio</button>
+                    <button onclick="scrollToSection('proceso'); closeMobileMenu()">Proceso</button>
+                    <button onclick="scrollToSection('contacto'); closeMobileMenu()">Contacto</button>
+                    <a href="nosotros.html" class="nav-link" onclick="closeMobileMenu()">Nosotros</a>
+                    <button class="btn btn-hero" onclick="scrollToSection('contacto'); closeMobileMenu()">
+                        ¡Consulta Aquí!
+                    </button>
                 </div>
             </nav>
         </div>
@@ -142,7 +150,7 @@
             <!-- Logo y descripción -->
             <div class="footer-section">
                 <div class="footer-logo">
-                    <img src="assets/LOGO PNG BLANCO.png" alt="Casa Bonita Logo" class="footer-logo-img" >
+                    <img src="assets/img/LOGO PNG BLANCO.png" alt="Casa Bonita Logo" class="footer-logo-img" >
                 </div>
                 <p class="footer-description">
                     Tu hogar soñado en Piura te espera. Más de 150 familias ya viven felices en Casa Bonita Residencial gracias al programa Techo Propio.
@@ -266,6 +274,6 @@
     </button>
 </div>
 
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
