@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosotros - Casa Bonita Residencial</title>
-    <link rel="stylesheet" href="assets/css/style_index.css">
-    <link rel="stylesheet" href="assets/css/style_nosotros.css">
+    <title>Artículo del Blog - Casa Bonita Residencial</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/LOGO PNG NEGRO.png" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style_header,footer.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="assets/css/style_blog.css">
+    <link rel="stylesheet" href="assets/css/style_index.css">
+    <link rel="stylesheet" href="assets/css/style_blog_articles.css">
 </head>
 <body>
-    <!-- Header --> 
+    <!-- Header -->
+    <!-- Header -->
     <header class="main-header">
         <div class="container">
             <div class="header-content">
@@ -28,8 +39,8 @@
                     <a href="index.html#techo-propio">Techo Propio</a>  
                     <a href="index.html#proceso">Proceso</a>
                     <a href="index.html#contacto">Contacto</a>
-                    <a href="nosotros.html" class="nav-link active">Nosotros</a>
-                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="nosotros.html" class="nav-link">Nosotros</a>
+                    <a href="blog.html" class="nav-link active">Blog</a>
                 </nav>
 
                 <!-- CTA Button -->
@@ -62,7 +73,7 @@
                     <button onclick="scrollToSection('techo-propio'); closeMobileMenu()">Techo Propio</button>
                     <button onclick="scrollToSection('proceso'); closeMobileMenu()">Proceso</button>
                     <button onclick="scrollToSection('contacto'); closeMobileMenu()">Contacto</button>
-                    <a href="nosotros.html" class="nav-link" onclick="closeMobileMenu()">Nosotros</a>
+                    <a href="blog.html" class="nav-link" onclick="closeMobileMenu()">Blog</a>
                     <button class="btn btn-hero" onclick="scrollToSection('contacto'); closeMobileMenu()">
                         ¡Consulta Aquí!
                     </button>
@@ -71,80 +82,45 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="about-hero">
+    <!-- Artículo -->
+    <article class="article">
         <div class="container">
-            <h1>Nuestra Historia</h1>
-            <p>Conoce más sobre Casa Bonita Residencial y nuestro compromiso con la calidad y la excelencia en cada proyecto.</p>
+            <a href="blog.html" class="back-to-blog"><i class="fas fa-arrow-left"></i> Volver al blog</a>
         </div>
-    </section>
+        <div id="article-loading" class="loading">Cargando artículo...</div>
+        <div id="article-not-found" class="not-found" style="display: none;">
+            <h2>Artículo no encontrado</h2>
+            <p>Lo sentimos, el artículo que buscas no existe o ha sido eliminado.</p>
+            <a href="blog.html" class="btn btn-primary">Volver al blog</a>
+        </div>
+        <div id="article-content" style="display: none;">
+            <header class="article-header">
+                <div class="container">
+                    <a href="#" id="article-category" class="article-category"></a>
+                    <h1 id="article-title" class="article-title"></h1>
+                    <div class="article-meta">
+                        <span id="article-date" class="article-date"><i class="far fa-calendar-alt"></i> </span>
+                        <span id="article-author" class="article-author"><i class="far fa-user"></i> </span>
+                    </div>
+                </div>
+            </header>
 
-    <!-- Carrusel -->
-    <div class="carousel-container">
-        <div class="carousel">
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Proyecto Casa Bonita">
-                <div class="slide-content">
-                    <h3>Nuestro Compromiso</h3>
-                    <p>Calidad y excelencia en cada detalle de nuestros proyectos inmobiliarios.</p>
+            <div class="article-content">
+                <img id="article-image" src="" alt="" class="article-featured-image">
+                <div id="article-body"></div>
+            </div>
+            
+            <div class="article-tags">
+                <h4>Etiquetas:</h4>
+                <div id="article-tags" class="tags">
+                    <!-- Las etiquetas se cargarán aquí dinámicamente -->
                 </div>
             </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Equipo de trabajo">
-                <div class="slide-content">
-                    <h3>Equipo Profesional</h3>
-                    <p>Contamos con un equipo altamente calificado para hacer realidad tus sueños.</p>
-                </div>
-            </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Comunidad">
-                <div class="slide-content">
-                    <h3>Comunidad</h3>
-                    <p>Creando espacios que fomentan la convivencia y el bienestar familiar.</p>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-btn" id="prevBtn">❮</button>
-        <button class="carousel-btn" id="nextBtn">❯</button>
-        <div class="carousel-indicators">
-            <span class="indicator active"></span>
-            <span class="indicator"></span>
-            <span class="indicator"></span>
-        </div>
-    </div>
+    </article>
 
-    <!-- Sección de información -->
-    <section class="about-section">
-        <div class="about-grid">
-            <div class="about-text">
-                <h2>Sobre Nosotros</h2>
-                <p>En Casa Bonita Residencial nos dedicamos a hacer realidad el sueño de la casa propia para las familias peruanas. Con años de experiencia en el mercado inmobiliario, nos hemos consolidado como una de las empresas líderes en el desarrollo de proyectos habitacionales en Piura.</p>
-                <p>Nuestro compromiso es ofrecer viviendas de calidad, con diseños modernos y funcionales que se adapten a las necesidades de cada familia, siempre con los más altos estándares de construcción y respetando el medio ambiente.</p>
-                <p>Creemos en la transparencia, la honestidad y el trato cercano con nuestros clientes, por eso nos esforzamos por brindar un servicio personalizado que garantice la satisfacción total en cada proyecto que emprendemos.</p>
-            </div>
-            <div class="about-features">
-                <div class="feature-item">
-                    <h4>Misión</h4>
-                    <p>Ofrecer viviendas de calidad que superen las expectativas de nuestros clientes, contribuyendo al desarrollo de comunidades sostenibles y armoniosas.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>Visión</h4>
-                    <p>Ser reconocidos como la empresa líder en desarrollo inmobiliario en Piura, destacando por nuestra innovación, calidad y compromiso social.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>Valores</h4>
-                    <p>Integridad, calidad, innovación, responsabilidad social y compromiso con nuestros clientes.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>Compromiso</h4>
-                    <p>Entregar proyectos terminados en tiempo y forma, cumpliendo con los más altos estándares de calidad y seguridad.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-  <!-- Footer -->
-  <footer class="footer">
+    <!-- Footer -->
+   <!-- Footer -->
+   <footer class="footer">
     <div class="container">
         <div class="footer-content">
             <!-- Logo y descripción -->
@@ -178,11 +154,11 @@
             <div class="footer-section">
                 <h4>Enlaces rápidos</h4>
                 <ul class="footer-links">
-                    <a href="index.html">Inicio</a>
-                    <a href="index.html#proyecto">Proyecto</a>
-                    <a href="index.html#modelos">Modelos</a>
-                    <a href="index.html#techo-propio">Techo Propio</a>  
-                    <a href="index.html#proceso">Proceso</a>
+                    <li><button onclick="scrollToSection('inicio')">Inicio</button></li>
+                    <li><button onclick="scrollToSection('proyecto')">Sobre el proyecto</button></li>
+                    <li><button onclick="scrollToSection('modelos')">Modelos de vivienda</button></li>
+                    <li><button onclick="scrollToSection('techo-propio')">Programa Techo Propio</button></li>
+                    <li><button onclick="scrollToSection('proceso')">Proceso de compra</button></li>
                 </ul>
             </div>
 
@@ -252,7 +228,7 @@
         <!-- Footer bottom -->
         <div class="footer-bottom">
             <div class="footer-copyright">
-                © 2024 Casa Bonita Residencial. Todos los derechos reservados.
+                © 2025 Casa Bonita Residencial. Todos los derechos reservados.
             </div>
             <div class="footer-approval">
                 <span>Proyecto aprobado por:</span>
@@ -274,6 +250,74 @@
     </button>
 </div>
 
+    <!-- Scripts -->
     <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener el ID del artículo de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = parseInt(urlParams.get('id'));
+            
+            // Elementos del DOM
+            const articleContent = document.getElementById('article-content');
+            const loadingElement = document.getElementById('article-loading');
+            const notFoundElement = document.getElementById('article-not-found');
+            
+            // Cargar el artículo
+            fetch('../assets/data/articles.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Encontrar el artículo por ID
+                    const article = data.articles.find(art => art.id === articleId);
+                    
+                    if (article) {
+                        // Mostrar el artículo
+                        document.title = article.title + ' | Blog Casa Bonita';
+                        document.getElementById('article-title').textContent = article.title;
+                        document.getElementById('article-category').textContent = article.category;
+                        document.getElementById('article-date').textContent += article.date;
+                        document.getElementById('article-author').textContent += article.author;
+                        document.getElementById('article-image').src = article.image;
+                        document.getElementById('article-image').alt = article.title;
+                        
+                        // Insertar el contenido del artículo
+                        const articleBody = document.getElementById('article-body');
+                        article.content.forEach(paragraph => {
+                            articleBody.innerHTML += paragraph;
+                        });
+                        
+                        // Insertar etiquetas
+                        const tagsContainer = document.getElementById('article-tags');
+                        article.tags.forEach(tag => {
+                            const tagElement = document.createElement('a');
+                            tagElement.href = `blog.html?tag=${encodeURIComponent(tag)}`;
+                            tagElement.className = 'tag';
+                            tagElement.textContent = tag;
+                            tagsContainer.appendChild(tagElement);
+                        });
+                        
+                        // Mostrar el contenido y ocultar el indicador de carga
+                        articleContent.style.display = 'block';
+                        loadingElement.style.display = 'none';
+                    } else {
+                        // Artículo no encontrado
+                        loadingElement.style.display = 'none';
+                        notFoundElement.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar el artículo:', error);
+                    loadingElement.style.display = 'none';
+                    notFoundElement.style.display = 'block';
+                });
+        });
+    </script>
+    <script>
+        // Script para manejar la funcionalidad de compartir
+        document.addEventListener('DOMContentLoaded', function() {
+            // Aquí puedes agregar funcionalidad adicional para compartir en redes sociales
+            console.log('Página de artículo cargada');
+        });
+    </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 /* header section */
 /* Navigation */
 :root {
-    --primary-color: #1a472a;
+    --primary-color: #d4af37;
     --secondary-color: #2d5a3f;
     --accent-color: #d4af37;
     --text-color: #333;
@@ -73,11 +73,9 @@ a:hover {
 }
 
 .desktop-nav a.active {
-    color: var(--primary-color);
+    color: var(--text-color);
     font-weight: 600;
 }
-
-
 
 
 /*footer section*/

@@ -23,6 +23,125 @@ body {
     padding: 0;
 }
 
+/* Estilos para filtros */
+#categories-list a.active,
+#tags-cloud a.active {
+    color: var(--primary-color);
+    font-weight: 600;
+    position: relative;
+}
+
+#categories-list a.active:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+#tags-cloud a {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 0 5px 8px 0;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+#tags-cloud a:hover,
+#tags-cloud a.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Estilos para los filtros */
+.filters-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+#active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.active-filter-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-right: 5px;
+}
+
+.active-filter-tag button {
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.active-filter-tag button:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.clear-filters-btn {
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: 1px solid #e0e0e0;
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clear-filters-btn i {
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+
+.clear-filters-btn:hover {
+    background-color: #f0f0f0;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Efecto para las tarjetas filtradas */
+.blog-card {
+    transition: all 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.blog-card[style*="display: none"] {
+    display: none !important;
+}
+
 /* Mobile Menu */
 .mobile-menu-btn {
     display: none;

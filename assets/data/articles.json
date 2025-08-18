@@ -1,0 +1,38 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "Tendencias en Diseño para tu Hogar en 2023",
+      "category": "Diseño de Interiores",
+      "date": "15 de agosto, 2023",
+      "author": "Equipo Casa Bonita",
+      "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1558&q=80",
+      "excerpt": "Descubre las últimas tendencias en diseño de interiores para este año.",
+      "content": [
+        "<p>El diseño de interiores está en constante evolución, y 2023 no es la excepción. En Casa Bonita Residencial, nos mantenemos a la vanguardia de las últimas tendencias para ofrecerte espacios que combinen estilo, funcionalidad y comodidad. A continuación, te presentamos las tendencias más destacadas que están marcando la pauta este año.</p>",
+        "<h3>1. Espacios Multifuncionales</h3>",
+        "<p>Con el aumento del trabajo desde casa, los espacios multifuncionales se han vuelto esenciales. Busca muebles modulares que se adapten a diferentes necesidades, como escritorios plegables o sofás cama para maximizar el espacio disponible.</p>",
+        "<h3>2. Materiales Naturales</h3>",
+        "<p>La madera, el mármol, el ratán y otras fibras naturales están en auge. Estos materiales aportan calidez y textura a los espacios, creando ambientes acogedores y relajantes.</p>"
+      ],
+      "tags": ["diseño", "tendencias", "decoración"]
+    },
+    {
+      "id": 2,
+      "title": "Consejos para Organizar tu Hogar",
+      "category": "Organización",
+      "date": "10 de agosto, 2023",
+      "author": "María González",
+      "image": "https://images.unsplash.com/photo-1583845112203-293299e56ddf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "excerpt": "Aprende a mantener tu hogar organizado y libre de desorden.",
+      "content": [
+        "<p>Mantener un hogar organizado puede parecer una tarea abrumadora, pero con los consejos adecuados, puedes lograrlo de manera efectiva. Aquí te presentamos algunas estrategias probadas para mantener el orden en tu espacio.</p>",
+        "<h3>1. La regla del descarte</h3>",
+        "<p>Antes de organizar, deshazte de lo que no necesitas. Si no lo has usado en el último año, es probable que no lo vayas a necesitar.</p>",
+        "<h3>2. Todo en su lugar</h3>",
+        "<p>Asigna un lugar específico para cada objeto. Esto hará que sea más fácil encontrarlo cuando lo necesites y devolverlo a su lugar después de usarlo.</p>"
+      ],
+      "tags": ["organización", "hogar", "consejos"]
+    }
+  ]
+}
