@@ -448,6 +448,82 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+/* Mobile navigation: inject hamburger button and overlay, handle toggle */
+document.addEventListener('DOMContentLoaded', function() {
+    const headerContent = document.querySelector('.header-content');
+    if (!headerContent) return;
+
+    // Create hamburger button
+    const mobileBtn = document.createElement('button');
+    mobileBtn.className = 'mobile-menu-btn';
+    mobileBtn.setAttribute('aria-label', 'Abrir menú');
+    mobileBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+    `;
+
+    // Insert button before the CTA button (or at end)
+    const cta = headerContent.querySelector('.cta-button');
+    if (cta) headerContent.insertBefore(mobileBtn, cta);
+    else headerContent.appendChild(mobileBtn);
+
+    // Create mobile nav overlay
+    const mobileNav = document.createElement('div');
+    mobileNav.className = 'mobile-nav';
+    mobileNav.innerHTML = `
+        <div class="mobile-panel" role="dialog" aria-modal="true">
+            <button class="mobile-close" aria-label="Cerrar menú" style="align-self:flex-end;background:none;border:none;font-size:1.6rem;">&times;</button>
+            <nav class="desktop-nav" role="navigation"></nav>
+        </div>
+    `;
+    document.body.appendChild(mobileNav);
+
+    // Clone desktop nav links into mobile panel
+    const desktopNav = document.querySelector('.desktop-nav');
+    const mobilePanelNav = mobileNav.querySelector('.desktop-nav');
+    if (desktopNav && mobilePanelNav) {
+        mobilePanelNav.innerHTML = desktopNav.innerHTML;
+    }
+
+    const openMenu = () => {
+        mobileNav.classList.add('open');
+        document.documentElement.classList.add('no-scroll');
+        document.body.classList.add('no-scroll');
+        mobileBtn.setAttribute('aria-expanded', 'true');
+    };
+
+    const closeMenu = () => {
+        mobileNav.classList.remove('open');
+        document.documentElement.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+    };
+
+    mobileBtn.addEventListener('click', openMenu);
+    mobileNav.querySelector('.mobile-close').addEventListener('click', closeMenu);
+
+    // Close when clicking outside panel
+    mobileNav.addEventListener('click', (e) => {
+        if (e.target === mobileNav) closeMenu();
+    });
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+            closeMenu();
+        }
+    });
+
+    // Close when clicking a link inside mobile nav
+    mobileNav.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        // If link is anchor to section, let it scroll then close
+        setTimeout(closeMenu, 150);
+    });
+});
+
 // Manejo de errores globales
 window.addEventListener('error', function(event) {
     console.error('Error en la aplicación:', event.error);

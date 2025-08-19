@@ -2,6 +2,7 @@
 /* header section */
 /* Navigation */
 :root {
+    --forest-green-dark: #000000;
     --primary-color: #d4af37;
     --secondary-color: #2d5a3f;
     --accent-color: #d4af37;
@@ -15,6 +16,129 @@
     --border-radius: 8px;
 }
 
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--gray-dark);
+    background-color: var(--white);
+}
+
+body, html {
+    margin: 0; 
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.btn-hero {
+    background: linear-gradient(135deg, var(--forest-green-dark), hsl(41.41deg 100% 50%));
+    color: var(--white);
+    box-shadow: var(--shadow-emerald);
+    font-weight: 600;
+}
+
+.btn {
+    display: inline-flex
+;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .75rem 1.5rem;
+    border: none;
+    border-radius: .5rem;
+    font-size: .875rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    white-space: nowrap;
+}
+
+.social-btn {
+    width: 2rem;
+    height: 2rem;
+    background: hsl(255, 255%, 255%, .1);
+    border: none;
+    border-radius: 50%;
+    color: var(--white);
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.social-links {
+    display: flex;
+    gap: .75rem;
+}
+
+.social-btn svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.approval-icon {
+    width: 2rem;
+    height: 2rem;
+    background: hsl(255, 255%, 255%, .1);
+    border-radius: .25rem;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.approval-badge {
+    display: flex
+;
+    align-items: center;
+    gap: .5rem;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: #25d366;
+    border: none;
+    border-radius: 50%;
+    color: var(--white);
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-strong);
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 50;
+}
+
+.whatsapp-btn svg {
+    width: 2rem;
+    height: 2rem;
+}
 
 .main-header {
     background: var(--white);
@@ -305,3 +429,70 @@ a:hover {
         grid-template-columns: repeat(4, 1fr)
     }
 }
+
+/* Mobile navigation (hamburger) */
+.mobile-menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 8px;
+    cursor: pointer;
+    gap: 8px;
+}
+
+.mobile-menu-btn svg {
+    width: 22px;
+    height: 22px;
+    color: var(--text-color);
+}
+
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 120;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.mobile-nav .mobile-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 85%;
+    max-width: 320px;
+    height: 100%;
+    background: var(--white);
+    padding: 1.25rem;
+    box-shadow: -8px 0 24px rgba(0,0,0,0.15);
+    transform: translateX(100%);
+    transition: transform 0.28s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mobile-nav.open { display: block; }
+.mobile-nav.open .mobile-panel { transform: translateX(0); }
+
+.mobile-nav .mobile-panel .desktop-nav { display: flex !important; flex-direction: column; gap: 0.5rem; }
+.mobile-nav .mobile-panel .desktop-nav a { padding: 0.75rem 0.5rem; color: var(--text-color); border-bottom: 1px solid rgba(0,0,0,0.06); }
+.mobile-nav .mobile-panel .cta-button { margin-top: auto; }
+
+/* Hide desktop nav and show hamburger on small screens */
+@media (max-width: 768px) {
+    .mobile-menu-btn { display: inline-flex; }
+    .desktop-nav { display: none !important; }
+    .header-content { gap: 0.5rem; }
+}
+
+/* Prevent body scroll when mobile nav open */
+.no-scroll { overflow: hidden; }
