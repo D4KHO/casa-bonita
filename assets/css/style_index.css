@@ -956,7 +956,7 @@ section {
 .btn-outline {
     background: 0 0;
     color: hsl(152deg 1.19% 1.56%);
-    border: 1px solid hsl(152deg 5.66% 5.36%);
+    border: 1px solid hsl(152deg 5.66% 5.36%) !important;
 }
 
 .btn-outline:hover {
