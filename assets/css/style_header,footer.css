@@ -16,6 +16,15 @@
 }
 
 
+.main-header {
+    background: var(--white);
+    box-shadow: var(--shadow-soft);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+
 .header-content {
     display: flex;
     align-items: center;
@@ -75,6 +84,34 @@ a:hover {
 .desktop-nav a.active {
     color: var(--text-color);
     font-weight: 600;
+}
+
+/* Logo / identidad (centralizado aquí) */
+.logo {
+    display: flex;
+    align-items: center;
+    height: 120px !important;
+}
+
+.logo-img {
+    height: 120px !important;
+    width: auto !important;
+    display: block;
+    max-width: 300px !important;
+}
+
+/* Asegurar que la navegación de escritorio sea visible en pantallas pequeñas
+   después de eliminar el menú móvil */
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: flex !important;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    .cta-button {
+        display: block !important;
+    }
 }
 
 

@@ -1,5 +1,3 @@
-let isMenuOpen = false;
-
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -10,36 +8,6 @@ function scrollToSection(sectionId) {
     }
 }
 
-function toggleMobileMenu() {
-    const mobileNav = document.getElementById('mobileNav');
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const menuIcon = mobileMenuBtn.querySelector('.menu-icon');
-    const closeIcon = mobileMenuBtn.querySelector('.close-icon');
-    
-    isMenuOpen = !isMenuOpen;
-    
-    if (isMenuOpen) {
-        mobileNav.classList.remove('hidden');
-        menuIcon.classList.add('hidden');
-        closeIcon.classList.remove('hidden');
-    } else {
-        mobileNav.classList.add('hidden');
-        menuIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-    }
-}
-
-function closeMobileMenu() {
-    const mobileNav = document.getElementById('mobileNav');
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const menuIcon = mobileMenuBtn.querySelector('.menu-icon');
-    const closeIcon = mobileMenuBtn.querySelector('.close-icon');
-    
-    isMenuOpen = false;
-    mobileNav.classList.add('hidden');  
-    menuIcon.classList.remove('hidden');
-    closeIcon.classList.add('hidden');
-}
 
 function openWhatsApp() {
     const mensaje = 'Hola, quiero información sobre Casa Bonita Residencial';
@@ -534,55 +502,9 @@ document.addEventListener('DOMContentLoaded', function() {
         currentIndex = (currentIndex + 1) % totalSlides;
         updateCarousel();
     }, 5000);
-    
-    // Menú móvil
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileNav = document.getElementById('mobileNav');
-    const menuIcon = mobileMenuBtn.querySelector('.menu-icon');
-    const closeIcon = mobileMenuBtn.querySelector('.close-icon');
-    
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileNav.classList.toggle('hidden');
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-    });
-    
-    // Cerrar menú al hacer clic en un enlace
-    const mobileLinks = document.querySelectorAll('.mobile-nav-content a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileNav.classList.add('hidden');
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-        });
-    });
 });
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileNav = document.getElementById('mobileNav');
-        const menuIcon = mobileMenuBtn.querySelector('.menu-icon');
-        const closeIcon = mobileMenuBtn.querySelector('.close-icon');
-        
-        // Toggle mobile menu
-        function toggleMobileMenu() {
-            mobileNav.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-            document.body.style.overflow = mobileNav.classList.contains('hidden') ? 'auto' : 'hidden';
-        }
-
-        // Add event listeners
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.mobile-nav-content a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (!mobileNav.classList.contains('hidden')) {
-                    toggleMobileMenu();
-                }
-            });
-        });
+    // Mobile menu logic removed
 
         // Add animation to blog cards on scroll
         const observerOptions = {

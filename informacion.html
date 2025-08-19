@@ -1,121 +1,120 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosotros - Casa Bonita Residencial</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Información | Casa Bonita Residencial</title>
+    <meta name="description" content="Información, preguntas frecuentes, términos, política de privacidad, financiamiento de Casa Bonita Residencial">
     <link rel="stylesheet" href="assets/css/style_index.css">
-    <link rel="stylesheet" href="assets/css/style_nosotros.css">
     <link rel="stylesheet" href="assets/css/style_header,footer.css">
+    <link rel="stylesheet" href="assets/css/style_informacion.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    <!-- Header --> 
+
+    <!-- Main header (copiado de index.html para mantener el mismo diseño) -->
     <header class="main-header">
         <div class="container">
             <div class="header-content">
-                <!-- Logo -->
                 <div class="logo">
                     <img src="assets/img/LOGO PNG NEGRO.png" alt="Casa Bonita Logo" class="logo-img" >
                 </div>
 
-                <!-- Desktop Navigation -->
                 <nav class="desktop-nav">
                     <a href="index.html">Inicio</a>
                     <a href="index.html#proyecto">Proyecto</a>
                     <a href="index.html#modelos">Modelos</a>
                     <a href="index.html#techo-propio">Techo Propio</a>  
                     <a href="index.html#contacto">Contacto</a>
-                    <a href="informacion.html" class="nav-link">Informacion</a>
-                    <a href="nosotros.html" class="nav-link active">Nosotros</a>
+                    <a href="informacion.html" class="nav-link active">Informacion</a>
+                    <a href="nosotros.html" class="nav-link">Nosotros</a>
                     <a href="blog.html" class="nav-link">Blog</a>
                 </nav>
 
-                <!-- CTA Button -->
                 <div class="cta-button">
-                    <button class="btn btn-hero" onclick="scrollToSection('contacto')">
-                        ¡Consulta Aquí!
-                    </button>
+                    <button class="btn btn-hero" onclick="scrollToSection('contacto')">¡Consulta Aquí!</button>
                 </div>
             </div>
-            
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="about-hero">
-        <div class="container">
-            <h1>Nuestra Historia</h1>
-            <p>Conoce más sobre Casa Bonita Residencial y nuestro compromiso con la calidad y la excelencia en cada proyecto.</p>
-        </div>
-    </section>
+    <main class="container informacion-main">
+        <section id="informacion" class="info-section">
+            <h1>Información</h1>
+            <p>Bienvenido a la sección de información de <strong>Casa Bonita Residencial</strong>. Aquí encontrarás todo lo relacionado con nuestros proyectos, requisitos para el programa Techo Propio y los servicios que ofrecemos en Piura.</p>
 
-    <!-- Carrusel -->
-    <div class="carousel-container">
-        <div class="carousel">
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Proyecto Casa Bonita">
-                <div class="slide-content">
-                    <h3>Nuestro Compromiso</h3>
-                    <p>Calidad y excelencia en cada detalle de nuestros proyectos inmobiliarios.</p>
+            <div class="info-grid">
+                <div>
+                    <h3>Quiénes somos</h3>
+                    <p>Casa Bonita Residencial es una inmobiliaria local que desarrolla lotes urbanizados con módulos habitacionales bajo el formato Techo Propio del Fondo MIVIVIENDA, ofreciendo facilidades de financiamiento, documentación completa y asesoría personalizada.</p>
+                </div>
+                <div>
+                    <h3>Contacto</h3>
+                    <p>Teléfono: +51 946 552 086<br>Correo: asignaciones@casabonita.pe<br>Dirección: Av. Principal 123, Piura</p>
                 </div>
             </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Equipo de trabajo">
-                <div class="slide-content">
-                    <h3>Equipo Profesional</h3>
-                    <p>Contamos con un equipo altamente calificado para hacer realidad tus sueños.</p>
-                </div>
-            </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Comunidad">
-                <div class="slide-content">
-                    <h3>Comunidad</h3>
-                    <p>Creando espacios que fomentan la convivencia y el bienestar familiar.</p>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-btn" id="prevBtn">❮</button>
-        <button class="carousel-btn" id="nextBtn">❯</button>
-        <div class="carousel-indicators">
-            <span class="indicator active"></span>
-            <span class="indicator"></span>
-            <span class="indicator"></span>
-        </div>
-    </div>
+        </section>
 
-    <!-- Sección de información -->
-    <section class="about-section">
-        <div class="about-grid">
-            <div class="about-text">
-                <h2>Sobre Nosotros</h2>
-                <p>En Casa Bonita Residencial nos dedicamos a hacer realidad el sueño de la casa propia para las familias peruanas. Con años de experiencia en el mercado inmobiliario, nos hemos consolidado como una de las empresas líderes en el desarrollo de proyectos habitacionales en Piura.</p>
-                <p>Nuestro compromiso es ofrecer viviendas de calidad, con diseños modernos y funcionales que se adapten a las necesidades de cada familia, siempre con los más altos estándares de construcción y respetando el medio ambiente.</p>
-                <p>Creemos en la transparencia, la honestidad y el trato cercano con nuestros clientes, por eso nos esforzamos por brindar un servicio personalizado que garantice la satisfacción total en cada proyecto que emprendemos.</p>
+        <section id="preguntas-frecuentes" class="faq-section">
+            <h2>Preguntas frecuentes</h2>
+            <div class="faq-item">
+                <h4>¿Qué es el programa Techo Propio?</h4>
+                <p>Es un programa del Estado peruano que otorga el Bono Familiar Habitacional para facilitar el acceso a la vivienda a familias que cumplan ciertos requisitos.</p>
             </div>
-            <div class="about-features">
-                <div class="feature-item">
-                    <h4>Misión</h4>
-                    <p>Ofrecer viviendas de calidad que superen las expectativas de nuestros clientes, contribuyendo al desarrollo de comunidades sostenibles y armoniosas.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>Visión</h4>
-                    <p>Ser reconocidos como la empresa líder en desarrollo inmobiliario en Piura, destacando por nuestra innovación, calidad y compromiso social.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>Valores</h4>
-                    <p>Integridad, calidad, innovación, responsabilidad social y compromiso con nuestros clientes.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>Compromiso</h4>
-                    <p>Entregar proyectos terminados en tiempo y forma, cumpliendo con los más altos estándares de calidad y seguridad.</p>
-                </div>
+            <div class="faq-item">
+                <h4>¿Requiere cuota inicial?</h4>
+                <p>En muchos de nuestros planes no se exige cuota inicial y existen opciones con financiamiento accesible; los detalles dependen del plan seleccionado.</p>
             </div>
-        </div>
-    </section>
+            <div class="faq-item">
+                <h4>¿Qué documentos necesito para postular?</h4>
+                <p>Documento de identidad (DNI), comprobantes de ingreso, declaraciones juradas y documentación familiar. Te ayudamos a revisar y preparar todo.</p>
+            </div>
+        </section>
 
-      <!-- Footer -->
+        <section id="terminos" class="terminos-section">
+            <h2>Términos y condiciones</h2>
+            <p>Los términos y condiciones aplicables a la compra de lotes y módulos en Casa Bonita Residencial incluyen las condiciones de venta, plazos de pago, responsabilidades de las partes y las políticas aplicables al uso de los servicios. A continuación se muestran los puntos principales:</p>
+            <ul>
+                <li>La reserva de un lote está sujeta a disponibilidad y a la firma del contrato de compraventa.</li>
+                <li>Los plazos de entrega y construcción se detallan en el contrato.</li>
+                <li>Los cambios solicitados por el comprador pueden generar costos adicionales.</li>
+                <li>Las ofertas y promociones tienen vigencia y condiciones específicas.</li>
+            </ul>
+
+            <p>Para revisar el documento completo de términos y condiciones, por favor solicita una copia a <a href="mailto:asignaciones@casabonita.pe">asignaciones@casabonita.pe</a>.</p>
+        </section>
+
+        <section id="privacidad" class="privacidad-section">
+            <h2>Política de privacidad</h2>
+            <p>En Casa Bonita respetamos tu privacidad. Tratamos los datos personales que nos proporcionas únicamente para: procesar consultas, gestionar ventas, realizar trámites vinculados al programa Techo Propio y mantener comunicación comercial cuando hayas dado tu consentimiento.</p>
+            <p>Tus datos no se cederán a terceros sin tu consentimiento, salvo obligaciones legales. Si deseas ejercer derechos de acceso, rectificación, cancelación u oposición, escríbenos a <a href="mailto:asignaciones@casabonita.pe">asignaciones@casabonita.pe</a>.</p>
+        </section>
+
+        <section id="financiamiento" class="financiamiento-section">
+            <h2>Financiamiento</h2>
+            <p>Ofrecemos planes de financiamiento compatibles con el programa Techo Propio y alternativas bancarias. Entre las opciones destacadas:</p>
+            <ul>
+                <li>Asesoría para postulación al Bono Familiar Habitacional (Techo Propio).</li>
+                <li>Planes con plazos hasta 20 años según perfil.</li>
+                <li>Opciones sin cuota inicial en promociones especiales.</li>
+            </ul>
+            <p>Para una cotización personalizada, completa el formulario de contacto o comunícate al WhatsApp: <a href="https://wa.me/51946552086" target="_blank" rel="noopener noreferrer">+51 946 552 086</a>.</p>
+        </section>
+
+        <section id="libro-reclamaciones" class="reclamaciones-section">
+            <h2>Libro de Reclamaciones</h2>
+            <p>Si deseas presentar una queja o reclamo, puedes hacerlo a través del siguiente contacto o descargando el formulario:</p>
+            <p>Correo: <a href="mailto:reclamos@casabonita.pe">reclamos@casabonita.pe</a></p>
+            <p>Teléfono: +51 946 552 086</p>
+            <div class="reclamaciones-actions">
+                <a class="btn btn-accent" href="mailto:reclamos@casabonita.pe">Enviar reclamo por correo</a>
+                <a class="btn btn-outline" href="#" title="Descargar formulario (placeholder)">Descargar formulario</a>
+            </div>
+            <p class="small">Nota: si requiere que creemos una página/formulario específico para el Libro de Reclamaciones, puedo añadirlo como recurso adicional.</p>
+        </section>
+    </main>
+
+        <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -237,14 +236,14 @@
         </div>
     </footer>
 
-<!-- WhatsApp flotante -->
-<div class="whatsapp-float">
-    <button onclick="openWhatsApp()" class="whatsapp-btn">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.106"></path>
-        </svg>
-    </button>
-</div>
+    <!-- WhatsApp flotante -->
+    <div class="whatsapp-float">
+        <button onclick="openWhatsApp()" class="whatsapp-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.106"></path>
+            </svg>
+        </button>
+    </div>
 
     <script src="assets/js/script.js"></script>
 </body>
