@@ -413,7 +413,7 @@ a:hover {
 
 @media (min-width:768px) {
     .footer-content {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .footer-bottom {
@@ -421,6 +421,7 @@ a:hover {
         justify-content: space-between
     }
 }
+
 
 @media (min-width:1024px) {
     .footer-content {
@@ -490,6 +491,7 @@ a:hover {
     .mobile-menu-btn { display: inline-flex; }
     .desktop-nav { display: none !important; }
     .header-content { gap: 0.5rem; }
+    .footer-content { gap: 0rem!important; }
 }
 
 /* Prevent body scroll when mobile nav open */

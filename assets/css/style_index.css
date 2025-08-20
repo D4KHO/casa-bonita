@@ -327,11 +327,21 @@
     }
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
+    .hero {
+        min-height: 70vh;
+        margin-bottom: 40px;
+    }
+    
+    .hero-title {
+        font-size: 2.9rem !important;
+    }
+
     .hero-left {
         width: 90%;
         padding: 1.25rem;
-        margin-bottom: 1.5rem
+        margin-bottom: 1.5rem;
+        margin-top: 20px;
     }
 
     .hero-left>* {
@@ -344,8 +354,11 @@
     }
 
     .hero-search {
-        width: 90%;
-        padding: 1.5rem
+        display: none;
+    }
+
+    .btn-accent {
+        min-width: 250px !important;
     }
 
     .form-input,
@@ -566,12 +579,6 @@
     font-weight: 700;
     line-height: 1.2;
     color: var(--primary-color)
-}
-
-.stat-label {
-    font-size: .875rem;
-    color: var(--text-color);
-    opacity: .9
 }
 
 .timeline {
@@ -976,9 +983,6 @@ section {
     gap: 1rem
 }
 
-
-/* Header, logo and navigation styles moved to assets/css/style_header,footer.css */
-
 .hero {
     min-height: 80vh;
     max-height: 900px;
@@ -1050,7 +1054,7 @@ section {
 }
 
 .hero-title {
-    font-size: 3.9rem !important;
+    font-size: 4rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
     line-height: 1.2;
@@ -1114,11 +1118,12 @@ section {
     .stats-section {
         margin-top: -70px;
         margin-bottom: -60px;
-        padding: 0 1.5rem
+        padding: 0rem;
     }
 
     .hero-stats {
-        gap: 1rem
+        gap: 1rem;
+        margin: auto 1.5rem !important;
     }
 
     .stat-card {
@@ -1133,7 +1138,12 @@ section {
 
     .stat-icon {
         width: 50px;
-        height: 50px
+        height: 50px;
+        margin: 0px !important;
+    }
+
+    .highlight-stat{
+        gap: 1.75rem !important;
     }
 }
 
@@ -1190,22 +1200,12 @@ section {
     margin-bottom: .5rem
 }
 
-.stat-label {
-    color: rgba(23, 23, 23, .9);
-    font-size: 1rem;
-    font-weight: 500
-}
-
 .stat-number {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: .25rem
 }
 
-.stat-label {
-    font-size: .875rem;
-    opacity: .9
-}
 
 .scroll-indicator {
     position: absolute;
@@ -1281,18 +1281,9 @@ section {
 }
 
 @media (min-width:768px) {
-    .hero-title {
-        font-size: 4rem
-    }
 
     .hero-subtitle {
         font-size: 1.5rem
-    }
-}
-
-@media (min-width:1024px) {
-    .hero-title {
-        font-size: 4.5rem
     }
 }
 
@@ -1453,10 +1444,11 @@ section {
 }
 
 .stat-label {
-    font-size: .9rem;
+    font-size: .8rem;
     color: var(--gray-dark);
     opacity: .7;
-    margin-top: .25rem
+    margin-top: .25rem;
+    font-weight: 500;
 }
 
 .showcase-image {
@@ -2223,6 +2215,7 @@ model-viewer {
     .section-header h2 {
         font-size: 2.8rem;
     }
+
 }
 
 
@@ -2235,8 +2228,13 @@ model-viewer {
     .section-header h2 {
         font-size: 2rem;
     }
+
+    .features-header h3{
+        font-size: 2.2rem !important;   
     }
-    .requirements-header h3 {
+    }
+
+.requirements-header h3 {
         font-size: 1.8rem;
 }
 
