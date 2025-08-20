@@ -340,13 +340,7 @@
     .hero-left {
         width: 90%;
         padding: 1.25rem;
-        margin-bottom: 1.5rem;
-        margin-top: 20px;
-    }
-
-    .hero-left>* {
-        max-width: 100%;
-        margin-left: 0
+        margin: 20px 1rem 1.5rem 1rem;
     }
 
     .hero-subtitle {
