@@ -234,6 +234,12 @@ a:hover {
     .cta-button {
         display: block !important;
     }
+
+    .logo-img{
+        height: 93px !important;
+        width: auto ;
+        max-width: 300px;
+    }
 }
 
 
@@ -490,7 +496,7 @@ a:hover {
 @media (max-width: 768px) {
     .mobile-menu-btn { display: inline-flex; }
     .desktop-nav { display: none !important; }
-    .header-content { gap: 0.5rem; }
+    .header-content { gap: 0.5rem; padding: 0;}
     .footer-content { gap: 0rem!important; }
 }
 
