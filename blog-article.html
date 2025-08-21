@@ -238,7 +238,7 @@
             const notFoundElement = document.getElementById('article-not-found');
             
             // Cargar el artículo
-            fetch('/assets/data/articles.json')
+            fetch('assets/data/articles.json')
                 .then(response => response.json())
                 .then(data => {
                     // Encontrar el artículo por ID
