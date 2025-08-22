@@ -502,3 +502,35 @@ a:hover {
 
 /* Prevent body scroll when mobile nav open */
 .no-scroll { overflow: hidden; }
+
+
+@media (max-width: 379px) {
+    .mobile-logo {
+        max-width: 241px;
+        height: auto;
+        display: block;
+        margin: 0px auto 104px;
+    }
+
+    .mobile-logo-container {
+        padding: 2rem 0;
+        text-align: center;
+        margin-top: auto;
+        border-top: 1px solid #eee;
+    }
+}
+
+/* Mobile Menu Logo */
+.mobile-logo-container {
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: auto;
+    border-top: 1px solid #eee;
+}
+
+.mobile-logo {
+    max-width: 241px;
+    height: auto;
+    display: block;
+    margin: 0px auto 104px;
+}

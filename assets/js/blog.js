@@ -1,13 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Elementos del DOM
     const blogGrid = document.querySelector('.blog-grid');
-    const blogCards = document.querySelectorAll('.blog-card');
+    let blogCards = document.querySelectorAll('.blog-card');
     const categoryLinks = document.querySelectorAll('#categories-list a');
     const tagLinks = document.querySelectorAll('#tags-cloud a');
     const searchInput = document.querySelector('.search-form input[type="text"]');
     const searchForm = document.querySelector('.search-form');
     const clearFiltersBtn = document.getElementById('clear-filters');
     const activeFiltersContainer = document.getElementById('active-filters');
+    const paginationContainer = document.querySelector('.pagination .page-numbers');
+    
+    // Variables de paginación
+    const postsPerPage = 6;
+    let currentPage = 1;
+    let filteredBlogCards = Array.from(blogCards);
     
     // Filtros activos
     let activeFilters = {
@@ -85,15 +91,129 @@ document.addEventListener('DOMContentLoaded', function() {
         applyFilters();
     }
     
+    // Inicializar la paginación
+    function initPagination() {
+        updatePagination();
+        
+        // Event delegation para los botones de paginación
+        paginationContainer.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = e.target.closest('a');
+            if (!target) return;
+            
+            if (target.classList.contains('next')) {
+                if (currentPage < Math.ceil(filteredBlogCards.length / postsPerPage)) {
+                    currentPage++;
+                    updateDisplayedPosts();
+                    updatePagination();
+                }
+            } else if (target.classList.contains('prev')) {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updateDisplayedPosts();
+                    updatePagination();
+                }
+            } else if (target.textContent && !isNaN(target.textContent)) {
+                currentPage = parseInt(target.textContent);
+                updateDisplayedPosts();
+                updatePagination();
+            }
+            
+            // Desplazarse suavemente hacia arriba
+            window.scrollTo({
+                top: blogGrid.offsetTop + 500,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    // Actualizar la visualización de la paginación
+    function updatePagination() {
+        const totalPages = Math.ceil(filteredBlogCards.length / postsPerPage);
+        let paginationHTML = '';
+        
+        // Botón Anterior
+        if (currentPage > 1) {
+            paginationHTML += `
+                <li><a href="#" class="prev"><i class="fas fa-chevron-left"></i></a></li>
+            `;
+        }
+        
+        // Páginas
+        const maxVisiblePages = 3;
+        let startPage = Math.max(1, currentPage - 1);
+        let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+        
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        // Primera página y puntos suspensivos si es necesario
+        if (startPage > 1) {
+            paginationHTML += `
+                <li><a href="#" data-page="1">1</a></li>
+                ${startPage > 2 ? '<li><span class="dots">...</span></li>' : ''}
+            `;
+        }
+        
+        // Páginas visibles
+        for (let i = startPage; i <= endPage; i++) {
+            if (i === currentPage) {
+                paginationHTML += `<li><span class="current">${i}</span></li>`;
+            } else {
+                paginationHTML += `<li><a href="#" data-page="${i}">${i}</a></li>`;
+            }
+        }
+        
+        // Última página y puntos suspensivos si es necesario
+        if (endPage < totalPages) {
+            paginationHTML += `
+                ${endPage < totalPages - 1 ? '<li><span class="dots">...</span></li>' : ''}
+                <li><a href="#" data-page="${totalPages}">${totalPages}</a></li>
+            `;
+        }
+        
+        // Botón Siguiente
+        if (currentPage < totalPages) {
+            paginationHTML += `
+                <li><a href="#" class="next"><i class="fas fa-chevron-right"></i></a></li>
+            `;
+        }
+        
+        paginationContainer.innerHTML = paginationHTML;
+    }
+    
+    // Actualizar las publicaciones mostradas según la página actual
+    function updateDisplayedPosts() {
+        const startIndex = (currentPage - 1) * postsPerPage;
+        const endIndex = startIndex + postsPerPage;
+        const visiblePosts = filteredBlogCards.slice(startIndex, endIndex);
+        
+        // Ocultar todas las publicaciones
+        blogCards.forEach(card => {
+            card.style.display = 'none';
+        });
+        
+        // Mostrar solo las publicaciones de la página actual
+        visiblePosts.forEach(card => {
+            if (card) card.style.display = 'block';
+        });
+    }
+    
     // Inicializar el blog
     function initBlog() {
         // Ocultar contenedor de filtros al inicio
         document.querySelector('.filters-container').style.display = 'none';
         
+        // Inicializar paginación
+        initPagination();
+        updateDisplayedPosts();
+        
         // Event listeners para categorías
         categoryLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
+                currentPage = 1; // Resetear a la primera página
                 const filterValue = this.getAttribute('data-filter');
                 activeFilters.category = filterValue;
                 updateActiveCategory(this);
@@ -191,14 +311,17 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        blogCards.forEach(card => {
+        filteredBlogCards = Array.from(blogCards).filter(card => {
             const title = card.querySelector('.blog-title').textContent.toLowerCase();
             const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
             const category = card.querySelector('.blog-category').textContent.toLowerCase();
-            const matchesSearch = title.includes(term) || excerpt.includes(term) || category.includes(term);
-            
-            card.style.display = matchesSearch ? 'block' : 'none';
+            return title.includes(term) || excerpt.includes(term) || category.includes(term);
         });
+        
+        // Actualizar la paginación y mostrar resultados
+        currentPage = 1;
+        updatePagination();
+        updateDisplayedPosts();
         
         // Mostrar el contenedor de filtros para la búsqueda
         document.querySelector('.filters-container').style.display = 'flex';
@@ -212,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Aplicar todos los filtros
     function applyFilters() {
-        blogCards.forEach(card => {
+        filteredBlogCards = Array.from(blogCards).filter(card => {
             const cardCategory = card.getAttribute('data-category');
             const cardTags = card.getAttribute('data-tags').split(',');
             
@@ -225,13 +348,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 tagsMatch = activeFilters.tags.some(tag => cardTags.includes(tag));
             }
             
-            // Mostrar u ocultar tarjeta según los filtros
-            if (categoryMatch && tagsMatch) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
+            return categoryMatch && tagsMatch;
         });
+        
+        // Actualizar la paginación y mostrar las publicaciones
+        currentPage = 1; // Volver a la primera página al aplicar nuevos filtros
+        updatePagination();
+        updateDisplayedPosts();
     }
 
     // Actualizar categoría activa

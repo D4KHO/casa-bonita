@@ -387,13 +387,13 @@ body {
 }
 
 .form-input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid var(--medium-gray);
-    border-radius: 30px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
+    width: 90%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
     transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
 }
 
 .form-input:focus {
@@ -942,21 +942,6 @@ body {
 
 .form-group {
     margin-bottom: 1rem;
-}
-
-.form-input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    transition: var(--transition);
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(26, 71, 42, 0.2);
 }
 
 .btn-subscribe {
