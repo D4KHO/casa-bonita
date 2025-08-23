@@ -2545,6 +2545,12 @@ model-viewer {
 
 /* RESPONSIVE PARA MÓVILES (768px y menos) */
 @media (max-width: 768px) {
+
+    .modelo-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+
     .timeline {
         padding: 2rem 1rem;
         margin-bottom: 3rem;
