@@ -132,7 +132,7 @@
 
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 3rem;
             margin-top: 3rem;
         }
