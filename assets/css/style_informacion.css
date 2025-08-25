@@ -19,7 +19,7 @@
 .informacion-main {
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 2rem 1rem 4rem;
+    padding: 2rem 1rem 2rem;
 }
 
 /* Estilos para títulos */
