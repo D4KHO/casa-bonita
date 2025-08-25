@@ -2194,7 +2194,7 @@ model-viewer {
 }
 
 .proceso-cta {
-    background: linear-gradient(135deg, var(--forest-green-dark), hsl(236.86deg 60% 50%));
+    background: #78B7FF;
     color: var(--white);
     text-align: center;
     padding: 2rem;
