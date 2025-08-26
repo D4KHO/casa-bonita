@@ -400,6 +400,56 @@
     }
 }
 
+/* Project CTA background styles (moved from HTML) */
+.project-cta {
+    position: relative;
+    background-image: url(../img/bg_nuevo.jpg);
+    background-size: 100% auto;
+    background-position: center 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    padding: 4px 0;
+    min-height: 320px;
+    border-radius: 2rem;
+    text-align: center;
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+}
+
+.project-cta .cta-content {
+    position: relative;
+    z-index: 2; /* keep content above overlay */
+    color: #fff;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .project-cta {
+        background-size: cover;
+        background-position: center top;
+        padding: 40px 0;
+        min-height: 260px;
+        align-items: center;
+    }
+}
+
 .testimonio-card {
     background: #fff;
     border-radius: 12px;
@@ -826,7 +876,7 @@ section {
 }
 
 .btn-accent:hover {
-    background-color: rgba(234, 183, 16, 0.98);
+    background-color: rgba(255 195 0 / 98%);
     transform: scale(1.05);
     box-shadow: 0 8px 25px rgb(204 202 0 / 35%);
     transition: var(--transition-smooth);
@@ -868,9 +918,9 @@ section {
 }
 
 .btn-model{
-    background: #1abe3a5c;
-    color: hsl(0deg 0% 91.86%);
-    border: 1px solid var(--forest-green);
+    background: #78b7ff;
+    color: #fff;
+    font-weight: 600;
 }
 
 .contact-info {
@@ -1597,31 +1647,6 @@ model-viewer {
     color: #8b5cf6
 }
 
-.project-cta {
-    background: var(--gradient-primary);
-    border-radius: 2rem;
-    padding: 3rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    margin-top: 4rem
-}
-
-.project-cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: .3
-}
-
-.cta-content {
-    position: relative;
-    z-index: 2
-}
-
 .cta-text h3 {
     font-size: 2.2rem;
     font-weight: 700;
@@ -2234,56 +2259,132 @@ model-viewer {
     background: hsl(142deg 30% 85% / 43%);
 }
 
-.testimonios-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-bottom: 3rem
+/* Carrusel de testimonios */
+.testimonios-carousel {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.testimonio-card {
+.carousel-container {
+    overflow: hidden;
+    position: relative;
+    margin: 0 60px;
+    border-radius: 1rem;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+.testimonios-carousel .testimonio-card {
+    flex: 0 0 320px;
+    max-width: 320px;
+    margin: 0 15px;
     background: var(--white);
-    border-radius: .5rem;
-    padding: 1.5rem;
-    box-shadow: var(--shadow-medium);
-    transition: var(--transition-smooth)
+    border-radius: 1rem;
+    padding: 0;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0.3;
+    transform: scale(0.8);
+    position: relative;
+    overflow: hidden;
+    filter: blur(2px);
 }
 
-.testimonio-card:hover {
-    box-shadow: var(--shadow-emerald)
+/* Imagen del testimonio */
+.testimonio-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 1rem 1rem 0 0;
+    position: relative;
+}
+
+.testimonio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.testimonio-card.active:hover .testimonio-image img {
+    transform: scale(1.05);
+}
+
+/* Contenido del testimonio */
+.testimonio-content {
+    padding: 1.2rem;
+}
+
+/* Card central - completamente visible y destacada */
+.testimonios-carousel .testimonio-card.active {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    filter: blur(0px);
+    z-index: 10;
+}
+
+/* Cards adyacentes - parcialmente visibles */
+.testimonios-carousel .testimonio-card.next,
+.testimonios-carousel .testimonio-card.prev {
+    opacity: 0.6;
+    transform: scale(0.85);
+    filter: blur(1px);
+    z-index: 5;
+}
+
+/* Cards lejanas - muy desvanecidas */
+.testimonios-carousel .testimonio-card.far {
+    opacity: 0.2;
+    transform: scale(0.75);
+    filter: blur(3px);
+    z-index: 1;
+}
+
+/* Efecto hover solo para la card activa */
+.testimonios-carousel .testimonio-card.active:hover {
+    transform: scale(1.02) translateY(-5px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
 }
 
 .testimonio-quote {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 1rem
+    margin-bottom: 0.8rem;
 }
 
 .quote-icon {
     width: 2rem;
     height: 2rem;
     color: var(--forest-green);
-    opacity: .2
+    opacity: 0.3;
 }
 
 .stars {
     color: var(--nature-gold);
-    font-size: 1rem
+    font-size: 1rem;
 }
 
 .testimonio-card p {
     font-style: italic;
     color: var(--gray-dark);
-    opacity: .8;
-    margin-bottom: 1.5rem;
-    line-height: 1.6
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    font-size: 0.9rem;
+    min-height: 60px;
 }
 
 .testimonio-author {
     display: flex;
     align-items: center;
-    gap: 1rem
+    gap: 1rem;
 }
 
 .author-avatar {
@@ -2297,35 +2398,234 @@ model-viewer {
     justify-content: center;
     color: var(--white);
     font-weight: 700;
-    font-size: .875rem
+    font-size: 0.875rem;
+    flex-shrink: 0;
 }
 
 .author-avatar img {
     width: 100%;
     height: 100%;
-    object-fit: cover
+    object-fit: cover;
 }
 
+.author-info h4 {
+    margin: 0 0 0.2rem 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gray-dark);
+}
 
 .author-info p {
-    font-size: .875rem;
+    font-size: 0.825rem;
     color: var(--gray-dark);
-    opacity: .8;
-    margin: 0 0 .25rem 0
+    opacity: 0.7;
+    margin: 0;
 }
 
-.author-info span {
-    font-size: .75rem;
-    color: var(--nature-gold);
-    font-weight: 500
+/* Controles del carrusel */
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 10;
 }
 
+.carousel-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--white);
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    pointer-events: all;
+    color: var(--forest-green);
+}
 
-@media (min-width:768px) {
-    .testimonios-grid {
-        grid-template-columns: repeat(2, 1fr)
+.carousel-btn:hover {
+    background: var(--forest-green);
+    color: var(--white);
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.prev-btn {
+    transform: translateX(-25px);
+}
+
+.next-btn {
+    transform: translateX(25px);
+}
+
+/* Indicadores del carrusel */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 2rem;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background: var(--forest-green);
+    transform: scale(1.2);
+}
+
+.indicator:hover {
+    background: var(--nature-gold);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .carousel-container {
+        margin: 0 30px;
+        padding: 0;
     }
+    
+    .carousel-track {
+        justify-content: flex-start;
+        /* Centrar el primer elemento exactamente en el centro */
+        padding-left: calc(50vw - 140px - 30px); /* 50% viewport - mitad del card - margen */
+    }
+    
+    .testimonios-carousel .testimonio-card {
+        flex: 0 0 280px;
+        max-width: 280px;
+        margin: 0 10px;
+    }
+    
+    .testimonio-content {
+        padding: 1.25rem;
+    }
+    
+    .testimonio-image {
+        height: 180px;
+    }
+    
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .carousel-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .prev-btn {
+        transform: translateX(-15px);
+    }
+    
+    .next-btn {
+        transform: translateX(15px);
+    }
+}
 
+@media (max-width: 480px) {
+    .carousel-container {
+        margin: 0 20px;
+        padding: 0;
+    }
+    
+    .carousel-track {
+        /* Centrar el primer elemento exactamente en el centro para móviles pequeños */
+        padding-left: calc(50vw - 125px - 20px); /* 50% viewport - mitad del card - margen */
+    }
+    
+    .testimonios-carousel .testimonio-card {
+        flex: 0 0 250px;
+        max-width: 250px;
+        margin: 0 8px;
+    }
+    
+    .testimonio-content {
+        padding: 1rem;
+    }
+    
+    .testimonio-image {
+        height: 160px;
+    }
+    
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .carousel-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .prev-btn {
+        transform: translateX(-10px);
+    }
+    
+    .next-btn {
+        transform: translateX(10px);
+    }
+}
+
+/* Ocultar las cards clonadas de la animación inicial */
+.testimonio-card.cloned {
+    animation: none !important;
+}
+
+/* Animaciones adicionales */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.testimonios-carousel .testimonio-card:not(.cloned) {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Efectos de desvanecimiento en los bordes */
+.carousel-container::before,
+.carousel-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.carousel-container::before {
+    left: 0;
+    background: linear-gradient(to right, hsl(142deg 30% 85% / 43%), transparent);
+}
+
+.carousel-container::after {
+    right: 0;
+    background: linear-gradient(to left, hsl(142deg 30% 85% / 43%), transparent);
 }
 
 .contacto-section {

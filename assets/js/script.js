@@ -532,55 +532,70 @@ window.addEventListener('error', function(event) {
     console.error('Error en la aplicación:', event.error);
 });
 
-// Script para el carrusel
+// Script para el carrusel (safe: no-op si no existe en la página)
 document.addEventListener('DOMContentLoaded', function() {
     const carousel = document.querySelector('.carousel');
-    const slides = document.querySelectorAll('.carousel-slide');
+    if (!carousel) return; // no hay carrusel en esta página
+
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    if (!slides || slides.length === 0) return; // nada que animar
+
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const indicators = document.querySelectorAll('.indicator');
-    
+
     let currentIndex = 0;
     const totalSlides = slides.length;
-    
+
     // Función para actualizar el carrusel
     function updateCarousel() {
+        if (!carousel) return;
         carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-        
-        // Actualizar indicadores
-        indicators.forEach((indicator, index) => {
-            if (index === currentIndex) {
-                indicator.classList.add('active');
-            } else {
-                indicator.classList.remove('active');
-            }
-        });
+
+        // Actualizar indicadores si existen
+        if (indicators && indicators.length) {
+            indicators.forEach((indicator, index) => {
+                if (index === currentIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
     }
-    
-    // Event listeners para los botones
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateCarousel();
-    });
-    
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateCarousel();
-    });
-    
-    // Event listeners para los indicadores
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-            currentIndex = index;
+
+    // Event listeners para los botones (si existen)
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
             updateCarousel();
         });
-    });
-    
-    // Cambio automático cada 5 segundos
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateCarousel();
-    }, 5000);
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        });
+    }
+
+    // Event listeners para los indicadores
+    if (indicators && indicators.length) {
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+    }
+
+    // Cambio automático cada 5 segundos (solo si hay más de 1 slide)
+    if (totalSlides > 1) {
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+        }, 5000);
+    }
 });
 
     // Mobile menu logic removed
@@ -605,3 +620,284 @@ document.addEventListener('DOMContentLoaded', function() {
             card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
             observer.observe(card);
         });
+
+// ==========================================
+// CARRUSEL DE TESTIMONIOS
+// ==========================================
+
+let testimonialsCurrentIndex = 0;
+let testimonialsInterval;
+let isTestimonialsTransitioning = false;
+let totalOriginalCards = 0;
+
+// Inicializar carrusel de testimonios cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    initTestimonialsCarousel();
+});
+
+function initTestimonialsCarousel() {
+    const carousel = document.getElementById('testimonialsCarousel');
+    const originalCards = carousel?.querySelectorAll('.testimonio-card');
+    
+    if (!carousel || !originalCards.length) return;
+    
+    totalOriginalCards = originalCards.length;
+    
+    // No duplicar cards - usar las originales solamente
+    
+    // Crear indicadores
+    createTestimonialsIndicators(totalOriginalCards);
+    
+    // Comenzar en la primera card (índice 0)
+    testimonialsCurrentIndex = 0;
+    
+    // Configurar posiciones iniciales
+    updateTestimonialsCarousel();
+    
+    // Iniciar autoplay
+    startTestimonialsAutoplay();
+    
+    // Pausar en hover
+    carousel.addEventListener('mouseenter', stopTestimonialsAutoplay);
+    carousel.addEventListener('mouseleave', startTestimonialsAutoplay);
+    
+    // Eventos táctiles para móviles
+    addTestimonialsSwipeEvents();
+    
+    // Recalcular al cambiar tamaño de ventana
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateTestimonialsCarousel();
+        }, 100);
+    });
+}
+
+function createInfiniteCards(carousel, originalCards) {
+    // Clonar las primeras 3 cards al final para el efecto infinito hacia adelante
+    for (let i = 0; i < 3; i++) {
+        const clone = originalCards[i].cloneNode(true);
+        clone.classList.add('cloned');
+        carousel.appendChild(clone);
+    }
+    
+    // Clonar las últimas 3 cards al inicio para el efecto infinito hacia atrás
+    for (let i = totalOriginalCards - 3; i < totalOriginalCards; i++) {
+        const clone = originalCards[i].cloneNode(true);
+        clone.classList.add('cloned');
+        carousel.insertBefore(clone, carousel.firstChild);
+    }
+    
+    // Ajustar el índice inicial para compensar las cards clonadas del inicio
+    testimonialsCurrentIndex = 3;
+}
+
+function createTestimonialsIndicators(totalCards) {
+    const indicatorsContainer = document.getElementById('carouselIndicators');
+    if (!indicatorsContainer) return;
+    
+    indicatorsContainer.innerHTML = '';
+    
+    for (let i = 0; i < totalCards; i++) {
+        const indicator = document.createElement('div');
+        indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
+        indicator.addEventListener('click', () => goToTestimonialsSlide(i));
+        indicatorsContainer.appendChild(indicator);
+    }
+}
+
+function updateTestimonialsCarousel() {
+    const carousel = document.getElementById('testimonialsCarousel');
+    const allCards = carousel?.querySelectorAll('.testimonio-card');
+    const indicators = document.querySelectorAll('.carousel-indicators .indicator');
+    
+    if (!carousel || !allCards.length) return;
+
+    // Detectar si estamos en móvil
+    const isMobile = window.innerWidth <= 768;
+    const isSmallMobile = window.innerWidth <= 480;
+    
+    // Calcular desplazamiento
+    const cardWidth = allCards[0].offsetWidth;
+    const cardMargin = isMobile ? (isSmallMobile ? 16 : 20) : 30; // márgenes según dispositivo
+    const totalCardWidth = cardWidth + cardMargin;
+    
+    // En móvil, usar solo el desplazamiento por card sin centrado adicional
+    // ya que el CSS se encarga del centrado inicial
+    const translateX = isMobile ? 
+        -testimonialsCurrentIndex * totalCardWidth :
+        -testimonialsCurrentIndex * totalCardWidth + (carousel.parentElement.offsetWidth - cardWidth) / 2;
+    
+    // Aplicar transformación
+    carousel.style.transform = `translateX(${translateX}px)`;
+    
+    // Actualizar clases de las tarjetas - SOLO la del centro está activa
+    allCards.forEach((card, index) => {
+        card.classList.remove('active', 'prev', 'next', 'far');
+        
+        const distance = Math.abs(index - testimonialsCurrentIndex);
+        
+        if (index === testimonialsCurrentIndex) {
+            // Card central - completamente visible
+            card.classList.add('active');
+        } else if (distance === 1) {
+            // Cards adyacentes - un poco desvanecidas
+            card.classList.add(index < testimonialsCurrentIndex ? 'prev' : 'next');
+        } else {
+            // Cards lejanas - muy desvanecidas
+            card.classList.add('far');
+        }
+    });
+    
+    // Actualizar indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === testimonialsCurrentIndex);
+    });
+}
+
+function getRealIndex(currentIndex) {
+    // Convertir el índice actual (que incluye clones) al índice real de las cards originales
+    const adjustedIndex = currentIndex - 3; // Restar las 3 cards clonadas del inicio
+    
+    if (adjustedIndex < 0) {
+        return totalOriginalCards + adjustedIndex;
+    } else if (adjustedIndex >= totalOriginalCards) {
+        return adjustedIndex % totalOriginalCards;
+    }
+    
+    return adjustedIndex;
+}
+
+function moveCarousel(direction) {
+    if (isTestimonialsTransitioning) return;
+    
+    const carousel = document.getElementById('testimonialsCarousel');
+    const allCards = carousel?.querySelectorAll('.testimonio-card');
+    
+    if (!allCards || !allCards.length) return;
+    
+    isTestimonialsTransitioning = true;
+    
+    testimonialsCurrentIndex += direction;
+    
+    // Manejar los límites del carrusel
+    if (testimonialsCurrentIndex >= allCards.length) {
+        testimonialsCurrentIndex = allCards.length - 1; // Quedarse en la última
+    } else if (testimonialsCurrentIndex < 0) {
+        testimonialsCurrentIndex = 0; // Quedarse en la primera
+    }
+    
+    // Aplicar la transición
+    carousel.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    updateTestimonialsCarousel();
+    
+    setTimeout(() => {
+        isTestimonialsTransitioning = false;
+    }, 600);
+    
+    // Resetear autoplay
+    stopTestimonialsAutoplay();
+    startTestimonialsAutoplay();
+}
+
+function goToTestimonialsSlide(index) {
+    if (isTestimonialsTransitioning) return;
+    
+    isTestimonialsTransitioning = true;
+    
+    // Convertir el índice del indicador al índice real del carrusel (incluyendo clones)
+    testimonialsCurrentIndex = index + 3; // Sumar 3 por las cards clonadas del inicio
+    
+    const carousel = document.getElementById('testimonialsCarousel');
+    carousel.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    updateTestimonialsCarousel();
+    
+    setTimeout(() => {
+        isTestimonialsTransitioning = false;
+    }, 600);
+    
+    // Resetear autoplay
+    stopTestimonialsAutoplay();
+    startTestimonialsAutoplay();
+}
+
+function startTestimonialsAutoplay() {
+    stopTestimonialsAutoplay();
+    testimonialsInterval = setInterval(() => {
+        moveCarousel(1);
+    }, 4000); // Cambio cada 4 segundos
+}
+
+function stopTestimonialsAutoplay() {
+    if (testimonialsInterval) {
+        clearInterval(testimonialsInterval);
+        testimonialsInterval = null;
+    }
+}
+
+function addTestimonialsSwipeEvents() {
+    const carousel = document.getElementById('testimonialsCarousel');
+    if (!carousel) return;
+    
+    let startX = 0;
+    let startY = 0;
+    let endX = 0;
+    let endY = 0;
+    
+    carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+    
+    carousel.addEventListener('touchmove', (e) => {
+        e.preventDefault(); // Prevenir scroll mientras se hace swipe
+    });
+    
+    carousel.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        endY = e.changedTouches[0].clientY;
+        
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        
+        // Solo procesar si el movimiento horizontal es mayor que el vertical
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0) {
+                moveCarousel(-1); // Swipe derecha - slide anterior
+            } else {
+                moveCarousel(1);  // Swipe izquierda - slide siguiente
+            }
+        }
+    });
+}
+
+// Redimensionar carrusel en cambio de ventana
+window.addEventListener('resize', () => {
+    if (document.getElementById('testimonialsCarousel')) {
+        updateTestimonialsCarousel();
+    }
+});
+
+// Intersection Observer para animar testimonios al entrar en vista
+const testimonialsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const cards = entry.target.querySelectorAll('.testimonio-card:not(.cloned)');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+    });
+}, { threshold: 0.1 });
+
+// Observar la sección de testimonios
+document.addEventListener('DOMContentLoaded', () => {
+    const testimonialsSection = document.querySelector('.testimonios-section');
+    if (testimonialsSection) {
+        testimonialsObserver.observe(testimonialsSection);
+    }
+});
