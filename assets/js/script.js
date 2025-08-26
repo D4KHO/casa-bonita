@@ -1,9 +1,12 @@
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
-        element.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
+        const headerHeight = document.querySelector('.main-header').offsetHeight;
+        const elementPosition = element.offsetTop - headerHeight - 20; // 20px de margen adicional
+        
+        window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
         });
     }
 }
@@ -900,4 +903,52 @@ document.addEventListener('DOMContentLoaded', () => {
     if (testimonialsSection) {
         testimonialsObserver.observe(testimonialsSection);
     }
+});
+
+// Funcionalidad del header compacto al hacer scroll
+document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.main-header');
+    let lastScrollTop = 0;
+    let isScrolling = false;
+
+    function handleHeaderScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Agregar o quitar la clase 'scrolled' basado en la posición del scroll
+        if (scrollTop > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        lastScrollTop = scrollTop;
+        isScrolling = false;
+    }
+
+    // Optimizar el rendimiento usando requestAnimationFrame
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            requestAnimationFrame(handleHeaderScroll);
+            isScrolling = true;
+        }
+    });
+
+    // Asegurar que el header inicie correctamente
+    handleHeaderScroll();
+});
+
+// Agregar espacio para compensar el header fijo
+document.addEventListener('DOMContentLoaded', () => {
+    // Crear un espacio para evitar que el contenido se oculte detrás del header fijo
+    const body = document.body;
+    const headerHeight = document.querySelector('.main-header').offsetHeight;
+    
+    // Agregar un padding-top al body para compensar el header fijo
+    body.style.paddingTop = headerHeight + 'px';
+    
+    // Actualizar el padding cuando la ventana cambie de tamaño
+    window.addEventListener('resize', () => {
+        const newHeaderHeight = document.querySelector('.main-header').offsetHeight;
+        body.style.paddingTop = newHeaderHeight + 'px';
+    });
 });

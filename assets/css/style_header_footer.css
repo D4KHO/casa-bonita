@@ -118,9 +118,18 @@ body, html {
 .main-header {
     background: var(--white);
     box-shadow: var(--shadow-soft);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 50;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.main-header.scrolled {
+    padding: 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -128,7 +137,12 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 0
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.main-header.scrolled .header-content {
+    padding: 0.5rem 0;
 }
 
 a {
@@ -190,6 +204,7 @@ a:hover {
     display: flex;
     align-items: center;
     height: 120px !important;
+    transition: all 0.3s ease;
 }
 
 .logo-img {
@@ -197,6 +212,16 @@ a:hover {
     width: auto !important;
     display: block;
     max-width: 300px !important;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para el header compacto */
+.main-header.scrolled .logo {
+    height: 63px !important;
+}
+
+.main-header.scrolled .logo-img {
+    height: 65px !important;
 }
 
 /* Asegurar que la navegación de escritorio sea visible en pantallas pequeñas
@@ -684,4 +709,3 @@ a:hover {
     .icon_contact-grid { grid-template-columns: 1fr; gap: .75rem; }
     .icon_contact-card { min-height: 110px; padding: .85rem; }
 }
-
