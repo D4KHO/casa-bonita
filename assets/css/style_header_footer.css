@@ -3,9 +3,9 @@
 /* Navigation */
 :root {
     --forest-green-dark: #000000;
-    --primary-color: #d4af37;
+    --primary-color: #eac736;
     --secondary-color: #2d5a3f;
-    --accent-color: #d4af37;
+    --accent-color: #eac736;
     --text-color: #333;
     --light-gray: #f5f5f5;
     --medium-gray: #e0e0e0;
@@ -41,7 +41,7 @@ body, html {
 }
 
 .btn-hero {
-    background: linear-gradient(135deg, var(--forest-green-dark), hsl(41.41deg 100% 50%));
+    background: linear-gradient(135deg, var(--forest-green-dark), hsl(48.33deg 81.08% 56.47%));
     color: var(--white);
     box-shadow: var(--shadow-emerald);
     font-weight: 600;
@@ -632,7 +632,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #D1A100; /* todo en Amarillo dorado */
+    background: var(--primary-color); /* todo en Amarillo dorado */
     border-radius: 50%;
     color: white;
 }
@@ -659,7 +659,7 @@ a:hover {
 .icon_contact-link {
     display: inline-block;
     padding: 0.4rem 1rem;
-    background: #D1A100; /* botón en Amarillo dorado */
+    background: var(--primary-color); /* botón en Amarillo dorado */
     color: #ffffff !important;
     text-decoration: none;
     border-radius: 2rem;
@@ -670,14 +670,14 @@ a:hover {
 
 .icon_contact-link:hover { transform: translateY(-2px); box-shadow: 0 6px 18px -6px rgba(0,0,0,0.08); }
 
-.icon_contact-card:nth-child(1) .icon_contact-icon { background: #D1A100; }
-.icon_contact-card:nth-child(2) .icon_contact-icon { background: #D1A100; }
-.icon_contact-card:nth-child(3) .icon_contact-icon { background: #D1A100; }
+.icon_contact-card:nth-child(1) .icon_contact-icon { background: var(--primary-color); }
+.icon_contact-card:nth-child(2) .icon_contact-icon { background: var(--primary-color); }
+.icon_contact-card:nth-child(3) .icon_contact-icon { background: var(--primary-color); }
 
 .icon_contact-icon.icon_contact-facebook-icon { background: #D1A100; color: #fff; }
 
 .icon_contact-card[data-whatsapp="true"] .icon_contact-link,
-.icon_contact-link[data-whatsapp="true"] { color: #000000; background: #D1A100; border-color: rgba(0,0,0,0.03); }
+.icon_contact-link[data-whatsapp="true"] { color: #000000; background: var(--primary-color); border-color: rgba(0,0,0,0.03); }
 
 @media (max-width: 480px) {
     .icon_contact-section { padding: 1.5rem 0; }

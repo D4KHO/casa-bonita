@@ -228,7 +228,7 @@ function animateCounters() {
                 const counter = entry.target;
                 const originalText = counter.textContent;
                 const target = parseInt(originalText.replace(/[^\d]/g, ''));
-                const duration = 1800;
+                const duration = 900;
                 const increment = target / (duration / 16);
                 let current = 0;
                 

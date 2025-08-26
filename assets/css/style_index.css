@@ -152,7 +152,7 @@
     height: 3px;
     margin: .6rem auto 0;
     border-radius: 2px;
-    background: linear-gradient(135deg, var(--forest-green-dark), hsl(41.41deg 140% 50%));
+    background: linear-gradient(135deg, var(--forest-green-dark), hsl(48.33deg 81.08% 56.47%));
     box-shadow: 0 2px 8px rgba(16, 185, 129, .35)
 }
 
@@ -272,7 +272,7 @@
 .form-submit {
     width: 100%;
     padding: 14px 20px;
-    background: linear-gradient(135deg, var(--forest-green-dark), hsl(41.41deg 140% 50%));
+    background: linear-gradient(135deg, var(--forest-green-dark), hsl(48.33deg 81.08% 56.47%));
     color: white;
     border: none;
     border-radius: 4px;
@@ -858,7 +858,7 @@ section {
 }
 
 .btn-accent {
-    background-color: rgb(255 176 0);
+    background-color: var(--primary-color);
     color: #fff;
     backdrop-filter: blur(4px);
     font-weight: 600;
@@ -956,7 +956,6 @@ section {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: var(--gradient-hero)
 }
 
 .hero-content {
@@ -1009,7 +1008,7 @@ section {
 
 .title-accent {
     display: block;
-    color: #ffb000;
+    color: var(--primary-color);
     font-weight: 700
 }
 
@@ -1335,7 +1334,7 @@ section {
 .highlight-stat .stat-icon {
     width: 3rem;
     height: 3rem;
-    background: #ffb309;
+    background: var(--primary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1944,7 +1943,7 @@ model-viewer {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    background: var(--nature-gold);
+    background: var(--primary-color);
     color: var(--white);
     padding: .25rem .75rem;
     border-radius: .25rem;
@@ -2682,7 +2681,7 @@ model-viewer {
 }
 
 .contact-item .icon {
-    color: hsl(36.7deg 90.38% 59.22%);
+    color: var(--primary-color);
 }
 
 .contact-label {
@@ -2707,7 +2706,7 @@ model-viewer {
 .whatsapp-icon {
     width: 3rem;
     height: 3rem;
-    color: hsl(36.7deg 90.38% 59.22%);
+    color: var(--primary-color);
     margin: 0 auto 1rem
 }
 
@@ -2725,7 +2724,7 @@ model-viewer {
 }
 
 .promo-card {
-    background: var(--gradient-accent);
+    background: var(--primary-color);
     color: var(--white);
     border-radius: .5rem;
     padding: 1.5rem;
