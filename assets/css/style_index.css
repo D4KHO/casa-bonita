@@ -2129,7 +2129,7 @@ model-viewer {
 }
 
 .proceso-section {
-    padding: 5rem 0;
+    padding: 3rem 0;
     background: var(--white)
 }
 
@@ -2474,6 +2474,7 @@ model-viewer {
     justify-content: center;
     gap: 8px;
     margin-top: 2rem;
+    margin-bottom: 4rem;
 }
 
 .indicator {
