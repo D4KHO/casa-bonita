@@ -2543,7 +2543,7 @@ model-viewer {
 
 @media (max-width: 480px) {
     .carousel-container {
-        margin: 0 20px;
+        margin: 0 0px;
         padding: 0;
     }
     
