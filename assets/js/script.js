@@ -625,13 +625,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
 // ==========================================
-// CARRUSEL DE TESTIMONIOS
+// CARRUSEL DE TESTIMONIOS CON SWIPER
 // ==========================================
 
-let testimonialsCurrentIndex = 0;
-let testimonialsInterval;
-let isTestimonialsTransitioning = false;
-let totalOriginalCards = 0;
+let testimonialsSwiper;
 
 // Inicializar carrusel de testimonios cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
@@ -639,63 +636,64 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initTestimonialsCarousel() {
-    const carousel = document.getElementById('testimonialsCarousel');
-    const originalCards = carousel?.querySelectorAll('.testimonio-card');
+    const swiperContainer = document.querySelector('.testimonials-swiper');
     
-    if (!carousel || !originalCards.length) return;
+    if (!swiperContainer) return;
     
-    totalOriginalCards = originalCards.length;
-    
-    // No duplicar cards - usar las originales solamente
-    
-    // Crear indicadores
-    createTestimonialsIndicators(totalOriginalCards);
-    
-    // Comenzar en la primera card (índice 0)
-    testimonialsCurrentIndex = 0;
-    
-    // Configurar posiciones iniciales
-    updateTestimonialsCarousel();
-    
-    // Iniciar autoplay
-    startTestimonialsAutoplay();
-    
-    // Pausar en hover
-    carousel.addEventListener('mouseenter', stopTestimonialsAutoplay);
-    carousel.addEventListener('mouseleave', startTestimonialsAutoplay);
-    
-    // Eventos táctiles para móviles
-    addTestimonialsSwipeEvents();
-    
-    // Recalcular al cambiar tamaño de ventana
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            updateTestimonialsCarousel();
-        }, 100);
+    // Configurar Swiper para carrusel infinito
+    testimonialsSwiper = new Swiper('.testimonials-swiper', {
+        // Configuración básica para loop infinito
+        loop: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        spaceBetween: 30,
+        
+        // Autoplay
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+        },
+        
+        // Velocidad de transición
+        speed: 600,
+        
+        // Configuración responsive
+        breakpoints: {
+            320: {
+                spaceBetween: 200,
+                slidesPerView: 2,
+                centeredSlides: true,
+            },
+            768: {
+                spaceBetween: 20,
+                slidesPerView: 'auto',
+                centeredSlides: true,
+            },
+            1024: {
+                spaceBetween: 30,
+                slidesPerView: 'auto',
+                centeredSlides: true,
+            }
+        },
+        
+        // Eventos
+        on: {
+            init: function() {
+                // Contar slides originales (no duplicadas por loop)
+                const originalSlides = document.querySelectorAll('.testimonials-swiper .swiper-slide');
+                createTestimonialsIndicators(originalSlides.length);
+                updateSlideClasses(this);
+            },
+            slideChange: function() {
+                updateSlideClasses(this);
+                updateActiveIndicator(this.realIndex);
+            }
+        }
     });
 }
 
-function createInfiniteCards(carousel, originalCards) {
-    // Clonar las primeras 3 cards al final para el efecto infinito hacia adelante
-    for (let i = 0; i < 3; i++) {
-        const clone = originalCards[i].cloneNode(true);
-        clone.classList.add('cloned');
-        carousel.appendChild(clone);
-    }
-    
-    // Clonar las últimas 3 cards al inicio para el efecto infinito hacia atrás
-    for (let i = totalOriginalCards - 3; i < totalOriginalCards; i++) {
-        const clone = originalCards[i].cloneNode(true);
-        clone.classList.add('cloned');
-        carousel.insertBefore(clone, carousel.firstChild);
-    }
-    
-    // Ajustar el índice inicial para compensar las cards clonadas del inicio
-    testimonialsCurrentIndex = 3;
-}
-
+// Función para crear indicadores personalizados
 function createTestimonialsIndicators(totalCards) {
     const indicatorsContainer = document.getElementById('carouselIndicators');
     if (!indicatorsContainer) return;
@@ -705,205 +703,80 @@ function createTestimonialsIndicators(totalCards) {
     for (let i = 0; i < totalCards; i++) {
         const indicator = document.createElement('div');
         indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
-        indicator.addEventListener('click', () => goToTestimonialsSlide(i));
+        indicator.addEventListener('click', () => {
+            if (testimonialsSwiper) {
+                testimonialsSwiper.slideToLoop(i);
+            }
+        });
         indicatorsContainer.appendChild(indicator);
     }
 }
 
-function updateTestimonialsCarousel() {
-    const carousel = document.getElementById('testimonialsCarousel');
-    const allCards = carousel?.querySelectorAll('.testimonio-card');
+// Función para actualizar el indicador activo
+function updateActiveIndicator(activeIndex) {
     const indicators = document.querySelectorAll('.carousel-indicators .indicator');
-    
-    if (!carousel || !allCards.length) return;
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === activeIndex);
+    });
+}
 
-    // Detectar si estamos en móvil
-    const isMobile = window.innerWidth <= 768;
-    const isSmallMobile = window.innerWidth <= 480;
+// Función para aplicar las clases de estilo originales
+function updateSlideClasses(swiper) {
+    const slides = swiper.slides;
+    const activeIndex = swiper.realIndex;
+    const totalSlides = Math.floor(slides.length / 3); // Slides originales sin duplicados
     
-    // Calcular desplazamiento
-    const cardWidth = allCards[0].offsetWidth;
-    const cardMargin = isMobile ? (isSmallMobile ? 16 : 20) : 30; // márgenes según dispositivo
-    const totalCardWidth = cardWidth + cardMargin;
-    
-    // En móvil, usar solo el desplazamiento por card sin centrado adicional
-    // ya que el CSS se encarga del centrado inicial
-    const translateX = isMobile ? 
-        -testimonialsCurrentIndex * totalCardWidth :
-        -testimonialsCurrentIndex * totalCardWidth + (carousel.parentElement.offsetWidth - cardWidth) / 2;
-    
-    // Aplicar transformación
-    carousel.style.transform = `translateX(${translateX}px)`;
-    
-    // Actualizar clases de las tarjetas - SOLO la del centro está activa
-    allCards.forEach((card, index) => {
+    slides.forEach((slide, index) => {
+        const card = slide.querySelector('.testimonio-card');
+        if (!card) return;
+        
+        // Limpiar todas las clases de estado
         card.classList.remove('active', 'prev', 'next', 'far');
         
-        const distance = Math.abs(index - testimonialsCurrentIndex);
+        // Obtener el índice real de la slide
+        const realIndex = parseInt(slide.getAttribute('data-swiper-slide-index') || '0');
         
-        if (index === testimonialsCurrentIndex) {
-            // Card central - completamente visible
+        // Calcular la distancia desde la slide activa
+        const distance = Math.abs(realIndex - activeIndex);
+        
+        // Aplicar clases basadas en la posición
+        if (realIndex === activeIndex) {
             card.classList.add('active');
-        } else if (distance === 1) {
-            // Cards adyacentes - un poco desvanecidas
-            card.classList.add(index < testimonialsCurrentIndex ? 'prev' : 'next');
+        } else if (distance === 1 || 
+                  (activeIndex === 0 && realIndex === totalSlides - 1) ||
+                  (activeIndex === totalSlides - 1 && realIndex === 0)) {
+            // Determinar si es prev o next considerando el loop circular
+            const isPrev = (realIndex === activeIndex - 1) || 
+                          (activeIndex === 0 && realIndex === totalSlides - 1);
+            card.classList.add(isPrev ? 'prev' : 'next');
         } else {
-            // Cards lejanas - muy desvanecidas
             card.classList.add('far');
         }
     });
-    
-    // Actualizar indicadores
-    indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === testimonialsCurrentIndex);
-    });
 }
 
-function getRealIndex(currentIndex) {
-    // Convertir el índice actual (que incluye clones) al índice real de las cards originales
-    const adjustedIndex = currentIndex - 3; // Restar las 3 cards clonadas del inicio
-    
-    if (adjustedIndex < 0) {
-        return totalOriginalCards + adjustedIndex;
-    } else if (adjustedIndex >= totalOriginalCards) {
-        return adjustedIndex % totalOriginalCards;
-    }
-    
-    return adjustedIndex;
-}
-
+// Mantener funciones existentes para compatibilidad con botones
 function moveCarousel(direction) {
-    if (isTestimonialsTransitioning) return;
-    
-    const carousel = document.getElementById('testimonialsCarousel');
-    const allCards = carousel?.querySelectorAll('.testimonio-card');
-    
-    if (!allCards || !allCards.length) return;
-    
-    isTestimonialsTransitioning = true;
-    
-    testimonialsCurrentIndex += direction;
-    
-    // Manejar los límites del carrusel
-    if (testimonialsCurrentIndex >= allCards.length) {
-        testimonialsCurrentIndex = allCards.length - 1; // Quedarse en la última
-    } else if (testimonialsCurrentIndex < 0) {
-        testimonialsCurrentIndex = 0; // Quedarse en la primera
+    if (testimonialsSwiper) {
+        if (direction > 0) {
+            testimonialsSwiper.slideNext();
+        } else {
+            testimonialsSwiper.slidePrev();
+        }
     }
-    
-    // Aplicar la transición
-    carousel.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    updateTestimonialsCarousel();
-    
-    setTimeout(() => {
-        isTestimonialsTransitioning = false;
-    }, 600);
-    
-    // Resetear autoplay
-    stopTestimonialsAutoplay();
-    startTestimonialsAutoplay();
-}
-
-function goToTestimonialsSlide(index) {
-    if (isTestimonialsTransitioning) return;
-    
-    isTestimonialsTransitioning = true;
-    
-    // Convertir el índice del indicador al índice real del carrusel (incluyendo clones)
-    testimonialsCurrentIndex = index + 3; // Sumar 3 por las cards clonadas del inicio
-    
-    const carousel = document.getElementById('testimonialsCarousel');
-    carousel.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    updateTestimonialsCarousel();
-    
-    setTimeout(() => {
-        isTestimonialsTransitioning = false;
-    }, 600);
-    
-    // Resetear autoplay
-    stopTestimonialsAutoplay();
-    startTestimonialsAutoplay();
 }
 
 function startTestimonialsAutoplay() {
-    stopTestimonialsAutoplay();
-    testimonialsInterval = setInterval(() => {
-        moveCarousel(1);
-    }, 4000); // Cambio cada 4 segundos
+    if (testimonialsSwiper && testimonialsSwiper.autoplay) {
+        testimonialsSwiper.autoplay.start();
+    }
 }
 
 function stopTestimonialsAutoplay() {
-    if (testimonialsInterval) {
-        clearInterval(testimonialsInterval);
-        testimonialsInterval = null;
+    if (testimonialsSwiper && testimonialsSwiper.autoplay) {
+        testimonialsSwiper.autoplay.stop();
     }
 }
-
-function addTestimonialsSwipeEvents() {
-    const carousel = document.getElementById('testimonialsCarousel');
-    if (!carousel) return;
-    
-    let startX = 0;
-    let startY = 0;
-    let endX = 0;
-    let endY = 0;
-    
-    carousel.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-    });
-    
-    carousel.addEventListener('touchmove', (e) => {
-        e.preventDefault(); // Prevenir scroll mientras se hace swipe
-    });
-    
-    carousel.addEventListener('touchend', (e) => {
-        endX = e.changedTouches[0].clientX;
-        endY = e.changedTouches[0].clientY;
-        
-        const deltaX = endX - startX;
-        const deltaY = endY - startY;
-        
-        // Solo procesar si el movimiento horizontal es mayor que el vertical
-        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-            if (deltaX > 0) {
-                moveCarousel(-1); // Swipe derecha - slide anterior
-            } else {
-                moveCarousel(1);  // Swipe izquierda - slide siguiente
-            }
-        }
-    });
-}
-
-// Redimensionar carrusel en cambio de ventana
-window.addEventListener('resize', () => {
-    if (document.getElementById('testimonialsCarousel')) {
-        updateTestimonialsCarousel();
-    }
-});
-
-// Intersection Observer para animar testimonios al entrar en vista
-const testimonialsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const cards = entry.target.querySelectorAll('.testimonio-card:not(.cloned)');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        }
-    });
-}, { threshold: 0.1 });
-
-// Observar la sección de testimonios
-document.addEventListener('DOMContentLoaded', () => {
-    const testimonialsSection = document.querySelector('.testimonios-section');
-    if (testimonialsSection) {
-        testimonialsObserver.observe(testimonialsSection);
-    }
-});
 
 // Funcionalidad del header compacto al hacer scroll
 document.addEventListener('DOMContentLoaded', () => {
