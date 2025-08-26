@@ -2445,11 +2445,11 @@ model-viewer {
     cursor: pointer;
     transition: all 0.3s ease;
     pointer-events: all;
-    color: var(--forest-green);
+    color: var(--primary-color);
 }
 
 .carousel-btn:hover {
-    background: var(--forest-green);
+    background: #eac736;
     color: var(--white);
     transform: scale(1.1);
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
@@ -2487,12 +2487,12 @@ model-viewer {
 }
 
 .indicator.active {
-    background: var(--forest-green);
+    background: #eac736;
     transform: scale(1.2);
 }
 
 .indicator:hover {
-    background: var(--nature-gold);
+    background: #eac736;
 }
 
 /* Responsive design */

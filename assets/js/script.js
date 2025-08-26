@@ -672,7 +672,7 @@ function initTestimonialsCarousel() {
             },
             1024: {
                 spaceBetween: 30,
-                slidesPerView: 'auto',
+                slidesPerView: 3,
                 centeredSlides: true,
             }
         },
