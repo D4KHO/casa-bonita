@@ -124,7 +124,7 @@ html {
 }
 
 .btn-hero {
-    background: linear-gradient(135deg, var(--forest-green-dark), hsl(48.33deg 81.08% 56.47%));
+    background: #eac736;
     color: var(--white);
     box-shadow: var(--shadow-emerald);
     font-weight: 600;
@@ -756,7 +756,7 @@ a:hover {
 }
 
 .icon_contact-card {
-    background: linear-gradient(145deg, #ffffff, #fffaf3);
+    background: linear-gradient(145deg, #ffffff, #ffffff);
     border-radius: 0.75rem;
     padding: 1rem;
     text-align: center;
@@ -806,7 +806,7 @@ a:hover {
 .icon_contact-link {
     display: inline-block;
     padding: 0.4rem 1rem;
-    background: var(--primary-color);
+    background: #ea4d4f;
     /* botón en Amarillo dorado */
     color: #ffffff !important;
     text-decoration: none;
@@ -836,15 +836,46 @@ a:hover {
 }
 
 .icon_contact-icon.icon_contact-facebook-icon {
-    background: #D1A100;
+    background: #1877F2 !important; /* Azul de Facebook */
+    color: #fff;
+}
+
+/* WhatsApp - Verde */
+.icon_contact-icon.icon_contact-whatsapp-icon {
+    background: #25D366 !important; /* Verde de WhatsApp */
+    color: #fff;
+}
+
+/* Sitio Web - Amarillo (mantener el color original) */
+.icon_contact-icon.icon_contact-website-icon {
+    background: #eac736  !important; /* Amarillo dorado */
+    color: #fff;
+}
+
+/* Instagram - Gradiente característico */
+.icon_contact-icon.icon_contact-instagram-icon {
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80) !important;
+    color: #fff;
+}
+
+/* TikTok - Negro */
+.icon_contact-icon.icon_contact-tiktok-icon {
+    background: #000000 !important; /* Negro de TikTok */
     color: #fff;
 }
 
 .icon_contact-card[data-whatsapp="true"] .icon_contact-link,
 .icon_contact-link[data-whatsapp="true"] {
-    color: #000000;
-    background: var(--primary-color);
-    border-color: rgba(0, 0, 0, 0.03);
+    color: #fff !important;
+    background: #ea4d4f  !important; /* Verde de WhatsApp para el botón */
+    border-color: rgba(37, 211, 102, 0.2);
+}
+
+.icon_contact-card[data-whatsapp="true"] .icon_contact-link:hover,
+.icon_contact-link[data-whatsapp="true"]:hover {
+    background: #1db954 !important; /* Verde más oscuro en hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px -6px rgba(37, 211, 102, 0.3);
 }
 
 @media (max-width: 480px) {
