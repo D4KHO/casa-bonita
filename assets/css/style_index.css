@@ -1493,7 +1493,7 @@ model-viewer {
 }
 
 .feature-card-enhanced.primary::before {
-    background-color: #78B7FF
+    background-color: #82b8e5 
 }
 
 .feature-card-enhanced.secondary::before {
@@ -1600,7 +1600,7 @@ model-viewer {
 
 .feature-card-enhanced.primary .feature-badge {
     background: rgb(120 183 255 / 10%);
-    color: #78B7FF
+    color: #82b8e5 
 }
 
 .feature-card-enhanced.secondary .feature-badge {
