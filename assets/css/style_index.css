@@ -583,12 +583,6 @@
     gap: 1rem;
     margin-top: 2rem;
     width: 100%;
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
-    transition: none !important;
-    visibility: visible !important;
-    will-change: auto
 }
 
 .highlight-stat {
@@ -836,7 +830,6 @@ section {
 }
 
 .btn:focus {
-    outline: 2px solid var(--forest-green);
     outline-offset: 2px
 }
 
@@ -934,7 +927,7 @@ section {
     display: flex;
     align-items: center;
     overflow: hidden;
-    position: relative
+    position: relative;
 }
 
 .hero-background {
@@ -2030,7 +2023,7 @@ model-viewer {
 .distribution-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: .75rem;
+    gap: .75rem 2rem; 
     font-size: .875rem
 }
 
@@ -2722,30 +2715,6 @@ model-viewer {
     color: var(--gray-dark);
     opacity: .8;
     margin-bottom: 1rem
-}
-
-.promo-card {
-    background: var(--primary-color);
-    color: var(--white);
-    border-radius: .5rem;
-    padding: 1.5rem;
-    text-align: center
-}
-
-.promo-card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: .5rem
-}
-
-.promo-card p {
-    margin-bottom: 1rem
-}
-
-.promo-disclaimer {
-    font-size: .875rem;
-    opacity: .9;
-    margin: 0 !important
 }
 
 .form-card {

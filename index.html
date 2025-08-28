@@ -16,7 +16,7 @@
         content="Lotes más módulos de alta calidad con planes accesibles, ubicación estratégica para que tengas tu casa propia en Piura.">
     <meta property="og:type" content="website">
 
-    <link rel="shortcut icon" href="assets/img/LOGO PNG BLANCO.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/LOGO PNG NEGRO.png" type="image/x-icon">
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -31,6 +31,21 @@
 
     <!-- Main header -->
     <header class="main-header">
+        <!-- Promotional top bar (compact) -->
+        <div class="top-promo">
+            <div class="container">
+                <div class="promo-text">
+                    <span class="promo-emoji">🎉</span>
+                    <span class="promo-main"><strong>¡Atención!</strong> Si reservas tu cita en oficina, obtienes
+                        <strong>10% de descuento</strong> en la compra de tu inmueble.</span>
+                </div>
+                <div class="promo-actions" style="flex:0 0 auto;">
+                    <button class="btn btn-hero" onclick="openWhatsApp()">Agendar cita</button>
+                    <button class="promo-close" aria-label="Cerrar promoción">×</button>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
             <div class="header-content">
                 <!-- Logo -->
@@ -44,7 +59,6 @@
                 <nav class="desktop-nav">
                     <button onclick="scrollToSection('inicio')">Inicio</button>
                     <button onclick="scrollToSection('proyecto')">Proyecto</button>
-                    <button onclick="scrollToSection('modelos')">Modelos</button>
                     <button onclick="scrollToSection('techo-propio')">Techo Propio</button>
                     <button onclick="scrollToSection('contacto')">Contacto</button>
                     <a href="informacion.html" class="nav-link">Informacion</a>
@@ -59,8 +73,6 @@
                     </button>
                 </div>
             </div>
-
-
         </div>
     </header>
 
@@ -491,6 +503,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="showcase-image">
                         <div class="model-container" style="position: relative; width: 100%; height: 100%;">
                             <!-- Placeholder de carga -->
@@ -679,7 +692,7 @@
                         </div>
 
                         <div class="modelo-buttons">
-                            <button class="btn btn-hero" onclick="scrollToSection('contacto')">
+                            <button class="btn btn-hero" onclick="openWhatsApp()">
                                 Consultar precio
                             </button>
                             <button class="btn btn-outline" onclick="scrollToSection('techo-propio')">
@@ -703,27 +716,27 @@
                             <div class="distribution-grid">
                                 <div class="distribution-item">
                                     <span>Dormitorio principal:</span>
-                                    <span>12 m²</span>
+                                    <span>6.44 m²</span>
                                 </div>
                                 <div class="distribution-item">
                                     <span>Dormitorio 2:</span>
-                                    <span>8 m²</span>
+                                    <span>6.20 m²</span>
                                 </div>
                                 <div class="distribution-item">
                                     <span>Sala-comedor:</span>
-                                    <span>10 m²</span>
+                                    <span>5.61 m²</span>
                                 </div>
                                 <div class="distribution-item">
                                     <span>Cocina:</span>
-                                    <span>4 m²</span>
+                                    <span>4.92 m²</span>
                                 </div>
                                 <div class="distribution-item">
                                     <span>Baño:</span>
-                                    <span>3 m²</span>
+                                    <span>2.52 m²</span>
                                 </div>
                                 <div class="distribution-item">
-                                    <span>Patio/jardín:</span>
-                                    <span>70 m²</span>
+                                    <span>lavandería:</span>
+                                    <span>1.96 m²</span>
                                 </div>
                             </div>
                         </div>
@@ -932,11 +945,13 @@
                         <div class="swiper-slide">
                             <div class="testimonio-card">
                                 <div class="testimonio-image">
-                                    <img src="assets/img/familia-feliz-COGM3Pca.jpg" alt="María González" loading="lazy">
+                                    <img src="assets/img/familia-feliz-COGM3Pca.jpg" alt="María González"
+                                        loading="lazy">
                                 </div>
                                 <div class="testimonio-content">
                                     <div class="testimonio-quote">
-                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
                                             <path
                                                 d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
                                             <path
@@ -946,13 +961,14 @@
                                             <span>★★★★★</span>
                                         </div>
                                     </div>
-                                    <p>"Gracias a Casa Bonita pudimos tener nuestra casa propia. El proceso fue fácil y nos ayudaron con todos los trámites."</p>
+                                    <p>“Me siento orgulloso por adquirir mi lote, para mí es un gran paso para mi persona y para mi futuro. La ubicación me favorece, porque vivo en Castilla. Estoy contento por lo que se viene de ahora en adelante.” </p>
                                     <div class="testimonio-author">
                                         <div class="author-avatar">
-                                            <img src="assets/img/familia-feliz-COGM3Pca.jpg" alt="María González" loading="lazy">
+                                            <img src="assets/img/familia-feliz-COGM3Pca.jpg" alt="María González"
+                                                loading="lazy">
                                         </div>
                                         <div class="author-info">
-                                            <h4>María González</h4>
+                                            <h4>Arnan Jimenez</h4>
                                             <p>Familia de 4 personas</p>
                                         </div>
                                     </div>
@@ -964,11 +980,13 @@
                         <div class="swiper-slide">
                             <div class="testimonio-card">
                                 <div class="testimonio-image">
-                                    <img src="assets/img/familia-feliz-COGM3Pca.jpg" alt="Carlos Ramírez" loading="lazy">
+                                    <img src="assets/img/familia-feliz-COGM3Pca.jpg" alt="Carlos Ramírez"
+                                        loading="lazy">
                                 </div>
                                 <div class="testimonio-content">
                                     <div class="testimonio-quote">
-                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
                                             <path
                                                 d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
                                             <path
@@ -978,13 +996,13 @@
                                             <span>★★★★★</span>
                                         </div>
                                     </div>
-                                    <p>"Con Techo Propio y Casa Bonita logramos nuestro sueño sin cuota inicial. La casa es hermosa."</p>
+                                    <p>“Estoy muy contento de adquirir mi lote más módulo en Casa Bonita. Estoy muy agradecido por las facilidades que me han brindado. A pesar de haber tenido obstáculos, como temas de trabajo o de dinero, pude comprar mi lote más módulo. Esto me ayudará a vivir tranquilo y poder vivir con todas las comodidades que brinda este proyecto.”</p>
                                     <div class="testimonio-author">
                                         <div class="author-avatar">
-                                            <span>CR</span>
+                                            <span>DE</span>
                                         </div>
                                         <div class="author-info">
-                                            <h4>Carlos Ramírez</h4>
+                                            <h4>Daniel Escárate</h4>
                                             <p>Pareja joven</p>
                                         </div>
                                     </div>
@@ -996,11 +1014,13 @@
                         <div class="swiper-slide">
                             <div class="testimonio-card">
                                 <div class="testimonio-image">
-                                    <img src="assets/img/casa-modelo-1-DNVuwG2y.jpg" alt="Ana Luisa Torres" loading="lazy">
+                                    <img src="assets/img/casa-modelo-1-DNVuwG2y.jpg" alt="Ana Luisa Torres"
+                                        loading="lazy">
                                 </div>
                                 <div class="testimonio-content">
                                     <div class="testimonio-quote">
-                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
                                             <path
                                                 d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
                                             <path
@@ -1010,13 +1030,13 @@
                                             <span>★★★★★</span>
                                         </div>
                                     </div>
-                                    <p>"Como madre soltera pensé que nunca podría tener casa propia. Casa Bonita me ayudó a lograrlo."</p>
+                                    <p>“Estoy contento. Casa Bonita representa mucho para las familias que no tienen el dinero suficiente para comprar una casa, sobre todo por las cuotas. Recomiendo Casa Bonita a todas las personas.”</p>
                                     <div class="testimonio-author">
                                         <div class="author-avatar">
-                                            <span>AT</span>
+                                            <span>JG</span>
                                         </div>
                                         <div class="author-info">
-                                            <h4>Ana Luisa Torres</h4>
+                                            <h4>Julio César Gutierrez Julca</h4>
                                             <p>Madre soltera</p>
                                         </div>
                                     </div>
@@ -1028,11 +1048,13 @@
                         <div class="swiper-slide">
                             <div class="testimonio-card">
                                 <div class="testimonio-image">
-                                    <img src="assets/img/hero-casa-bonita-calgTnyg.jpg" alt="Roberto Silva" loading="lazy">
+                                    <img src="assets/img/hero-casa-bonita-calgTnyg.jpg" alt="Roberto Silva"
+                                        loading="lazy">
                                 </div>
                                 <div class="testimonio-content">
                                     <div class="testimonio-quote">
-                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
                                             <path
                                                 d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
                                             <path
@@ -1042,13 +1064,13 @@
                                             <span>★★★★★</span>
                                         </div>
                                     </div>
-                                    <p>"La atención fue excelente desde el primer día. Siempre estuvieron disponibles para resolver nuestras dudas."</p>
+                                    <p>“Estoy emocionada porque es un logro muy grande en mi vida, un paso grande para mí, como jóven.  Tengo muchas expectativas en este proyecto, sé que será un éxito. Recomendaría a más jóvenes que aprovechen esta oportunidad.”</p>
                                     <div class="testimonio-author">
                                         <div class="author-avatar">
-                                            <span>RS</span>
+                                            <span>AM</span>
                                         </div>
                                         <div class="author-info">
-                                            <h4>Roberto Silva</h4>
+                                            <h4>Ana Mogollón</h4>
                                             <p>Familia extendida</p>
                                         </div>
                                     </div>
@@ -1064,7 +1086,8 @@
                                 </div>
                                 <div class="testimonio-content">
                                     <div class="testimonio-quote">
-                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
                                             <path
                                                 d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
                                             <path
@@ -1074,13 +1097,13 @@
                                             <span>★★★★★</span>
                                         </div>
                                     </div>
-                                    <p>"Nos encanta vivir en Casa Bonita. La calidad de construcción es excelente y tenemos tranquilidad total."</p>
+                                    <p>“Tener un bien es un gran logro para mí, estoy contento. Yo quiero vivir en comodidad con mi familia. Recomiendo Casa Bonita Residencial.”</p>
                                     <div class="testimonio-author">
                                         <div class="author-avatar">
-                                            <span>LP</span>
+                                            <span>MA</span>
                                         </div>
                                         <div class="author-info">
-                                            <h4>Luis Paredes</h4>
+                                            <h4>Marco Antonio Avalo Urbina</h4>
                                             <p>Familia joven</p>
                                         </div>
                                     </div>
@@ -1096,7 +1119,8 @@
                                 </div>
                                 <div class="testimonio-content">
                                     <div class="testimonio-quote">
-                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
                                             <path
                                                 d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
                                             <path
@@ -1106,13 +1130,13 @@
                                             <span>★★★★★</span>
                                         </div>
                                     </div>
-                                    <p>"El mejor investment que hemos hecho. Casa Bonita nos guió en todo el proceso."</p>
+                                    <p>“Para mí es un orgullo, gracias a Renato por la asesoría he podido comprar mi lote más módulo. Me da mucho gusto pertenecer a la familia Casa Bonita Residencial.”</p>
                                     <div class="testimonio-author">
                                         <div class="author-avatar">
-                                            <span>MC</span>
+                                            <span>JP</span>
                                         </div>
                                         <div class="author-info">
-                                            <h4>Marina Castillo</h4>
+                                            <h4>José Pintado</h4>
                                             <p>Profesional independiente</p>
                                         </div>
                                     </div>
@@ -1237,13 +1261,6 @@
                         <button class="btn btn-hero full-width" onclick="openWhatsApp()">
                             💬 Chatear ahora
                         </button>
-                    </div>
-
-                    <div class="promo-card">
-                        <h3>🎉 Promoción Especial</h3>
-                        <p>¡Los primeros 10 contactos de este mes reciben asesoría personalizada gratuita y evaluación
-                            express!</p>
-                        <p class="promo-disclaimer">*Válido hasta fin de mes</p>
                     </div>
                 </div>
 

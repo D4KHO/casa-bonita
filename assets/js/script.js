@@ -783,17 +783,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.main-header');
     let lastScrollTop = 0;
     let isScrolling = false;
+    let wasScrolled = false; // Rastrear el estado anterior
 
     function handleHeaderScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const isCurrentlyScrolled = scrollTop > 100;
+        
+        // Detectar cambio de estado
+        const stateChanged = wasScrolled !== isCurrentlyScrolled;
         
         // Agregar o quitar la clase 'scrolled' basado en la posición del scroll
-        if (scrollTop > 100) {
+        if (isCurrentlyScrolled) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
         
+        // Recalcular padding solo si hubo cambio de estado o al inicializar
+        if (stateChanged || wasScrolled === undefined) {
+            // Usar timeout para asegurar que las transiciones CSS se completen
+            setTimeout(() => {
+                updateBodyPadding();
+            }, 100); // Ligeramente más que la transición CSS (0.3s)
+        }
+        
+        wasScrolled = isCurrentlyScrolled;
         lastScrollTop = scrollTop;
         isScrolling = false;
     }
@@ -810,18 +824,104 @@ document.addEventListener('DOMContentLoaded', () => {
     handleHeaderScroll();
 });
 
-// Agregar espacio para compensar el header fijo
-document.addEventListener('DOMContentLoaded', () => {
-    // Crear un espacio para evitar que el contenido se oculte detrás del header fijo
+// Sistema inteligente de cálculo de padding del body
+function updateBodyPadding() {
     const body = document.body;
-    const headerHeight = document.querySelector('.main-header').offsetHeight;
+    const mainHeader = document.querySelector('.main-header');
     
-    // Agregar un padding-top al body para compensar el header fijo
-    body.style.paddingTop = headerHeight + 'px';
+    if (!mainHeader) return;
     
-    // Actualizar el padding cuando la ventana cambie de tamaño
-    window.addEventListener('resize', () => {
-        const newHeaderHeight = document.querySelector('.main-header').offsetHeight;
-        body.style.paddingTop = newHeaderHeight + 'px';
+    // Forzar múltiples reflows para obtener medidas precisas
+    mainHeader.offsetHeight;
+    
+    // Usar requestAnimationFrame doble para asegurar que los cambios CSS se apliquen completamente
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            const headerHeight = mainHeader.offsetHeight;
+            body.style.paddingTop = headerHeight + 'px';
+        });
     });
+}
+
+// Función para cerrar el anuncio promocional
+function closePromoBar() {
+    const promoBar = document.querySelector('.top-promo');
+    if (promoBar) {
+        // Agregar animación de desvanecimiento
+        promoBar.style.transition = 'opacity 0.3s ease, max-height 0.3s ease';
+        promoBar.style.opacity = '0';
+        promoBar.style.maxHeight = '0';
+        promoBar.style.overflow = 'hidden';
+        
+        // Remover el elemento después de la animación
+        setTimeout(() => {
+            promoBar.remove();
+            // Recalcular con delay adicional para manejar transiciones
+            setTimeout(() => {
+                updateBodyPadding();
+            }, 100); // Delay adicional para cambios complejos
+        }, 300);
+    }
+}
+
+// Configurar el padding inicial y observadores
+document.addEventListener('DOMContentLoaded', () => {
+    const mainHeader = document.querySelector('.main-header');
+    
+    if (mainHeader) {
+        // Aplicar padding inicial después de que todo se cargue
+        setTimeout(() => {
+            updateBodyPadding();
+        }, 100);
+        
+        // Observar cambios de tamaño de ventana
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                updateBodyPadding();
+            }, 50);
+        });
+        
+        // Configurar el botón de cerrar promoción
+        const closeButton = document.querySelector('.promo-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', closePromoBar);
+        }
+        
+        // Observador de mutaciones para detectar cambios en el DOM del header
+        const headerObserver = new MutationObserver((mutations) => {
+            let shouldUpdate = false;
+            let hasClassChange = false;
+            let hasElementRemoved = false;
+            
+            mutations.forEach((mutation) => {
+                // Detectar cambios en clases (como .scrolled)
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    hasClassChange = true;
+                }
+                // Detectar eliminación de elementos (como .top-promo)
+                if (mutation.type === 'childList' && mutation.removedNodes.length > 0) {
+                    hasElementRemoved = true;
+                }
+            });
+            
+            // Manejar diferentes tipos de cambios con delays apropiados
+            if (hasClassChange) {
+                // Cambio de clase (scroll): esperar a que termine la transición
+                setTimeout(updateBodyPadding, 50);
+            } else if (hasElementRemoved) {
+                // Elemento removido: delay más corto
+                setTimeout(updateBodyPadding, 50);
+            }
+        });
+        
+        // Observar el header y sus cambios
+        headerObserver.observe(mainHeader, {
+            attributes: true,
+            childList: true,
+            subtree: true,
+            attributeFilter: ['class']
+        });
+    }
 });
