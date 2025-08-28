@@ -1028,8 +1028,6 @@ function initializeModel3D() {
     
     // Configuración basada en dispositivo
     if (isMobile || isSlowNet) {
-        console.log('Dispositivo móvil detectado - Optimizando carga');
-        
         // Mostrar fallback móvil inicialmente
         if (mobileFallback) {
             mobileFallback.style.display = 'block';
@@ -1096,7 +1094,7 @@ function initializeModel3D() {
     async function loadModelInBackground() {
         if (!modelViewer.src && load3DBtn && !load3DBtn.hasAttribute('data-loading')) {
             load3DBtn.setAttribute('data-loading', 'true');
-            load3DBtn.innerHTML = '<span class="icon">⏳</span>Preparando modelo 3D...';
+            load3DBtn.innerHTML = '<span class="icon">⏳</span>presiona para cargar modelo';
             
             try {
                 // Asegurar que model-viewer esté cargado
@@ -1200,12 +1198,6 @@ function initializeModel3D() {
 
         modelObserver.observe(modelContainer);
     }
-
-    // Log para debugging
-    console.log(`🏠 Casa Bonita - Modelo 3D optimizado:
-    - Dispositivo: ${isMobile ? 'Móvil' : 'Desktop'}
-    - Conexión lenta: ${isSlowNet}
-    - Estrategia: ${isMobile ? 'Carga bajo demanda' : 'Carga inmediata'}`);
 }
 
 // Inicializar modelo 3D cuando el DOM esté listo
