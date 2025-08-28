@@ -544,7 +544,7 @@ body {
 
 
 .btn-subscribe:hover {
-    background-color: var(--secondary-color);
+    background-color: #e47835;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(26, 71, 42, 0.3);
 }
