@@ -5,7 +5,7 @@
     /* Header/navigation styles moved to assets/css/style_header,footer.css */
 
         .about-hero {
-            background: linear-gradient(135deg, #1a472a, #2d5a3f);
+            background: #82b8e5;
             color: white;
             padding: 1rem 0 2rem;
             text-align: center;
@@ -139,7 +139,7 @@
 
         .about-text h2 {
             font-size: 2.5rem;
-            color: #1a472a;
+            color: #000;
             margin-bottom: 1.5rem;
         }
 
@@ -169,7 +169,7 @@
         }
 
         .feature-item h4 {
-            color: #1a472a;
+            color: #000  ;
             margin-bottom: 0.5rem;
         }
 
@@ -237,7 +237,7 @@
 
         .valores-title h2 {
             font-family: 'Poppins', sans-serif;
-            font-size: 3rem;
+            font-size: 3.6rem;
             font-weight: 700;
             color: #2c3e50;
             margin: 0;
@@ -250,7 +250,7 @@
             display: block;
             width: 100px;
             height: 4px;
-            background: linear-gradient(90deg, #e67e22 0%, #d35400 100%);
+            background: #eac736;
             margin: 15px auto 0;
             border-radius: 2px;
             box-shadow: 0 2px 10px rgba(230, 126, 34, 0.3);
@@ -292,10 +292,12 @@
         .valor-card h4::before {
             content: '✦';
             font-size: 1.2rem;
-            color: #e67e22;
+            color: #eac736;
             margin-right: 8px;
+            display: inline-block;
+            line-height: 1;
+            text-shadow: 0 2px 8px hsl(48.33deg 81.08% 56.47%);
         }
-
         .valor-card p {
             font-size: 1rem;
             color: #555;
