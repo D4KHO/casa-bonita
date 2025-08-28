@@ -1493,11 +1493,11 @@ model-viewer {
 }
 
 .feature-card-enhanced.primary::before {
-    background-color: #82b8e5 
+    background-color: #82b8e5
 }
 
 .feature-card-enhanced.secondary::before {
-    background-color: #E1783C
+    background-color: #ea4d4f
 }
 
 .feature-card-enhanced.accent::before {
@@ -1509,7 +1509,7 @@ model-viewer {
 }
 
 .feature-card-enhanced.services::before {
-    background-color: #F6534C
+    background-color: #e47835
 }
 
 .feature-card-enhanced.education::before {
@@ -1604,8 +1604,8 @@ model-viewer {
 }
 
 .feature-card-enhanced.secondary .feature-badge {
-    background: rgb(225 120 60 / 10%);
-    color: #E1783C
+    background: rgb(234 77 79 / 10%);
+    color: #ea4d4f
 }
 
 .feature-card-enhanced.accent .feature-badge {
@@ -1619,8 +1619,8 @@ model-viewer {
 }
 
 .feature-card-enhanced.services .feature-badge {
-    background: rgba(239, 68, 68, .1);
-    color: #F6534C
+    background: rgb(228 120 53 / 10%);
+    color: #e47835 
 }
 
 .feature-card-enhanced.education .feature-badge {
