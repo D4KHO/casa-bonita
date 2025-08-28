@@ -209,6 +209,18 @@ html {
     padding: 0;
 }
 
+/* Barra de progreso de scroll */
+.scroll-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: #eac736;
+    width: 0%;
+    transition: width 0.1s ease;
+    z-index: 100;
+}
+
 .main-header.scrolled {
     padding: 0;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);

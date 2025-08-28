@@ -925,3 +925,131 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Barra de progreso de scroll
+document.addEventListener('DOMContentLoaded', function() {
+    // Crear la barra de progreso
+    const header = document.querySelector('.main-header');
+    if (header) {
+        const progressBar = document.createElement('div');
+        progressBar.className = 'scroll-progress';
+        progressBar.id = 'scrollProgress';
+        header.appendChild(progressBar);
+    }
+    
+    // Función para actualizar la barra
+    function updateScrollProgress() {
+        const progressBar = document.getElementById('scrollProgress');
+        if (!progressBar) return;
+        
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        
+        progressBar.style.width = Math.min(scrollPercent, 100) + '%';
+    }
+    
+    // Eventos
+    window.addEventListener('scroll', updateScrollProgress);
+    window.addEventListener('resize', updateScrollProgress);
+    updateScrollProgress();
+});
+
+// Función para cargar el modelo 3D bajo demanda
+function loadModel3D() {
+    const placeholder = document.getElementById('model-loading-placeholder');
+    const container = document.getElementById('model-viewer-container');
+    
+    if (!placeholder || !container) return;
+    
+    // Mostrar cargando
+    placeholder.innerHTML = `
+        <div style="text-align: center;">
+            <div class="spinner"></div>
+            <p style="margin-top: 1rem; color: #666;">Cargando modelo 3D...</p>
+        </div>
+    `;
+    
+    // Cargar model-viewer dinámicamente
+    if (!window.modelViewerLoaded) {
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js';
+        script.onload = function() {
+            window.modelViewerLoaded = true;
+            insertModel3D();
+        };
+        document.head.appendChild(script);
+    } else {
+        insertModel3D();
+    }
+    
+    function insertModel3D() {
+        container.innerHTML = `
+            <model-viewer 
+                id="casa-model" 
+                src="assets/img/casa.glb"
+                alt="Modelo 3D de Casa Bonita Residencial" 
+                auto-rotate 
+                camera-controls
+                shadow-intensity="0.7" 
+                camera-orbit="45deg 60deg 100%" 
+                field-of-view="45deg"
+                min-camera-orbit="auto 30deg auto" 
+                max-camera-orbit="auto 75deg auto" 
+                exposure="1"
+                environment-intensity="0.8" 
+                shadow-softness="0.6" 
+                reveal="auto"
+                style="width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
+                
+                <div slot="poster" class="model-poster">
+                    <div class="spinner"></div>
+                    <p>Cargando modelo 3D...</p>
+                </div>
+            </model-viewer>
+        `;
+        
+        const modelViewer = container.querySelector('model-viewer');
+        if (modelViewer) {
+            modelViewer.addEventListener('load', () => {
+                modelViewer.style.opacity = '1';
+                placeholder.style.display = 'none';
+                container.style.display = 'block';
+            });
+            
+            modelViewer.addEventListener('error', () => {
+                console.error('Error al cargar el modelo 3D');
+                placeholder.innerHTML = '<p style="color: #666;">No se pudo cargar el modelo 3D</p>';
+            });
+        }
+    }
+}
+
+// Lazy loading mejorado del video hero
+function initHeroVideo() {
+    const video = document.getElementById('hero-video');
+    if (!video) return;
+    
+    // Verificar si está en el viewport
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Cargar el video cuando sea visible
+                if (!video.src && video.querySelector('source')) {
+                    const source = video.querySelector('source');
+                    video.src = source.src;
+                    video.load();
+                }
+                observer.unobserve(video);
+            }
+        });
+    });
+    
+    observer.observe(video);
+}
+
+// Inicializar en DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    initHeroVideo();
+});

@@ -18,13 +18,16 @@
 
     <link rel="shortcut icon" href="assets/img/LOGO PNG NEGRO.png" type="image/x-icon">
 
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Preload critical resources -->                                                                                            
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"></noscript>
+    
+    <!-- Swiper CSS cargado de forma diferida -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
 
     <link rel="stylesheet" href="assets/css/style_index.css">
     <link rel="stylesheet" href="assets/css/style_header_footer.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
 </head>
 
 <body>
@@ -79,7 +82,10 @@
     <!-- Hero Section -->
     <section id="inicio" class="hero">
         <div class="hero-background">
-            <video src="assets/img/video_hero_optimizado.mp4" autoplay loop muted></video>
+            <video id="hero-video" preload="metadata" autoplay loop muted poster="assets/img/video_hero_CAPTURA.jpg">
+                <source src="assets/img/video_hero_optimizado.mp4" type="video/mp4">
+                <!-- Fallback image -->
+            </video>
             <div class="hero-overlay"></div>
         </div>
         <div class="container">
@@ -528,28 +534,6 @@
                                 </div>
                             </model-viewer>
                         </div>
-
-                        <!-- Estilos para el spinner de carga -->
-                        <style>
-                            @keyframes spin {
-                                0% {
-                                    transform: rotate(0deg);
-                                }
-
-                                100% {
-                                    transform: rotate(360deg);
-                                }
-                            }
-
-                            .spinner {
-                                width: 40px;
-                                height: 40px;
-                                border: 4px solid rgba(0, 0, 0, 0.1);
-                                border-left-color: #000;
-                                border-radius: 50%;
-                                animation: spin 1s linear infinite;
-                            }
-                        </style>
 
                         <!-- Script para manejar la carga -->
                         <script>
