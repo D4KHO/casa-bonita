@@ -821,6 +821,7 @@ a:hover {
 .icon_contact-link:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.08);
+    background: #eac736;
 }
 
 .icon_contact-card:nth-child(1) .icon_contact-icon {
@@ -873,7 +874,7 @@ a:hover {
 
 .icon_contact-card[data-whatsapp="true"] .icon_contact-link:hover,
 .icon_contact-link[data-whatsapp="true"]:hover {
-    background: #1db954 !important; /* Verde más oscuro en hover */
+    background: #eac736  !important; /* Verde más oscuro en hover */
     transform: translateY(-2px);
     box-shadow: 0 6px 18px -6px rgba(37, 211, 102, 0.3);
 }
