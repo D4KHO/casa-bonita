@@ -1391,6 +1391,117 @@ section {
     box-shadow: 0 10px 30px rgba(0, 0, 0, .1)
 }
 
+/* Estilos optimizados para modelo 3D y móviles */
+.model-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+}
+
+/* Fallback móvil */
+.mobile-fallback {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.mobile-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        180deg, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.3) 60%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2rem;
+    z-index: 2;
+}
+
+.mobile-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    color: #495057;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.load-3d-btn {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+    transform: translateY(0);
+    position: relative;
+    overflow: hidden;
+}
+
+.load-3d-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.load-3d-btn:hover::before {
+    left: 100%;
+}
+
+.load-3d-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(220, 53, 69, 0.4);
+    background: linear-gradient(135deg, #e63946, #d90429);
+}
+
+.load-3d-btn:active {
+    transform: translateY(-1px);
+}
+
+.load-3d-btn .icon {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+}
+
+.load-3d-btn:hover .icon {
+    transform: scale(1.1);
+}
+
+/* Model viewer optimizado */
 model-viewer {
     --progress-bar-color: var(--primary-color);
     --progress-bar-height: 4px;
@@ -1399,14 +1510,117 @@ model-viewer {
     width: 100%;
     height: 100%;
     min-height: 400px;
-    background: 0 0;
+    background: transparent;
     overflow: hidden;
     position: relative;
     z-index: 1;
     --camera-orbit: 45deg 60% 100%;
     --field-of-view: 40deg;
     --max-camera-orbit: auto 80deg auto;
-    --min-camera-orbit: auto 20deg auto
+    --min-camera-orbit: auto 20deg auto;
+    border-radius: 16px;
+}
+
+/* Poster y loading mejorados */
+.model-poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border-radius: 16px;
+}
+
+.loading-container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.spinner-3d {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(220, 53, 69, 0.1);
+    border-left: 4px solid #dc3545;
+    border-radius: 50%;
+    animation: spin-3d 1s linear infinite;
+    margin: 0 auto 1.5rem;
+}
+
+@keyframes spin-3d {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.05); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.loading-text {
+    color: #495057;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.loading-progress {
+    width: 200px;
+    height: 4px;
+    background: rgba(220, 53, 69, 0.1);
+    border-radius: 4px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #dc3545, #c82333, #dc3545);
+    background-size: 200% 100%;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.3s ease;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Error state */
+.model-error {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 16px;
+}
+
+.error-overlay {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: rgba(220, 53, 69, 0.9);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.error-overlay p {
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+}
+
+.error-overlay small {
+    opacity: 0.8;
+    font-size: 0.875rem;
 }
 
 @media (max-width:768px) {
@@ -1423,6 +1637,85 @@ model-viewer {
 
     .highlight-stats {
         grid-template-columns: 1fr
+    }
+
+    /* Optimizaciones específicas para móvil */
+    .mobile-overlay {
+        padding: 1.5rem;
+    }
+
+    .mobile-badge {
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .load-3d-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.9rem;
+        gap: 0.375rem;
+    }
+
+    .loading-container {
+        padding: 1.5rem;
+    }
+
+    .spinner-3d {
+        width: 50px;
+        height: 50px;
+    }
+
+    .loading-text {
+        font-size: 1rem;
+    }
+
+    .loading-progress {
+        width: 150px;
+    }
+
+    /* Reducir efectos visuales en móvil para mejor rendimiento */
+    .load-3d-btn::before {
+        display: none;
+    }
+
+    .spinner-3d {
+        animation: spin 1s linear infinite; /* Simplificar animación */
+    }
+
+    /* Ocultar auto-rotate en móvil por defecto */
+    model-viewer {
+        --camera-orbit: 45deg 55% 80%;
+        --field-of-view: 50deg;
+    }
+}
+
+/* Media query adicional para dispositivos muy pequeños */
+@media (max-width: 480px) {
+    .model-container,
+    .mobile-fallback,
+    model-viewer {
+        min-height: 300px;
+    }
+
+    .mobile-overlay {
+        padding: 1rem;
+    }
+
+    .load-3d-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .loading-progress {
+        width: 120px;
+    }
+
+    .mobile-badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
     }
 }
 

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casa Bonita | Inmobiliaria en Piura con Techo Propio</title>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
     <meta name="description"
         content="Casa Bonita es una inmobiliaria en Piura que trabaja bajo el formato Techo Propio del Fondo Mivivienda, Construcción y Saneamiento de Perú: lotes más módulos de alta calidad con planes accesibles, ubicación estratégica y planes accesibles para que tengas tu casa propia en Piura.">
     <meta name="author" content="Casa Bonita Residencial">
@@ -519,46 +518,61 @@
                                 <div class="spinner"></div>
                             </div>
 
-                            <!-- Modelo 3D optimizado -->
-                            <model-viewer id="casa-model" src="assets/img/casa.glb"
-                                alt="Modelo 3D de Casa Bonita Residencial" auto-rotate camera-controls
-                                shadow-intensity="0.7" camera-orbit="45deg 60deg 100%" field-of-view="45deg"
-                                min-camera-orbit="auto 30deg auto" max-camera-orbit="auto 75deg auto" exposure="1"
-                                environment-intensity="0.8" shadow-softness="0.6" reveal="auto"
-                                style="width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
-
-                                <!-- Mensaje de carga -->
-                                <div slot="poster" class="model-poster">
-                                    <div class="spinner"></div>
-                                    <p>Cargando modelo 3D...</p>
+                            <!-- Modelo 3D optimizado para móviles -->
+                            <div id="model-container" class="model-container">
+                                <!-- Imagen estática para móviles (carga rápida) -->
+                                <div id="mobile-fallback" class="mobile-fallback" style="display: none;">
+                                    <img src="assets/img/casa.png" alt="Casa Bonita - Vista 3D" 
+                                         style="width: 100%; height: 100%; object-fit: contain;">
+                                    <div class="mobile-overlay">
+                                        <div class="mobile-badge">
+                                            <span>📱 Vista optimizada para móvil</span>
+                                        </div>
+                                        <button id="load-3d-btn" class="load-3d-btn">
+                                            <span class="icon">🏠</span>
+                                            Ver modelo 3D completo
+                                        </button>
+                                    </div>
                                 </div>
-                            </model-viewer>
+
+                                <!-- Modelo 3D (se carga condicionalmente) -->
+                                <model-viewer id="casa-model" 
+                                    alt="Modelo 3D de Casa Bonita Residencial" 
+                                    camera-controls auto-rotate
+                                    shadow-intensity="0.7" 
+                                    camera-orbit="45deg 60deg 100%" 
+                                    field-of-view="45deg"
+                                    min-camera-orbit="auto 30deg auto" 
+                                    max-camera-orbit="auto 75deg auto" 
+                                    exposure="1"
+                                    environment-intensity="0.8" 
+                                    shadow-softness="0.6" 
+                                    reveal="auto"
+                                    loading="lazy"
+                                    style="width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
+
+                                    <!-- Poster optimizado -->
+                                    <div slot="poster" class="model-poster">
+                                        <div class="loading-container">
+                                            <div class="spinner-3d"></div>
+                                            <p class="loading-text">Cargando modelo 3D...</p>
+                                            <div class="loading-progress">
+                                                <div class="progress-bar"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Fallback para errores -->
+                                    <div slot="error" class="model-error">
+                                        <img src="assets/img/casa.png" alt="Casa Bonita" style="width: 100%; height: 100%; object-fit: contain;">
+                                        <div class="error-overlay">
+                                            <p>Error al cargar el modelo 3D</p>
+                                            <small>Mostrando vista estática</small>
+                                        </div>
+                                    </div>
+                                </model-viewer>
+                            </div>
                         </div>
-
-                        <!-- Script para manejar la carga -->
-                        <script>
-                            document.addEventListener('DOMContentLoaded', () => {
-                                const modelViewer = document.querySelector('model-viewer');
-                                const loadingElement = document.querySelector('.model-loading');
-
-                                if (modelViewer) {
-                                    modelViewer.addEventListener('load', () => {
-                                        modelViewer.style.opacity = '1';
-                                        if (loadingElement) {
-                                            loadingElement.style.display = 'none';
-                                        }
-                                    });
-
-                                    // Mostrar mensaje de error si falla la carga
-                                    modelViewer.addEventListener('error', () => {
-                                        console.error('Error al cargar el modelo 3D');
-                                        if (loadingElement) {
-                                            loadingElement.textContent = 'No se pudo cargar el modelo 3D';
-                                        }
-                                    });
-                                }
-                            });
-                        </script>
                     </div>
                 </div>
             </div>

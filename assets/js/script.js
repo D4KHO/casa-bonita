@@ -955,101 +955,271 @@ document.addEventListener('DOMContentLoaded', function() {
     updateScrollProgress();
 });
 
-// Función para cargar el modelo 3D bajo demanda
-function loadModel3D() {
-    const placeholder = document.getElementById('model-loading-placeholder');
-    const container = document.getElementById('model-viewer-container');
+// ============================================================================
+// MODELO 3D OPTIMIZADO PARA MÓVILES
+// ============================================================================
+
+// Detectar dispositivo móvil de forma precisa
+function isMobileDevice() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini|mobile/i;
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isSmallScreen = window.innerWidth <= 768;
     
-    if (!placeholder || !container) return;
-    
-    // Mostrar cargando
-    placeholder.innerHTML = `
-        <div style="text-align: center;">
-            <div class="spinner"></div>
-            <p style="margin-top: 1rem; color: #666;">Cargando modelo 3D...</p>
-        </div>
-    `;
-    
-    // Cargar model-viewer dinámicamente
-    if (!window.modelViewerLoaded) {
+    return mobileRegex.test(userAgent) || (isTouch && isSmallScreen);
+}
+
+// Detectar conexión lenta
+function isSlowConnection() {
+    if ('connection' in navigator) {
+        const connection = navigator.connection;
+        return connection.effectiveType === 'slow-2g' || 
+               connection.effectiveType === '2g' || 
+               connection.effectiveType === '3g' ||
+               connection.saveData === true;
+    }
+    return false;
+}
+
+// Carga condicional de model-viewer
+function loadModelViewerLibrary() {
+    return new Promise((resolve) => {
+        if (window.customElements && window.customElements.get('model-viewer')) {
+            resolve();
+            return;
+        }
         const script = document.createElement('script');
         script.type = 'module';
         script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js';
-        script.onload = function() {
-            window.modelViewerLoaded = true;
-            insertModel3D();
+        script.onload = resolve;
+        script.onerror = () => {
+            console.error('Error cargando model-viewer');
+            resolve(); // Resolver de todos modos para evitar bloqueos
         };
         document.head.appendChild(script);
-    } else {
-        insertModel3D();
-    }
-    
-    function insertModel3D() {
-        container.innerHTML = `
-            <model-viewer 
-                id="casa-model" 
-                src="assets/img/casa.glb"
-                alt="Modelo 3D de Casa Bonita Residencial" 
-                auto-rotate 
-                camera-controls
-                shadow-intensity="0.7" 
-                camera-orbit="45deg 60deg 100%" 
-                field-of-view="45deg"
-                min-camera-orbit="auto 30deg auto" 
-                max-camera-orbit="auto 75deg auto" 
-                exposure="1"
-                environment-intensity="0.8" 
-                shadow-softness="0.6" 
-                reveal="auto"
-                style="width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
-                
-                <div slot="poster" class="model-poster">
-                    <div class="spinner"></div>
-                    <p>Cargando modelo 3D...</p>
-                </div>
-            </model-viewer>
-        `;
-        
-        const modelViewer = container.querySelector('model-viewer');
-        if (modelViewer) {
-            modelViewer.addEventListener('load', () => {
-                modelViewer.style.opacity = '1';
-                placeholder.style.display = 'none';
-                container.style.display = 'block';
-            });
-            
-            modelViewer.addEventListener('error', () => {
-                console.error('Error al cargar el modelo 3D');
-                placeholder.innerHTML = '<p style="color: #666;">No se pudo cargar el modelo 3D</p>';
-            });
+    });
+}
+
+// Utility function para throttling
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
         }
     }
 }
 
-// Lazy loading mejorado del video hero
-function initHeroVideo() {
-    const video = document.getElementById('hero-video');
-    if (!video) return;
+// Función principal del modelo 3D
+function initializeModel3D() {
+    const modelViewer = document.querySelector('#casa-model');
+    const mobileFallback = document.querySelector('#mobile-fallback');
+    const load3DBtn = document.querySelector('#load-3d-btn');
+    const modelContainer = document.querySelector('#model-container');
     
-    // Verificar si está en el viewport
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Cargar el video cuando sea visible
-                if (!video.src && video.querySelector('source')) {
-                    const source = video.querySelector('source');
-                    video.src = source.src;
-                    video.load();
+    if (!modelViewer || !modelContainer) return;
+    
+    const isMobile = isMobileDevice();
+    const isSlowNet = isSlowConnection();
+    
+    // Configuración basada en dispositivo
+    if (isMobile || isSlowNet) {
+        console.log('Dispositivo móvil detectado - Optimizando carga');
+        
+        // Mostrar fallback móvil inicialmente
+        if (mobileFallback) {
+            mobileFallback.style.display = 'block';
+            modelViewer.style.display = 'none';
+        }
+        
+        // Cargar modelo solo cuando el usuario lo solicite
+        if (load3DBtn) {
+            load3DBtn.addEventListener('click', () => {
+                loadFullModel();
+            });
+        }
+        
+        // Auto-cargar después de 3 segundos si la página ya cargó completamente
+        setTimeout(() => {
+            if (document.readyState === 'complete' && window.performance.now() > 3000) {
+                loadModelInBackground();
+            }
+        }, 3000);
+        
+    } else {
+        // Desktop - cargar inmediatamente
+        console.log('Dispositivo desktop - Carga estándar');
+        loadFullModel();
+    }
+
+    // Función para cargar el modelo completo
+    async function loadFullModel() {
+        try {
+            // Asegurar que model-viewer esté cargado
+            await loadModelViewerLibrary();
+
+            if (!modelViewer.src) {
+                // Mostrar loading
+                if (mobileFallback) mobileFallback.style.display = 'none';
+                modelViewer.style.display = 'block';
+                
+                // Configurar modelo para móvil con menor calidad
+                if (isMobile) {
+                    modelViewer.setAttribute('camera-controls', '');
+                    modelViewer.removeAttribute('auto-rotate'); // Menos recursos
+                    modelViewer.setAttribute('shadow-intensity', '0.3'); // Menos sombras
+                    modelViewer.setAttribute('environment-intensity', '0.5');
                 }
-                observer.unobserve(video);
+                
+                // Cargar el modelo
+                modelViewer.src = 'assets/img/casa.glb';
+                
+                // Simular progreso de carga
+                simulateLoadingProgress();
+            } else {
+                // Ya está cargado, solo mostrar
+                if (mobileFallback) mobileFallback.style.display = 'none';
+                modelViewer.style.display = 'block';
+                modelViewer.style.opacity = '1';
+            }
+        } catch (error) {
+            console.error('Error cargando modelo 3D:', error);
+            showModelError();
+        }
+    }
+
+    // Función para cargar en background (sin mostrar)
+    async function loadModelInBackground() {
+        if (!modelViewer.src && load3DBtn && !load3DBtn.hasAttribute('data-loading')) {
+            load3DBtn.setAttribute('data-loading', 'true');
+            load3DBtn.innerHTML = '<span class="icon">⏳</span>Preparando modelo 3D...';
+            
+            try {
+                // Asegurar que model-viewer esté cargado
+                await loadModelViewerLibrary();
+
+                // Precargar modelo sin mostrarlo
+                const tempViewer = document.createElement('model-viewer');
+                tempViewer.style.display = 'none';
+                tempViewer.src = 'assets/img/casa.glb';
+                document.body.appendChild(tempViewer);
+                
+                tempViewer.addEventListener('load', () => {
+                    modelViewer.src = 'assets/img/casa.glb';
+                    load3DBtn.innerHTML = '<span class="icon">🏠</span>Ver modelo 3D (listo)';
+                    load3DBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                    document.body.removeChild(tempViewer);
+                });
+                
+                tempViewer.addEventListener('error', () => {
+                    load3DBtn.innerHTML = '<span class="icon">📱</span>Ver modelo 3D';
+                    document.body.removeChild(tempViewer);
+                });
+            } catch (error) {
+                console.warn('Error precargando modelo:', error);
+                load3DBtn.innerHTML = '<span class="icon">📱</span>Ver modelo 3D';
+            }
+        }
+    }
+
+    // Simular progreso de carga visual
+    function simulateLoadingProgress() {
+        const progressBar = document.querySelector('.progress-bar');
+        if (progressBar) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                progressBar.style.width = Math.min(progress, 90) + '%';
+                
+                if (progress >= 90) {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+    }
+
+    // Mostrar error del modelo
+    function showModelError() {
+        if (mobileFallback) {
+            mobileFallback.style.display = 'block';
+            modelViewer.style.display = 'none';
+        }
+    }
+
+    // Event listeners del modelo
+    if (modelViewer) {
+        modelViewer.addEventListener('load', () => {
+            console.log('Modelo 3D cargado exitosamente');
+            modelViewer.style.opacity = '1';
+            
+            // Completar barra de progreso
+            const progressBar = document.querySelector('.progress-bar');
+            if (progressBar) {
+                progressBar.style.width = '100%';
+                setTimeout(() => {
+                    const poster = document.querySelector('.model-poster');
+                    if (poster) poster.style.display = 'none';
+                }, 500);
             }
         });
-    });
-    
-    observer.observe(video);
+
+        modelViewer.addEventListener('error', (error) => {
+            console.error('Error al cargar el modelo 3D:', error);
+            showModelError();
+        });
+
+        // Optimizaciones de rendimiento para móvil
+        if (isMobile) {
+            modelViewer.addEventListener('camera-change', throttle(() => {
+                // Throttle camera changes en móvil
+            }, 16)); // 60fps max
+        }
+    }
+
+    // Optimización adicional: Observador de visibilidad
+    if ('IntersectionObserver' in window && modelContainer) {
+        const modelObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                    // El modelo está visible, precargarlo si es móvil
+                    if (isMobile && !modelViewer.src && load3DBtn && !load3DBtn.hasAttribute('data-loading')) {
+                        setTimeout(() => {
+                            loadModelInBackground();
+                        }, 1000);
+                    }
+                }
+            });
+        }, {
+            threshold: [0.5],
+            rootMargin: '50px'
+        });
+
+        modelObserver.observe(modelContainer);
+    }
+
+    // Log para debugging
+    console.log(`🏠 Casa Bonita - Modelo 3D optimizado:
+    - Dispositivo: ${isMobile ? 'Móvil' : 'Desktop'}
+    - Conexión lenta: ${isSlowNet}
+    - Estrategia: ${isMobile ? 'Carga bajo demanda' : 'Carga inmediata'}`);
 }
 
-// Inicializar en DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function() {
-    initHeroVideo();
+// Inicializar modelo 3D cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', initializeModel3D);
+
+// Carga condicional inicial de model-viewer para desktop
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.innerWidth > 768 && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
+        // Desktop - precargar model-viewer
+        loadModelViewerLibrary().catch(error => {
+            console.warn('Error precargando model-viewer:', error);
+        });
+    } else {
+        // Móvil - exponer función para carga bajo demanda
+        window.loadModelViewer = loadModelViewerLibrary;
+    }
 });
