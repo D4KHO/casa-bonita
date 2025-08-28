@@ -479,7 +479,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <button class="mobile-close" aria-label="Cerrar menú" style="align-self:flex-end;background:none;border:none;font-size:1.6rem;">&times;</button>
             <nav class="desktop-nav" role="navigation"></nav>
             <div class="mobile-logo-container">
-                <img src="assets/img/LOGO PNG NEGRO.png" alt="Casa Bonita Logo" class="mobile-logo">
+                <img src="assets/img/LOGO PNG NEGRO_1.webp" alt="Casa Bonita Logo" class="mobile-logo">
             </div>
         </div>
     `;
@@ -1049,8 +1049,6 @@ function initializeModel3D() {
         }, 3000);
         
     } else {
-        // Desktop - cargar inmediatamente
-        console.log('Dispositivo desktop - Carga estándar');
         loadFullModel();
     }
 
