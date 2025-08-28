@@ -11,7 +11,7 @@
     --section-spacing: 2.5rem;
     --section-padding: 2rem;
     --text-color: #333;
-    --heading-color: #0b2545;
+    --heading-color: #000;
     --border-color: #e1e4e8;
 }
 
@@ -204,7 +204,7 @@
 }
 
 .reclamaciones-section h2 {
-    color: #0b2545;
+    color: #000;
     margin-bottom: 1.5rem;
     font-size: 1.8rem;
     position: relative;
