@@ -20,6 +20,8 @@
     <!-- Preload critical resources -->                                                                                            
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"></noscript>
+    <!-- Preload poster image for hero (LCP) -->
+    <link rel="preload" as="image" href="assets/img/hero_c.webp" fetchpriority="high">
     
     <!-- Swiper CSS cargado de forma diferida -->
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -1507,7 +1509,8 @@
     </div>
 
     <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Cargar Swiper como defer para que no bloquee el parsing y mantener inicialización en DOMContentLoaded -->
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="assets/js/script.js" defer></script>
 </body>
 

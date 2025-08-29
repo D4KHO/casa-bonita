@@ -634,11 +634,46 @@ let testimonialsSwiper;
 document.addEventListener('DOMContentLoaded', function() {
     initTestimonialsCarousel();
 });
+// Cargar la librería Swiper de forma dinámica (solo cuando se necesite)
+function loadSwiperLibrary() {
+    return new Promise((resolve) => {
+        if (typeof Swiper !== 'undefined') {
+            resolve();
+            return;
+        }
 
-function initTestimonialsCarousel() {
+        // Asegurar CSS de Swiper
+        if (!document.querySelector('link[href*="swiper-bundle.min.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+            document.head.appendChild(link);
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+        script.defer = true;
+        script.onload = () => resolve();
+        script.onerror = () => {
+            console.warn('No se pudo cargar Swiper desde CDN.');
+            resolve();
+        };
+        document.head.appendChild(script);
+    });
+}
+
+async function initTestimonialsCarousel() {
     const swiperContainer = document.querySelector('.testimonials-swiper');
     
     if (!swiperContainer) return;
+    // Cargar Swiper solo cuando exista el contenedor
+    await loadSwiperLibrary();
+
+    if (typeof Swiper === 'undefined') {
+        // Si la librería no está disponible, no inicializamos y salimos
+        console.warn('Swiper no está disponible. Saltando inicialización de testimonios.');
+        return;
+    }
     
     // Configurar Swiper para carrusel infinito
     testimonialsSwiper = new Swiper('.testimonials-swiper', {
