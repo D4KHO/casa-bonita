@@ -897,12 +897,30 @@ a:hover {
     }
 
     .icon_contact-grid {
-        grid-template-columns: 1fr;
+        /* columnas de igual ancho en móvil para concordancia entre dispositivos */
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: .75rem;
+        margin: 17px;
     }
 
     .icon_contact-card {
         min-height: 110px;
-        padding: .85rem;
+        padding: .5rem;
+    }
+    .icon_contact-card h4 {
+        font-size: 0.9rem;
+    }
+    .icon_contact-card p {
+        font-size: 0.7rem;
+    }
+
+    /* Asegurar que solo la última tarjeta (TikTok) tenga el mismo ancho
+       que las otras tarjetas en móviles: estirarla dentro de su celda */
+
+    .icon_contact-card:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: 43.83%;
+
     }
 }
