@@ -84,8 +84,7 @@
 .info-section,
 .faq-section,
 .terminos-section,
-.privacidad-section,
-.financiamiento-section {
+.privacidad-section{
     background: white;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
@@ -152,29 +151,6 @@
 
 .terminos-section li::before {
     color: var(--accent);
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-}
-
-/* Sección de Financiamiento */
-.financiamiento-section ul {
-    margin: 1.2rem 0 1.2rem 1.5rem;
-    padding: 0;
-    list-style: none;
-}
-
-.financiamiento-section li {
-    margin-bottom: 0.8rem;
-    color: var(--text-color);
-    line-height: 1.6;
-    position: relative;
-    padding-left: 1.8rem;
-}
-
-.financiamiento-section li::before {
-    content: '✓';
-    color: #28a745;
     font-weight: bold;
     position: absolute;
     left: 0;
@@ -362,7 +338,6 @@
     .faq-section,
     .terminos-section,
     .privacidad-section,
-    .financiamiento-section,
     .reclamaciones-section {
         padding: 1.5rem 1.2rem;
         margin-bottom: 1.5rem;
@@ -396,13 +371,11 @@
     
     .info-grid > div,
     .faq-item,
-    .terminos-section ul,
-    .financiamiento-section ul {
+    .terminos-section ul {
         padding-left: 1rem;
     }
     
-    .terminos-section li,
-    .financiamiento-section li {
+    .terminos-section li {
         padding-left: 1.5rem;
     }
     
