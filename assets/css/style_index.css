@@ -1062,33 +1062,51 @@ section {
 @media (max-width:767px) {
     .stats-section {
         margin-top: -70px;
-        margin-bottom: -60px;
+        margin-bottom: -114px;
         padding: 0rem;
     }
 
-    .hero-stats {
-        gap: 1rem;
-        margin: auto 1.5rem !important;
+    .stats-section .hero-stats {
+        gap: 1rem !important;
+        margin: auto 1rem !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        max-width: 100% !important;
+        display: grid !important;
     }
 
-    .stat-card {
-        padding: 1.25rem;
+    .stats-section .stat-card {
+        padding: 1rem 0.75rem !important;
         backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px)
+        -webkit-backdrop-filter: blur(8px);
+        min-height: 110px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
 
-    .stat-number {
-        font-size: 1.5rem
+    .stats-section .stat-number {
+        font-size: 1.4rem !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.1 !important;
     }
 
-    .stat-icon {
-        width: 50px;
-        height: 50px;
-        margin: 0px !important;
+    .stats-section .stat-label {
+        font-size: 0.75rem !important;
+        margin-top: 0.25rem !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
     }
 
-    .highlight-stat{
-        gap: 1.75rem !important;
+    .stats-section .stat-icon {
+        width: 40px !important;
+        height: 40px !important;
+        margin: 0 0 0.5rem 0 !important;
+    }
+
+    .stats-section .stat-icon svg {
+        width: 20px !important;
+        height: 20px !important;
     }
 }
 
@@ -1989,7 +2007,8 @@ model-viewer {
     }
 
     .project-title {
-        font-size: 2.2rem
+        font-size: 2.2rem;
+        margin-top: 5rem
     }
 
     .project-subtitle {
