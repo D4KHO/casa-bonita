@@ -27,7 +27,7 @@
 
 /* Barra promocional compacta */
 .top-promo {
-    background: var(--primary-color);
+    background: #ea4d4f;
     color: #ffffff;
     padding: 6px 0;
     font-weight: 600;
@@ -68,16 +68,16 @@
 
 .top-promo .promo-close {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border: 1px solid rgb(234 199 54);
     border-radius: 6px;
-    color: #fff;
+    color: #f8f9fa;
     padding: 4px 8px;
     cursor: pointer;
-    font-size: 1rem
+    font-size: 1rem;
 }
 
 .top-promo .btn-hero {
-    background: #e47835;
+    background: #eac736;
     color: #ffffff;
     padding: 6px 10px;
     border-radius: 6px;
@@ -94,7 +94,8 @@
     }
 
     .top-promo .promo-main {
-        white-space: normal
+        white-space: normal;
+        font-size: 0.8rem;
     }
 
     .top-promo .promo-actions {
