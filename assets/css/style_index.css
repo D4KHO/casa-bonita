@@ -2452,7 +2452,7 @@ model-viewer {
     padding: 1.5rem !important;
     width: calc(100% - 7rem);
     box-shadow: var(--shadow-soft);
-    border: 1px solid hsl(142, 30%, 85%);
+    border: 1px solid hsl(207 30% 85% / 1);
     transition: var(--transition-smooth);
     margin: 0 2rem
 }
