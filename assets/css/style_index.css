@@ -421,7 +421,7 @@
 /* Project CTA background styles (moved from HTML) */
 .project-cta {
     position: relative;
-    background-image: url(../img/bg_nuevo.webp);
+    /* background-image: url(../img/bg_nuevo.webp); - Moved to lazy loading */
     background-size: 100% auto;
     background-position: center 100%;
     background-repeat: no-repeat;
@@ -434,6 +434,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-image 0.3s ease-in-out;
+}
+
+/* Class for lazy loaded background */
+.project-cta.bg-loaded {
+    background-image: url(../img/bg_nuevo.webp);
+}
+
+/* Loading placeholder for background images */
+.project-cta:not(.bg-loaded) {
+    background-color: #f8f9fa;
 }
 
 .project-cta::before {
@@ -3345,4 +3356,12 @@ model-viewer {
         padding: 0; /* Eliminar padding extra */
         margin: 1rem 0; /* Reducir margen */
     }
+}
+
+/* Asegurar que todos los h1 dentro de secciones tengan font-size definido */
+section h1,
+article h1,
+aside h1,
+nav h1 {
+    font-size: inherit; /* Usar el tamaño heredado de la clase específica */
 }

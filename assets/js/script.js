@@ -1047,10 +1047,101 @@ function setupModelViewer() {
     });
 }
 
+// Lazy loading para imágenes de fondo
+function initLazyBackgrounds() {
+    const bgElements = document.querySelectorAll('[data-bg-src]');
+    
+    if ('IntersectionObserver' in window) {
+        const bgObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const bgSrc = element.dataset.bgSrc;
+                    
+                    if (bgSrc) {
+                        // Precargar la imagen
+                        const img = new Image();
+                        img.onload = () => {
+                            // Una vez cargada, aplicar la clase que contiene el background-image
+                            element.classList.add('bg-loaded');
+                        };
+                        img.src = bgSrc;
+                    }
+                    
+                    bgObserver.unobserve(element);
+                }
+            });
+        }, {
+            // Cargar la imagen cuando esté a 50px de entrar en el viewport
+            rootMargin: '50px'
+        });
+        
+        bgElements.forEach(element => {
+            bgObserver.observe(element);
+        });
+    } else {
+        // Fallback para navegadores que no soportan IntersectionObserver
+        bgElements.forEach(element => {
+            const bgSrc = element.dataset.bgSrc;
+            if (bgSrc) {
+                element.classList.add('bg-loaded');
+            }
+        });
+    }
+}
+
+// Optimización adicional para imágenes lazy loading
+function optimizeLazyImages() {
+    // Verificar si el navegador soporta lazy loading nativo
+    if ('loading' in HTMLImageElement.prototype) {
+        // El navegador soporta lazy loading nativo, no necesitamos hacer nada más
+        return;
+    }
+    
+    // Fallback para navegadores que no soportan lazy loading nativo
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px'
+        });
+        
+        lazyImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+    } else {
+        // Fallback para navegadores muy antiguos
+        lazyImages.forEach(img => {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+        });
+    }
+}
+
 // Inicializar modelo 3D cuando el DOM esté listo y manejar cambios de tamaño
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar modelo 3D solo en desktop
     initModel3D();
+    
+    // Inicializar lazy loading para backgrounds
+    initLazyBackgrounds();
+    
+    // Optimizar imágenes lazy loading
+    optimizeLazyImages();
     
     // Listener para cambios de tamaño de ventana
     window.addEventListener('resize', function() {
