@@ -991,260 +991,82 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================================
-// MODELO 3D OPTIMIZADO PARA MÓVILES
+// MODELO 3D - SOLO DESKTOP
 // ============================================================================
 
-// Detectar dispositivo móvil de forma precisa
-function isMobileDevice() {
-    const userAgent = navigator.userAgent.toLowerCase();
-    const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini|mobile/i;
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const isSmallScreen = window.innerWidth <= 768;
-    
-    return mobileRegex.test(userAgent) || (isTouch && isSmallScreen);
+// Función para detectar si es móvil
+function isMobile() {
+    return window.innerWidth <= 768;
 }
 
-// Detectar conexión lenta
-function isSlowConnection() {
-    if ('connection' in navigator) {
-        const connection = navigator.connection;
-        return connection.effectiveType === 'slow-2g' || 
-               connection.effectiveType === '2g' || 
-               connection.effectiveType === '3g' ||
-               connection.saveData === true;
+// Función para inicializar modelo 3D (solo desktop)
+function initModel3D() {
+    // Solo cargar en desktop
+    if (isMobile()) {
+        return;
     }
-    return false;
-}
 
-// Carga condicional de model-viewer
-function loadModelViewerLibrary() {
-    return new Promise((resolve) => {
-        if (window.customElements && window.customElements.get('model-viewer')) {
-            resolve();
-            return;
-        }
+    const modelViewer = document.getElementById('casa-model');
+    
+    if (!modelViewer) return;
+
+    // Cargar el script de model-viewer solo si es desktop
+    if (!document.querySelector('script[src*="model-viewer"]')) {
         const script = document.createElement('script');
         script.type = 'module';
-        script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js';
-        script.onload = resolve;
-        script.onerror = () => {
-            console.error('Error cargando model-viewer');
-            resolve(); // Resolver de todos modos para evitar bloqueos
-        };
+        script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js';
         document.head.appendChild(script);
+        
+        script.onload = function() {
+            setupModelViewer();
+        };
+    } else {
+        setupModelViewer();
+    }
+}
+
+function setupModelViewer() {
+    const modelViewer = document.getElementById('casa-model');
+    if (!modelViewer) return;
+
+    // Configurar el modelo
+    modelViewer.src = 'assets/img/casa.glb'; // Asegúrate de tener el archivo 3D
+
+    modelViewer.addEventListener('load', function() {
+        modelViewer.style.opacity = '1';
+        // Ocultar el loading si existe
+        const loading = document.querySelector('.model-loading');
+        if (loading) loading.style.display = 'none';
+    });
+
+    modelViewer.addEventListener('error', function() {
+        console.warn('Error cargando modelo 3D, mostrando imagen estática');
+        // Mostrar imagen de fallback en caso de error
+        const errorSlot = modelViewer.querySelector('[slot="error"]');
+        if (errorSlot) errorSlot.style.display = 'block';
     });
 }
 
-// Utility function para throttling
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
-}
-
-// Función principal del modelo 3D
-function initializeModel3D() {
-    const modelViewer = document.querySelector('#casa-model');
-    const mobileFallback = document.querySelector('#mobile-fallback');
-    const load3DBtn = document.querySelector('#load-3d-btn');
-    const modelContainer = document.querySelector('#model-container');
+// Inicializar modelo 3D cuando el DOM esté listo y manejar cambios de tamaño
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar modelo 3D solo en desktop
+    initModel3D();
     
-    if (!modelViewer || !modelContainer) return;
-    
-    const isMobile = isMobileDevice();
-    const isSlowNet = isSlowConnection();
-    
-    // Configuración basada en dispositivo
-    if (isMobile || isSlowNet) {
-        // Mostrar fallback móvil inicialmente
-        if (mobileFallback) {
-            mobileFallback.style.display = 'block';
-            modelViewer.style.display = 'none';
-        }
+    // Listener para cambios de tamaño de ventana
+    window.addEventListener('resize', function() {
+        const showcaseImage = document.querySelector('.showcase-image');
         
-        // Cargar modelo solo cuando el usuario lo solicite
-        if (load3DBtn) {
-            load3DBtn.addEventListener('click', () => {
-                loadFullModel();
-            });
-        }
-        
-        // Auto-cargar después de 3 segundos si la página ya cargó completamente
-        setTimeout(() => {
-            if (document.readyState === 'complete' && window.performance.now() > 3000) {
-                loadModelInBackground();
-            }
-        }, 3000);
-        
-    } else {
-        loadFullModel();
-    }
-
-    // Función para cargar el modelo completo
-    async function loadFullModel() {
-        try {
-            // Asegurar que model-viewer esté cargado
-            await loadModelViewerLibrary();
-
-            if (!modelViewer.src) {
-                // Mostrar loading
-                if (mobileFallback) mobileFallback.style.display = 'none';
-                modelViewer.style.display = 'block';
-                
-                // Configurar modelo para móvil con menor calidad
-                if (isMobile) {
-                    modelViewer.setAttribute('camera-controls', '');
-                    modelViewer.removeAttribute('auto-rotate'); // Menos recursos
-                    modelViewer.setAttribute('shadow-intensity', '0.3'); // Menos sombras
-                    modelViewer.setAttribute('environment-intensity', '0.5');
-                }
-                
-                // Cargar el modelo
-                modelViewer.src = 'assets/img/casa.glb';
-                
-                // Simular progreso de carga
-                simulateLoadingProgress();
-            } else {
-                // Ya está cargado, solo mostrar
-                if (mobileFallback) mobileFallback.style.display = 'none';
-                modelViewer.style.display = 'block';
-                modelViewer.style.opacity = '1';
-            }
-        } catch (error) {
-            console.error('Error cargando modelo 3D:', error);
-            showModelError();
-        }
-    }
-
-    // Función para cargar en background (sin mostrar)
-    async function loadModelInBackground() {
-        if (!modelViewer.src && load3DBtn && !load3DBtn.hasAttribute('data-loading')) {
-            load3DBtn.setAttribute('data-loading', 'true');
-            load3DBtn.innerHTML = '<span class="icon">⏳</span>presiona para cargar modelo';
-            
-            try {
-                // Asegurar que model-viewer esté cargado
-                await loadModelViewerLibrary();
-
-                // Precargar modelo sin mostrarlo
-                const tempViewer = document.createElement('model-viewer');
-                tempViewer.style.display = 'none';
-                tempViewer.src = 'assets/img/casa.glb';
-                document.body.appendChild(tempViewer);
-                
-                tempViewer.addEventListener('load', () => {
-                    modelViewer.src = 'assets/img/casa.glb';
-                    load3DBtn.innerHTML = '<span class="icon">🏠</span>Ver modelo 3D (listo)';
-                    load3DBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
-                    document.body.removeChild(tempViewer);
-                });
-                
-                tempViewer.addEventListener('error', () => {
-                    load3DBtn.innerHTML = '<span class="icon">📱</span>Ver modelo 3D';
-                    document.body.removeChild(tempViewer);
-                });
-            } catch (error) {
-                console.warn('Error precargando modelo:', error);
-                load3DBtn.innerHTML = '<span class="icon">📱</span>Ver modelo 3D';
+        if (isMobile()) {
+            // Ocultar completamente en móvil
+            if (showcaseImage) showcaseImage.style.display = 'none';
+        } else {
+            // Mostrar en desktop
+            if (showcaseImage) showcaseImage.style.display = 'block';
+            // Reinicializar modelo si es necesario
+            const modelViewer = document.getElementById('casa-model');
+            if (modelViewer && !modelViewer.src) {
+                initModel3D();
             }
         }
-    }
-
-    // Simular progreso de carga visual
-    function simulateLoadingProgress() {
-        const progressBar = document.querySelector('.progress-bar');
-        if (progressBar) {
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 15;
-                progressBar.style.width = Math.min(progress, 90) + '%';
-                
-                if (progress >= 90) {
-                    clearInterval(interval);
-                }
-            }, 100);
-        }
-    }
-
-    // Mostrar error del modelo
-    function showModelError() {
-        if (mobileFallback) {
-            mobileFallback.style.display = 'block';
-            modelViewer.style.display = 'none';
-        }
-    }
-
-    // Event listeners del modelo
-    if (modelViewer) {
-        modelViewer.addEventListener('load', () => {
-            console.log('Modelo 3D cargado exitosamente');
-            modelViewer.style.opacity = '1';
-            
-            // Completar barra de progreso
-            const progressBar = document.querySelector('.progress-bar');
-            if (progressBar) {
-                progressBar.style.width = '100%';
-                setTimeout(() => {
-                    const poster = document.querySelector('.model-poster');
-                    if (poster) poster.style.display = 'none';
-                }, 500);
-            }
-        });
-
-        modelViewer.addEventListener('error', (error) => {
-            console.error('Error al cargar el modelo 3D:', error);
-            showModelError();
-        });
-
-        // Optimizaciones de rendimiento para móvil
-        if (isMobile) {
-            modelViewer.addEventListener('camera-change', throttle(() => {
-                // Throttle camera changes en móvil
-            }, 16)); // 60fps max
-        }
-    }
-
-    // Optimización adicional: Observador de visibilidad
-    if ('IntersectionObserver' in window && modelContainer) {
-        const modelObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-                    // El modelo está visible, precargarlo si es móvil
-                    if (isMobile && !modelViewer.src && load3DBtn && !load3DBtn.hasAttribute('data-loading')) {
-                        setTimeout(() => {
-                            loadModelInBackground();
-                        }, 1000);
-                    }
-                }
-            });
-        }, {
-            threshold: [0.5],
-            rootMargin: '50px'
-        });
-
-        modelObserver.observe(modelContainer);
-    }
-}
-
-// Inicializar modelo 3D cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', initializeModel3D);
-
-// Carga condicional inicial de model-viewer para desktop
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.innerWidth > 768 && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
-        // Desktop - precargar model-viewer
-        loadModelViewerLibrary().catch(error => {
-            console.warn('Error precargando model-viewer:', error);
-        });
-    } else {
-        // Móvil - exponer función para carga bajo demanda
-        window.loadModelViewer = loadModelViewerLibrary;
-    }
+    });
 });

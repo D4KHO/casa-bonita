@@ -549,8 +549,6 @@ body {
     box-shadow: 0 4px 15px rgba(26, 71, 42, 0.3);
 }
 
-
-
 /* Responsive Styles */
 @media (max-width: 1200px) {
     .blog-container {
