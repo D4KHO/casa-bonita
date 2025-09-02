@@ -192,16 +192,59 @@
                 font-size: 1.1rem;
             }
 
+            /* En móvil: dejar que la imagen determine la altura para evitar recortes raros */
             .carousel {
-                height: 300px;
+                height: auto;
+            }
+
+            /* Ajustes de imagen para móvil: usar contain para evitar cortar áreas importantes. 
+               Si prefieres un recorte más cinematográfico, cambia 'contain' a 'cover'. */
+            .carousel-slide {
+                position: static; /* permitir que el contenido fluya debajo de la imagen */
+            }
+
+            .carousel-slide img {
+                width: 100%;
+                height: auto;
+                max-height: 60vh;
+                object-fit: contain;
+                object-position: center top;
+                background: #000; /* fondo si hay letterbox */
+                display: block;
+            }
+
+            /* En móvil colocamos el texto DEL SLIDE debajo de la imagen (no overlay) */
+            .slide-content {
+                position: relative;
+                background: #ffffff; /* fondo claro para buena legibilidad */
+                color: #111;
+                padding: 1rem;
+                margin-top: 0.25rem;
+                box-shadow: 0 -6px 18px rgba(0,0,0,0.06);
+                text-align: left;
             }
 
             .slide-content h3 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+            }
+
+            .slide-content p {
+                font-size: 0.95rem;
             }
 
             .about-features {
                 grid-template-columns: 1fr;
+            }
+
+            /* Controles más pequeños en móvil para no tapar contenido */
+            .carousel-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 1.2rem;
+            }
+
+            .carousel-indicators {
+                bottom: 12px;
             }
         }
 

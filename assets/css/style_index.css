@@ -2301,7 +2301,6 @@ model-viewer {
 
 .distribution-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: .75rem 2rem; 
     font-size: .875rem
 }

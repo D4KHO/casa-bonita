@@ -84,7 +84,7 @@
 .info-section,
 .faq-section,
 .terminos-section,
-.privacidad-section{
+.privacidad-section, .marco-legal-section{
     background: white;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
