@@ -3370,10 +3370,6 @@ nav h1 {
    PREVENCIÓN DE LAYOUT SHIFT 
    ================================ */
 
-/* Las dimensiones width/height en HTML son intrinsecas para prevenir CLS.
-   Todo el CSS existente se mantiene 100% intacto y funcional.
-   El diseño visual permanece exactamente igual en desktop y móvil. */
-
 img {
     height: auto; /* Mantiene proporciones */
     max-width: 100%; /* Responsive existente */

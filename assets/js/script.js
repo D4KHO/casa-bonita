@@ -3,7 +3,7 @@ function scrollToSection(sectionId) {
     if (element) {
         const headerHeight = document.querySelector('.main-header').offsetHeight;
         const elementPosition = element.offsetTop - headerHeight - 20; // 20px de margen adicional
-        
+
         window.scrollTo({
             top: elementPosition,
             behavior: 'smooth'
@@ -20,25 +20,25 @@ function openWhatsApp() {
 
 function handleFormSubmit(event) {
     event.preventDefault();
-    
+
     const form = event.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
-    
+
     // Validar campos obligatorios
     if (!data.terminos) {
         showToast('Error: Debes aceptar los términos y condiciones', 'error');
         return;
     }
-    
+
     const requiredFields = ['nombre', 'dni', 'telefono', 'grupoFamiliar', 'ingresoMensual'];
     const missingFields = requiredFields.filter(field => !data[field]);
-    
+
     if (missingFields.length > 0) {
         showToast('Error: Por favor completa todos los campos obligatorios', 'error');
         return;
     }
-    
+
     // Construir mensaje para WhatsApp
     const mensaje = `Hola, soy ${data.nombre}. Estoy interesado en Casa Bonita Residencial.
 
@@ -54,30 +54,30 @@ function handleFormSubmit(event) {
 
     // Mostrar feedback al usuario
     showToast('¡Formulario enviado! Redirigiendo a WhatsApp...', 'success');
-    
+
     // Abrir WhatsApp con el mensaje
     const whatsappUrl = `https://wa.me/51946552086?text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
-    
+
     // Limpiar el formulario
     form.reset();
-    
+
     return false;
 }
 
 function handleHeroFormSubmit(event) {
     event.preventDefault();
-    
+
     const form = event.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
-    
+
     // Validar campos obligatorios
     if (!data.nombre || !data.telefono) {
         showToast('Error: Por favor completa tu nombre y teléfono', 'error');
         return;
     }
-    
+
     // Construir mensaje para WhatsApp
     const mensaje = `Hola, soy ${data.nombre}. Quiero información sobre Casa Bonita Residencial.
 
@@ -89,14 +89,14 @@ function handleHeroFormSubmit(event) {
 
     // Mostrar feedback al usuario
     showToast('¡Formulario enviado! Redirigiendo a WhatsApp...', 'success');
-    
+
     // Abrir WhatsApp con el mensaje
     const whatsappUrl = `https://wa.me/51946552086?text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
-    
+
     // Limpiar el formulario
     form.reset();
-    
+
     return false;
 }
 
@@ -117,7 +117,7 @@ function showToast(message, type = 'info') {
     if (existingToast) {
         existingToast.remove();
     }
-    
+
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.innerHTML = `
@@ -126,7 +126,7 @@ function showToast(message, type = 'info') {
             <button onclick="this.parentElement.parentElement.remove()" class="toast-close">×</button>
         </div>
     `;
-    
+
     toast.style.cssText = `
         position: fixed;
         top: 20px;
@@ -140,7 +140,7 @@ function showToast(message, type = 'info') {
         max-width: 400px;
         animation: slideIn 0.3s ease-out;
     `;
-    
+
     if (!document.querySelector('#toastStyles')) {
         const style = document.createElement('style');
         style.id = 'toastStyles';
@@ -179,9 +179,9 @@ function showToast(message, type = 'info') {
         `;
         document.head.appendChild(style);
     }
-    
+
     document.body.appendChild(toast);
-    
+
     setTimeout(() => {
         if (toast.parentElement) {
             toast.remove();
@@ -194,7 +194,7 @@ function animateOnScroll() {
         threshold: 0.1,
         rootMargin: '0px 0px -30px 0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
@@ -207,7 +207,7 @@ function animateOnScroll() {
             }
         });
     }, observerOptions);
-    
+
     const animatedElements = document.querySelectorAll('.feature-card, .modelo-card, .benefit-card, .testimonio-card, .requirement-card, .timeline-content, .stat-card');
     animatedElements.forEach((el, index) => {
         el.classList.add('animate-on-scroll');
@@ -219,12 +219,12 @@ function animateOnScroll() {
 }
 
 function animateCounters() {
-     const counters = document.querySelectorAll('.stat-number:not(.highlight-stats .stat-number)');
+    const counters = document.querySelectorAll('.stat-number:not(.highlight-stats .stat-number)');
     const observerOptions = {
         threshold: 0.4,
         rootMargin: '0px 0px -20px 0px'
     };
-    
+
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -234,7 +234,7 @@ function animateCounters() {
                 const duration = 900;
                 const increment = target / (duration / 16);
                 let current = 0;
-                
+
                 const updateCounter = () => {
                     current += increment;
                     if (current < target) {
@@ -251,13 +251,13 @@ function animateCounters() {
                         counter.textContent = originalText;
                     }
                 };
-                
+
                 updateCounter();
                 counterObserver.unobserve(counter);
             }
         });
     }, observerOptions);
-    
+
     counters.forEach(counter => {
         counterObserver.observe(counter);
     });
@@ -265,50 +265,50 @@ function animateCounters() {
 
 function animateHeroElements() {
     const heroElements = [
-        { 
-            selector: '.hero-badge', 
+        {
+            selector: '.hero-badge',
             delay: 100,
             transform: 'translateY(-40px) scale(0.8)',
             finalTransform: 'translateY(0) scale(1)'
         },
-        { 
-            selector: '.hero-title', 
+        {
+            selector: '.hero-title',
             delay: 300,
             transform: 'translateX(-60px) scale(0.9)',
             finalTransform: 'translateX(0) scale(1)'
         },
-        { 
-            selector: '.hero-subtitle', 
+        {
+            selector: '.hero-subtitle',
             delay: 500,
             transform: 'translateX(60px) scale(0.9)',
             finalTransform: 'translateX(0) scale(1)'
         },
-        { 
-            selector: '.hero-description', 
+        {
+            selector: '.hero-description',
             delay: 700,
             transform: 'translateY(40px) scale(0.95)',
             finalTransform: 'translateY(0) scale(1)'
         },
-        { 
-            selector: '.hero-location', 
+        {
+            selector: '.hero-location',
             delay: 900,
             transform: 'translateY(30px) scale(0.7)',
             finalTransform: 'translateY(0) scale(1)'
         },
-        { 
-            selector: '.hero-buttons', 
+        {
+            selector: '.hero-buttons',
             delay: 1100,
             transform: 'translateY(50px) scale(0.8)',
             finalTransform: 'translateY(0) scale(1)'
         },
-        { 
-            selector: '.scroll-indicator', 
+        {
+            selector: '.scroll-indicator',
             delay: 1300,
             transform: 'translateY(20px) scale(0.5)',
             finalTransform: 'translateY(0) scale(1)'
         }
     ];
-    
+
     heroElements.forEach(({ selector, transform }) => {
         const element = document.querySelector(selector);
         if (element) {
@@ -317,13 +317,13 @@ function animateHeroElements() {
             element.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
         }
     });
-    
+
     const heroForm = document.querySelector('.hero-search');
     if (heroForm) {
         heroForm.style.opacity = '0';
         heroForm.style.transition = 'opacity 1s ease-out';
     }
-    
+
     setTimeout(() => {
         heroElements.forEach(({ selector, delay, finalTransform }) => {
             setTimeout(() => {
@@ -331,7 +331,7 @@ function animateHeroElements() {
                 if (element) {
                     element.style.opacity = '1';
                     element.style.transform = finalTransform;
-                    
+
                     element.style.filter = 'brightness(1.1)';
                     setTimeout(() => {
                         element.style.filter = 'brightness(1)';
@@ -340,23 +340,23 @@ function animateHeroElements() {
                 }
             }, delay);
         });
-        
+
         setTimeout(() => {
             if (heroForm) {
                 heroForm.style.opacity = '1';
             }
         }, 400);
-        
+
     }, 200);
 }
 
 function initParallax() {
     const parallaxElements = document.querySelectorAll('.scroll-indicator');
-    
+
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         const rate = scrolled * -0.5;
-        
+
         parallaxElements.forEach(element => {
             if (element.classList.contains('scroll-indicator')) {
                 element.style.transform = `translateX(-50%) translateY(${rate * 0.1}px)`;
@@ -367,13 +367,13 @@ function initParallax() {
 
 function enhanceHoverEffects() {
     const cards = document.querySelectorAll('.feature-card, .modelo-card, .benefit-card, .testimonio-card');
-    
+
     cards.forEach(card => {
         card.addEventListener('mouseenter', () => {
             card.style.transform = 'translateY(-5px) scale(1.02)';
             card.style.transition = 'all 0.3s ease';
         });
-        
+
         card.addEventListener('mouseleave', () => {
             card.style.transform = 'translateY(0px) scale(1)';
             card.style.transition = 'all 0.3s ease';
@@ -383,22 +383,22 @@ function enhanceHoverEffects() {
 
 function enhanceButtonAnimations() {
     const buttons = document.querySelectorAll('.btn');
-    
+
     buttons.forEach(button => {
         button.addEventListener('mouseenter', () => {
             button.style.transform = 'scale(1.05) translateY(-2px)';
             button.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
         });
-        
+
         button.addEventListener('mouseleave', () => {
             button.style.transform = 'scale(1) translateY(0px)';
             button.style.boxShadow = '';
         });
-        
+
         button.addEventListener('mousedown', () => {
             button.style.transform = 'scale(0.98) translateY(1px)';
         });
-        
+
         button.addEventListener('mouseup', () => {
             button.style.transform = 'scale(1.05) translateY(-2px)';
         });
@@ -417,7 +417,7 @@ function lazyLoadImages() {
             }
         });
     });
-    
+
     images.forEach(img => imageObserver.observe(img));
 }
 
@@ -428,7 +428,7 @@ function trackEvent(eventName, parameters = {}) {
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize animations and effects
     animateOnScroll();
     animateCounters();
@@ -437,22 +437,22 @@ document.addEventListener('DOMContentLoaded', function() {
     enhanceHoverEffects();
     enhanceButtonAnimations();
     lazyLoadImages();
-    
+
     // Add form submission handlers
     const heroForm = document.getElementById('heroContactForm');
     const contactForm = document.getElementById('contactForm');
-    
+
     if (heroForm) {
         heroForm.addEventListener('submit', handleHeroFormSubmit);
     }
-    
+
     if (contactForm) {
         contactForm.addEventListener('submit', handleFormSubmit);
     }
 });
 
 /* Mobile navigation: inject hamburger button and overlay, handle toggle */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const headerContent = document.querySelector('.header-content');
     if (!headerContent) return;
 
@@ -531,12 +531,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Manejo de errores globales
-window.addEventListener('error', function(event) {
+window.addEventListener('error', function (event) {
     console.error('Error en la aplicación:', event.error);
 });
 
 // Script para el carrusel (safe: no-op si no existe en la página)
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const carousel = document.querySelector('.carousel');
     if (!carousel) return; // no hay carrusel en esta página
 
@@ -601,28 +601,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-    // Mobile menu logic removed
+// Mobile menu logic removed
 
-        // Add animation to blog cards on scroll
-        const observerOptions = {
-            threshold: 0.1
-        };
+// Add animation to blog cards on scroll
+const observerOptions = {
+    threshold: 0.1
+};
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
 
-        document.querySelectorAll('.blog-card').forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
-            observer.observe(card);
-        });
+document.querySelectorAll('.blog-card').forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+    observer.observe(card);
+});
 
 // ==========================================
 // CARRUSEL DE TESTIMONIOS CON SWIPER
@@ -631,7 +631,7 @@ document.addEventListener('DOMContentLoaded', function() {
 let testimonialsSwiper;
 
 // Inicializar carrusel de testimonios cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initTestimonialsCarousel();
 });
 // Cargar la librería Swiper de forma dinámica (solo cuando se necesite)
@@ -664,7 +664,7 @@ function loadSwiperLibrary() {
 
 async function initTestimonialsCarousel() {
     const swiperContainer = document.querySelector('.testimonials-swiper');
-    
+
     if (!swiperContainer) return;
     // Cargar Swiper solo cuando exista el contenedor
     await loadSwiperLibrary();
@@ -674,7 +674,7 @@ async function initTestimonialsCarousel() {
         console.warn('Swiper no está disponible. Saltando inicialización de testimonios.');
         return;
     }
-    
+
     // Configurar Swiper para carrusel infinito
     testimonialsSwiper = new Swiper('.testimonials-swiper', {
         // Configuración básica para loop infinito
@@ -682,17 +682,17 @@ async function initTestimonialsCarousel() {
         centeredSlides: true,
         slidesPerView: 'auto',
         spaceBetween: 30,
-        
+
         // Autoplay
         autoplay: {
             delay: 4000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
         },
-        
+
         // Velocidad de transición
         speed: 600,
-        
+
         // Configuración responsive
         breakpoints: {
             320: {
@@ -711,16 +711,16 @@ async function initTestimonialsCarousel() {
                 centeredSlides: true,
             }
         },
-        
+
         // Eventos
         on: {
-            init: function() {
+            init: function () {
                 // Contar slides originales (no duplicadas por loop)
                 const originalSlides = document.querySelectorAll('.testimonials-swiper .swiper-slide');
                 createTestimonialsIndicators(originalSlides.length);
                 updateSlideClasses(this);
             },
-            slideChange: function() {
+            slideChange: function () {
                 updateSlideClasses(this);
                 updateActiveIndicator(this.realIndex);
             }
@@ -732,9 +732,9 @@ async function initTestimonialsCarousel() {
 function createTestimonialsIndicators(totalCards) {
     const indicatorsContainer = document.getElementById('carouselIndicators');
     if (!indicatorsContainer) return;
-    
+
     indicatorsContainer.innerHTML = '';
-    
+
     for (let i = 0; i < totalCards; i++) {
         const indicator = document.createElement('div');
         indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
@@ -760,29 +760,29 @@ function updateSlideClasses(swiper) {
     const slides = swiper.slides;
     const activeIndex = swiper.realIndex;
     const totalSlides = Math.floor(slides.length / 3); // Slides originales sin duplicados
-    
+
     slides.forEach((slide, index) => {
         const card = slide.querySelector('.testimonio-card');
         if (!card) return;
-        
+
         // Limpiar todas las clases de estado
         card.classList.remove('active', 'prev', 'next', 'far');
-        
+
         // Obtener el índice real de la slide
         const realIndex = parseInt(slide.getAttribute('data-swiper-slide-index') || '0');
-        
+
         // Calcular la distancia desde la slide activa
         const distance = Math.abs(realIndex - activeIndex);
-        
+
         // Aplicar clases basadas en la posición
         if (realIndex === activeIndex) {
             card.classList.add('active');
-        } else if (distance === 1 || 
-                  (activeIndex === 0 && realIndex === totalSlides - 1) ||
-                  (activeIndex === totalSlides - 1 && realIndex === 0)) {
+        } else if (distance === 1 ||
+            (activeIndex === 0 && realIndex === totalSlides - 1) ||
+            (activeIndex === totalSlides - 1 && realIndex === 0)) {
             // Determinar si es prev o next considerando el loop circular
-            const isPrev = (realIndex === activeIndex - 1) || 
-                          (activeIndex === 0 && realIndex === totalSlides - 1);
+            const isPrev = (realIndex === activeIndex - 1) ||
+                (activeIndex === 0 && realIndex === totalSlides - 1);
             card.classList.add(isPrev ? 'prev' : 'next');
         } else {
             card.classList.add('far');
@@ -823,17 +823,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleHeaderScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const isCurrentlyScrolled = scrollTop > 100;
-        
+
         // Detectar cambio de estado
         const stateChanged = wasScrolled !== isCurrentlyScrolled;
-        
+
         // Agregar o quitar la clase 'scrolled' basado en la posición del scroll
         if (isCurrentlyScrolled) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-        
+
         // Recalcular padding solo si hubo cambio de estado o al inicializar
         if (stateChanged || wasScrolled === undefined) {
             // Usar timeout para asegurar que las transiciones CSS se completen
@@ -841,7 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateBodyPadding();
             }, 100); // Ligeramente más que la transición CSS (0.3s)
         }
-        
+
         wasScrolled = isCurrentlyScrolled;
         lastScrollTop = scrollTop;
         isScrolling = false;
@@ -863,12 +863,12 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateBodyPadding() {
     const body = document.body;
     const mainHeader = document.querySelector('.main-header');
-    
+
     if (!mainHeader) return;
-    
+
     // Forzar múltiples reflows para obtener medidas precisas
     mainHeader.offsetHeight;
-    
+
     // Usar requestAnimationFrame doble para asegurar que los cambios CSS se apliquen completamente
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -887,7 +887,7 @@ function closePromoBar() {
         promoBar.style.opacity = '0';
         promoBar.style.maxHeight = '0';
         promoBar.style.overflow = 'hidden';
-        
+
         // Remover el elemento después de la animación
         setTimeout(() => {
             promoBar.remove();
@@ -902,13 +902,13 @@ function closePromoBar() {
 // Configurar el padding inicial y observadores
 document.addEventListener('DOMContentLoaded', () => {
     const mainHeader = document.querySelector('.main-header');
-    
+
     if (mainHeader) {
         // Aplicar padding inicial después de que todo se cargue
         setTimeout(() => {
             updateBodyPadding();
         }, 100);
-        
+
         // Observar cambios de tamaño de ventana
         let resizeTimeout;
         window.addEventListener('resize', () => {
@@ -917,19 +917,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateBodyPadding();
             }, 50);
         });
-        
+
         // Configurar el botón de cerrar promoción
         const closeButton = document.querySelector('.promo-close');
         if (closeButton) {
             closeButton.addEventListener('click', closePromoBar);
         }
-        
+
         // Observador de mutaciones para detectar cambios en el DOM del header
         const headerObserver = new MutationObserver((mutations) => {
             let shouldUpdate = false;
             let hasClassChange = false;
             let hasElementRemoved = false;
-            
+
             mutations.forEach((mutation) => {
                 // Detectar cambios en clases (como .scrolled)
                 if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -940,7 +940,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     hasElementRemoved = true;
                 }
             });
-            
+
             // Manejar diferentes tipos de cambios con delays apropiados
             if (hasClassChange) {
                 // Cambio de clase (scroll): esperar a que termine la transición
@@ -950,7 +950,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(updateBodyPadding, 50);
             }
         });
-        
+
         // Observar el header y sus cambios
         headerObserver.observe(mainHeader, {
             attributes: true,
@@ -962,7 +962,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Barra de progreso de scroll
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Crear la barra de progreso
     const header = document.querySelector('.main-header');
     if (header) {
@@ -971,19 +971,19 @@ document.addEventListener('DOMContentLoaded', function() {
         progressBar.id = 'scrollProgress';
         header.appendChild(progressBar);
     }
-    
+
     // Función para actualizar la barra
     function updateScrollProgress() {
         const progressBar = document.getElementById('scrollProgress');
         if (!progressBar) return;
-        
+
         const scrollTop = window.pageYOffset;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         const scrollPercent = (scrollTop / docHeight) * 100;
-        
+
         progressBar.style.width = Math.min(scrollPercent, 100) + '%';
     }
-    
+
     // Eventos
     window.addEventListener('scroll', updateScrollProgress);
     window.addEventListener('resize', updateScrollProgress);
@@ -1007,7 +1007,7 @@ function initModel3D() {
     }
 
     const modelViewer = document.getElementById('casa-model');
-    
+
     if (!modelViewer) return;
 
     // Cargar el script de model-viewer solo si es desktop
@@ -1016,8 +1016,8 @@ function initModel3D() {
         script.type = 'module';
         script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js';
         document.head.appendChild(script);
-        
-        script.onload = function() {
+
+        script.onload = function () {
             setupModelViewer();
         };
     } else {
@@ -1032,14 +1032,14 @@ function setupModelViewer() {
     // Configurar el modelo
     modelViewer.src = 'assets/img/casa.glb'; // Asegúrate de tener el archivo 3D
 
-    modelViewer.addEventListener('load', function() {
+    modelViewer.addEventListener('load', function () {
         modelViewer.style.opacity = '1';
         // Ocultar el loading si existe
         const loading = document.querySelector('.model-loading');
         if (loading) loading.style.display = 'none';
     });
 
-    modelViewer.addEventListener('error', function() {
+    modelViewer.addEventListener('error', function () {
         console.warn('Error cargando modelo 3D, mostrando imagen estática');
         // Mostrar imagen de fallback en caso de error
         const errorSlot = modelViewer.querySelector('[slot="error"]');
@@ -1050,14 +1050,14 @@ function setupModelViewer() {
 // Lazy loading para imágenes de fondo
 function initLazyBackgrounds() {
     const bgElements = document.querySelectorAll('[data-bg-src]');
-    
+
     if ('IntersectionObserver' in window) {
         const bgObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const element = entry.target;
                     const bgSrc = element.dataset.bgSrc;
-                    
+
                     if (bgSrc) {
                         // Precargar la imagen
                         const img = new Image();
@@ -1067,7 +1067,7 @@ function initLazyBackgrounds() {
                         };
                         img.src = bgSrc;
                     }
-                    
+
                     bgObserver.unobserve(element);
                 }
             });
@@ -1075,7 +1075,7 @@ function initLazyBackgrounds() {
             // Cargar la imagen cuando esté a 50px de entrar en el viewport
             rootMargin: '50px'
         });
-        
+
         bgElements.forEach(element => {
             bgObserver.observe(element);
         });
@@ -1097,10 +1097,10 @@ function optimizeLazyImages() {
         // El navegador soporta lazy loading nativo, no necesitamos hacer nada más
         return;
     }
-    
+
     // Fallback para navegadores que no soportan lazy loading nativo
     const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    
+
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1117,7 +1117,7 @@ function optimizeLazyImages() {
         }, {
             rootMargin: '50px'
         });
-        
+
         lazyImages.forEach(img => {
             imageObserver.observe(img);
         });
@@ -1133,20 +1133,20 @@ function optimizeLazyImages() {
 }
 
 // Inicializar modelo 3D cuando el DOM esté listo y manejar cambios de tamaño
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Inicializar modelo 3D solo en desktop
     initModel3D();
-    
+
     // Inicializar lazy loading para backgrounds
     initLazyBackgrounds();
-    
+
     // Optimizar imágenes lazy loading
     optimizeLazyImages();
-    
+
     // Listener para cambios de tamaño de ventana
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', function () {
         const showcaseImage = document.querySelector('.showcase-image');
-        
+
         if (isMobile()) {
             // Ocultar completamente en móvil
             if (showcaseImage) showcaseImage.style.display = 'none';
