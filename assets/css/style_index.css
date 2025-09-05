@@ -2643,11 +2643,11 @@ model-viewer {
 }
 
 .prev-btn {
-    transform: translateX(-25px);
+    transform: translateX(-12px);
 }
 
 .next-btn {
-    transform: translateX(25px);
+    transform: translateX(12px);
 }
 
 /* Indicadores del carrusel */

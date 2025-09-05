@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Elementos del DOM
     const blogGrid = document.querySelector('.blog-grid');
-    let blogCards = document.querySelectorAll('.blog-card');
-    const categoryLinks = document.querySelectorAll('#categories-list a');
-    const tagLinks = document.querySelectorAll('#tags-cloud a');
+    let blogCards = [];
+    let allBlogs = []; // Array para almacenar todos los blogs desde la API
     const searchInput = document.querySelector('.search-form input[type="text"]');
     const searchForm = document.querySelector('.search-form');
     const clearFiltersBtn = document.getElementById('clear-filters');
@@ -13,7 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Variables de paginación
     const postsPerPage = 6;
     let currentPage = 1;
-    let filteredBlogCards = Array.from(blogCards);
+    let filteredBlogCards = [];
+    
+    // URL base de la API
+    const API_BASE_URL = 'http://localhost:5000';
     
     // Filtros activos
     let activeFilters = {
@@ -21,8 +23,165 @@ document.addEventListener('DOMContentLoaded', function() {
         tags: []
     };
 
+    // Función para cargar blogs desde la API
+    async function loadBlogs() {
+        try {
+            showLoader(true);
+            const response = await fetch(`${API_BASE_URL}/api/blogs`);
+            const data = await response.json();
+            
+            if (data.ok && data.blogs) {
+                allBlogs = data.blogs;
+                renderBlogs(allBlogs);
+                // Actualizar los filtros de categoría y tags basados en los datos
+                updateFiltersFromData();
+            } else {
+                console.error('Error al cargar blogs:', data.error);
+                showErrorMessage('Error al cargar los blogs. Por favor, intenta más tarde.');
+            }
+        } catch (error) {
+            console.error('Error de conexión:', error);
+            showErrorMessage('Error de conexión. Verifica que el servidor esté funcionando.');
+        } finally {
+            showLoader(false);
+        }
+    }
+
+    // Función para mostrar un loader mientras cargan los datos
+    function showLoader(show) {
+        if (show) {
+            blogGrid.innerHTML = '<div class="blog-loader"><div class="loader-spinner"></div><p>Cargando blogs...</p></div>';
+        }
+    }
+
+    // Función para mostrar mensajes de error
+    function showErrorMessage(message) {
+        blogGrid.innerHTML = `<div class="blog-error"><p>${message}</p></div>`;
+    }
+
+    // Función para renderizar los blogs en el DOM
+    function renderBlogs(blogs) {
+        blogGrid.innerHTML = '';
+        
+        if (blogs.length === 0) {
+            blogGrid.innerHTML = '<div class="no-blogs"><p>No se encontraron blogs.</p></div>';
+            return;
+        }
+
+        blogs.forEach(blog => {
+            const blogCard = createBlogCard(blog);
+            blogGrid.appendChild(blogCard);
+        });
+
+        // Actualizar la lista de cards para la paginación y filtros
+        blogCards = Array.from(blogGrid.querySelectorAll('.blog-card'));
+        filteredBlogCards = blogCards;
+        
+        // Reinicializar paginación
+        currentPage = 1;
+        updatePagination();
+        showCurrentPage();
+        
+        // Actualizar la visualización de filtros (se ocultará si no hay filtros activos)
+        updateActiveFiltersDisplay();
+    }
+
+    // Función para crear una card de blog
+    function createBlogCard(blog) {
+        const article = document.createElement('article');
+        article.className = 'blog-card';
+        article.setAttribute('data-category', blog.categoria || 'General');
+        article.setAttribute('data-id', blog.id);
+
+        // Formatear la fecha
+        const formattedDate = formatDate(blog.fecha);
+        
+        // Construir la URL de la imagen
+        const imageUrl = blog.imagen ? `${API_BASE_URL}${blog.imagen}` : 'https://via.placeholder.com/400x250?text=Sin+Imagen';
+
+        article.innerHTML = `
+            <div class="blog-image-container">
+                <img src="${imageUrl}" alt="${blog.titulo}" class="blog-image" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250?text=Sin+Imagen'">
+            </div>
+            <div class="blog-content">
+                <div class="blog-category">${blog.categoria || 'General'}</div>
+                <h2 class="blog-title">${blog.titulo}</h2>
+                <p class="blog-excerpt">${blog.resumen}</p>
+                <div class="blog-meta">
+                    <span class="blog-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
+                    <a href="blog-article.html?id=${blog.id}" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        `;
+
+        return article;
+    }
+
+    // Función para formatear la fecha
+    function formatDate(dateString) {
+        if (!dateString) return 'Fecha no disponible';
+        
+        try {
+            const date = new Date(dateString);
+            const options = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric'
+            };
+            return date.toLocaleDateString('es-ES', options);
+        } catch (error) {
+            return dateString; // Retornar la fecha original si hay error al formatear
+        }
+    }
+
+    // Función para actualizar filtros basados en los datos de la API
+    function updateFiltersFromData() {
+        // Obtener categorías únicas
+        const categories = [...new Set(allBlogs.map(blog => blog.categoria).filter(cat => cat))];
+        
+        // Actualizar el menú de categorías si existe
+        const categoriesList = document.getElementById('categories-list');
+        if (categoriesList) {
+            // Mantener el "Todos"
+            const allCategoriesLink = categoriesList.querySelector('[data-filter="all"]');
+            categoriesList.innerHTML = '';
+            if (allCategoriesLink) {
+                categoriesList.appendChild(allCategoriesLink);
+            }
+            
+            // Agregar las nuevas categorías
+            categories.forEach(category => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#';
+                a.setAttribute('data-filter', category);
+                a.textContent = category;
+                li.appendChild(a);
+                categoriesList.appendChild(li);
+            });
+        }
+    }
+
+    // Función para filtrar por categoría
+    function filterByCategory(category, element) {
+        // Actualizar filtros activos
+        activeFilters.category = category;
+        
+        // Actualizar UI de categorías
+        document.querySelectorAll('#categories-list a').forEach(link => {
+            link.classList.remove('active');
+        });
+        element.classList.add('active');
+        
+        // Aplicar filtros
+        applyFilters();
+        updateActiveFiltersDisplay();
+    }
+
     // Mostrar filtros activos
     function updateActiveFiltersDisplay() {
+        if (!activeFiltersContainer) return;
+        
         activeFiltersContainer.innerHTML = '';
         
         // Mostrar categoría activa
@@ -52,10 +211,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Mostrar u ocultar el contenedor de filtros activos
-        if (activeFilters.category === 'all' && activeFilters.tags.length === 0) {
-            document.querySelector('.filters-container').style.display = 'none';
-        } else {
-            document.querySelector('.filters-container').style.display = 'flex';
+        const filtersContainer = document.querySelector('.filters-container');
+        if (filtersContainer) {
+            if (activeFilters.category === 'all' && activeFilters.tags.length === 0) {
+                filtersContainer.style.display = 'none';
+            } else {
+                filtersContainer.style.display = 'flex';
+            }
         }
     }
     
@@ -79,56 +241,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Restablecer etiquetas activas
-        document.querySelectorAll('#tags-cloud a').forEach(tag => {
-            tag.classList.remove('active');
-        });
-        
         // Restablecer búsqueda
-        searchInput.value = '';
+        if (searchInput) {
+            searchInput.value = '';
+        }
         
         // Aplicar filtros (sin ninguna categoría o etiqueta)
         applyFilters();
     }
     
-    // Inicializar la paginación
-    function initPagination() {
-        updatePagination();
-        
-        // Event delegation para los botones de paginación
-        paginationContainer.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = e.target.closest('a');
-            if (!target) return;
-            
-            if (target.classList.contains('next')) {
-                if (currentPage < Math.ceil(filteredBlogCards.length / postsPerPage)) {
-                    currentPage++;
-                    updateDisplayedPosts();
-                    updatePagination();
-                }
-            } else if (target.classList.contains('prev')) {
-                if (currentPage > 1) {
-                    currentPage--;
-                    updateDisplayedPosts();
-                    updatePagination();
-                }
-            } else if (target.textContent && !isNaN(target.textContent)) {
-                currentPage = parseInt(target.textContent);
-                updateDisplayedPosts();
-                updatePagination();
-            }
-            
-            // Desplazarse suavemente hacia arriba
-            window.scrollTo({
-                top: blogGrid.offsetTop + 500,
-                behavior: 'smooth'
-            });
-        });
-    }
-    
     // Actualizar la visualización de la paginación
     function updatePagination() {
+        if (!paginationContainer) return;
+        
         const totalPages = Math.ceil(filteredBlogCards.length / postsPerPage);
         let paginationHTML = '';
         
@@ -181,10 +306,80 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         paginationContainer.innerHTML = paginationHTML;
+        
+        // Agregar event listeners para paginación
+        paginationContainer.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = e.target.closest('a');
+            if (!target) return;
+            
+            if (target.classList.contains('next')) {
+                if (currentPage < Math.ceil(filteredBlogCards.length / postsPerPage)) {
+                    currentPage++;
+                    showCurrentPage();
+                    updatePagination();
+                }
+            } else if (target.classList.contains('prev')) {
+                if (currentPage > 1) {
+                    currentPage--;
+                    showCurrentPage();
+                    updatePagination();
+                }
+            } else if (target.textContent && !isNaN(target.textContent)) {
+                currentPage = parseInt(target.textContent);
+                showCurrentPage();
+                updatePagination();
+            }
+            
+            // Desplazarse suavemente hacia arriba
+            if (blogGrid) {
+                window.scrollTo({   
+                    top:450,
+                    behavior: 'smooth'
+                });
+            }
+        });
     }
-    
-    // Actualizar las publicaciones mostradas según la página actual
-    function updateDisplayedPosts() {
+
+    // Aplicar todos los filtros
+    function applyFilters() {
+        const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        
+        filteredBlogCards = Array.from(blogCards).filter(card => {
+            const cardCategory = card.getAttribute('data-category');
+            
+            // Filtrar por categoría
+            const categoryMatch = activeFilters.category === 'all' || cardCategory === activeFilters.category;
+            
+            // Filtrar por etiquetas
+            let tagsMatch = true;
+            if (activeFilters.tags.length > 0) {
+                tagsMatch = activeFilters.tags.some(tag => cardTags.includes(tag));
+            }
+            
+            // Filtrar por búsqueda (título y resumen)
+            let searchMatch = true;
+            if (searchTerm) {
+                const title = card.querySelector('.blog-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
+                const category = cardCategory.toLowerCase();
+                
+                searchMatch = title.includes(searchTerm) || 
+                             excerpt.includes(searchTerm) || 
+                             category.includes(searchTerm);
+            }
+            
+            return categoryMatch && tagsMatch && searchMatch;
+        });
+        
+        // Actualizar la paginación y mostrar las publicaciones
+        currentPage = 1; // Volver a la primera página al aplicar nuevos filtros
+        updatePagination();
+        showCurrentPage();
+    }
+
+    // Función para mostrar la página actual
+    function showCurrentPage() {
         const startIndex = (currentPage - 1) * postsPerPage;
         const endIndex = startIndex + postsPerPage;
         const visiblePosts = filteredBlogCards.slice(startIndex, endIndex);
@@ -198,194 +393,172 @@ document.addEventListener('DOMContentLoaded', function() {
         visiblePosts.forEach(card => {
             if (card) card.style.display = 'block';
         });
+        
+        // Mostrar mensaje si no hay resultados
+        if (filteredBlogCards.length === 0) {
+            if (!document.querySelector('.no-results')) {
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.innerHTML = '<p>No se encontraron blogs que coincidan con los filtros aplicados.</p>';
+                blogGrid.appendChild(noResults);
+            }
+        } else {
+            const noResults = document.querySelector('.no-results');
+            if (noResults) {
+                noResults.remove();
+            }
+        }
     }
-    
-    // Inicializar el blog
-    function initBlog() {
+
+    // Inicializar la aplicación
+    function init() {
         // Ocultar contenedor de filtros al inicio
-        document.querySelector('.filters-container').style.display = 'none';
+        const filtersContainer = document.querySelector('.filters-container');
+        if (filtersContainer) {
+            filtersContainer.style.display = 'none';
+        }
         
-        // Inicializar paginación
-        initPagination();
-        updateDisplayedPosts();
+        // Inicializar la visualización de filtros activos
+        updateActiveFiltersDisplay();
         
-        // Event listeners para categorías
-        categoryLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+        loadBlogs();
+        
+        // Event listeners
+        if (clearFiltersBtn) {
+            clearFiltersBtn.addEventListener('click', clearAllFilters);
+        }
+        
+        // Event delegation para filtros de categoría dinámicos
+        const categoriesList = document.getElementById('categories-list');
+        if (categoriesList) {
+            categoriesList.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    e.preventDefault();
+                    const filter = e.target.getAttribute('data-filter');
+                    filterByCategory(filter, e.target);
+                }
+            });
+        }
+        
+        // Búsqueda
+        if (searchForm) {
+            searchForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                currentPage = 1; // Resetear a la primera página
-                const filterValue = this.getAttribute('data-filter');
-                activeFilters.category = filterValue;
-                updateActiveCategory(this);
+                applyFilters();
+            });
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                applyFilters();
+            });
+        }
+
+        // Event delegation para eliminar filtros activos
+        if (activeFiltersContainer) {
+            activeFiltersContainer.addEventListener('click', function(e) {
+                const button = e.target.closest('button');
+                if (!button) return;
+                
+                const type = button.getAttribute('data-type');
+                const value = button.getAttribute('data-value');
+                
+                if (type === 'category') {
+                    activeFilters.category = 'all';
+                    // Actualizar UI de categorías
+                    document.querySelectorAll('#categories-list a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('data-filter') === 'all') {
+                            link.classList.add('active');
+                        }
+                    });
+                } 
                 updateActiveFiltersDisplay();
                 applyFilters();
             });
-        });
-
-        // Event listeners para etiquetas
-        tagLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const tag = this.getAttribute('data-tag');
-                toggleTagFilter(tag, this);
-                updateActiveFiltersDisplay();
-            });
-        });
-        
-        // Event listener para el botón de limpiar filtros
-        clearFiltersBtn.addEventListener('click', clearAllFilters);
-        
-        // Event delegation para eliminar filtros individuales
-        document.addEventListener('click', function(e) {
-            const removeBtn = e.target.closest('.active-filter-tag button');
-            if (!removeBtn) return;
-            
-            const type = removeBtn.getAttribute('data-type');
-            const value = removeBtn.getAttribute('data-value');
-            
-            if (type === 'category') {
-                activeFilters.category = 'all';
-                document.querySelectorAll('#categories-list a').forEach(link => {
-                    link.classList.remove('active');
-                });
-                document.querySelector('#categories-list a[data-filter="all"]').classList.add('active');
-            } else if (type === 'tag') {
-                const tagIndex = activeFilters.tags.indexOf(value);
-                if (tagIndex > -1) {
-                    activeFilters.tags.splice(tagIndex, 1);
-                    document.querySelectorAll('#tags-cloud a').forEach(tag => {
-                        if (tag.getAttribute('data-tag') === value) {
-                            tag.classList.remove('active');
-                        }
-                    });
-                }
-            }
-            
-            updateActiveFiltersDisplay();
-            applyFilters();
-        });
-
-        // Event listener para búsqueda
-        searchForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const searchTerm = searchInput.value.trim().toLowerCase();
-            filterBySearch(searchTerm);
-        });
-
-        // Event listener para limpiar búsqueda
-        searchInput.addEventListener('input', function() {
-            if (this.value === '') {
-                resetSearch();
-            }
-        });
-    }
-
-    // Actualizar categoría activa
-    function updateActiveCategory(activeLink) {
-        categoryLinks.forEach(link => link.classList.remove('active'));
-        activeLink.classList.add('active');
-    }
-
-    // Alternar filtro de etiqueta
-    function toggleTagFilter(tag, element) {
-        const index = activeFilters.tags.indexOf(tag);
-        if (index === -1) {
-            // Añadir etiqueta
-            activeFilters.tags.push(tag);
-            element.classList.add('active');
-        } else {
-            // Quitar etiqueta
-            activeFilters.tags.splice(index, 1);
-            element.classList.remove('active');
         }
-        // Actualizar la visualización de filtros activos
-        updateActiveFiltersDisplay();
-        // Aplicar los filtros
-        applyFilters();
     }
 
-    // Filtrar por búsqueda
-    function filterBySearch(term) {
-        if (term === '') {
-            resetSearch();
+    // Función para cargar blogs populares
+    async function loadPopularBlogs() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/blogs/populares`);
+            const data = await response.json();
+            
+            if (data.ok && data.blogs) {
+                renderPopularBlogs(data.blogs);
+            } else {
+                console.error('Error al cargar blogs populares:', data.error);
+            }
+        } catch (error) {
+            console.error('Error de conexión al cargar blogs populares:', error);
+        }
+    }
+
+    // Función para renderizar blogs populares en el sidebar
+    function renderPopularBlogs(blogs) {
+        const popularPostsWidget = document.querySelector('.sidebar-widget.popular-posts');
+        if (!popularPostsWidget) return;
+
+        // Mantener el título del widget
+        const widgetTitle = popularPostsWidget.querySelector('.widget-title');
+        popularPostsWidget.innerHTML = '';
+        
+        if (widgetTitle) {
+            popularPostsWidget.appendChild(widgetTitle);
+        }
+
+        if (blogs.length === 0) {
+            const noPostsMessage = document.createElement('p');
+            noPostsMessage.textContent = 'No hay artículos populares disponibles.';
+            noPostsMessage.style.textAlign = 'center';
+            noPostsMessage.style.color = '#666';
+            popularPostsWidget.appendChild(noPostsMessage);
             return;
         }
 
-        filteredBlogCards = Array.from(blogCards).filter(card => {
-            const title = card.querySelector('.blog-title').textContent.toLowerCase();
-            const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
-            const category = card.querySelector('.blog-category').textContent.toLowerCase();
-            return title.includes(term) || excerpt.includes(term) || category.includes(term);
-        });
-        
-        // Actualizar la paginación y mostrar resultados
-        currentPage = 1;
-        updatePagination();
-        updateDisplayedPosts();
-        
-        // Mostrar el contenedor de filtros para la búsqueda
-        document.querySelector('.filters-container').style.display = 'flex';
-    }
-
-    // Restablecer búsqueda
-    function resetSearch() {
-        searchInput.value = '';
-        applyFilters();
-    }
-
-    // Aplicar todos los filtros
-    function applyFilters() {
-        filteredBlogCards = Array.from(blogCards).filter(card => {
-            const cardCategory = card.getAttribute('data-category');
-            const cardTags = card.getAttribute('data-tags').split(',');
+        // Crear elementos para cada blog popular
+        blogs.forEach(blog => {
+            const postItem = document.createElement('div');
+            postItem.className = 'post-item';
             
-            // Filtrar por categoría
-            const categoryMatch = activeFilters.category === 'all' || cardCategory === activeFilters.category;
-            
-            // Filtrar por etiquetas
-            let tagsMatch = true;
-            if (activeFilters.tags.length > 0) {
-                tagsMatch = activeFilters.tags.some(tag => cardTags.includes(tag));
+            // Formatear fecha
+            const fecha = new Date(blog.fecha).toLocaleDateString('es-ES', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            });
+
+            // Construir URL de imagen (puede ser relativa o absoluta)
+            let imagenUrl = blog.imagen || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80';
+            if (blog.imagen && blog.imagen.startsWith('/static/uploads/')) {
+                imagenUrl = `${API_BASE_URL}${blog.imagen}`;
             }
-            
-            return categoryMatch && tagsMatch;
+
+            postItem.innerHTML = `
+                <img src="${imagenUrl}" alt="${blog.titulo}" class="post-image" loading="lazy" 
+                     onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'">
+                <div class="post-content">
+                    <h4 class="post-title" title="${blog.titulo}">${blog.titulo}</h4>
+                    <span class="post-date">${fecha}</span>
+                </div>
+            `;
+
+            // Agregar evento de click para navegar al artículo
+            postItem.style.cursor = 'pointer';
+            postItem.addEventListener('click', () => {
+                // Aquí puedes agregar la navegación al artículo completo
+                window.location.href = `blog-article.html?id=${blog.id}`;
+            });
+
+            popularPostsWidget.appendChild(postItem);
         });
-        
-        // Actualizar la paginación y mostrar las publicaciones
-        currentPage = 1; // Volver a la primera página al aplicar nuevos filtros
-        updatePagination();
-        updateDisplayedPosts();
     }
 
-    // Actualizar categoría activa
-    function updateActiveCategory(activeLink) {
-        categoryLinks.forEach(link => link.classList.remove('active'));
-        activeLink.classList.add('active');
-    }
-
-    // Inicializar el blog
-    initBlog();
-});
-
-
-// Este script actualiza dinámicamente los enlaces "Leer más" en blog.html
-document.addEventListener('DOMContentLoaded', function() {
-    // Seleccionar todos los artículos del blog
-    const articles = document.querySelectorAll('.blog-card');
+    // Llamar a la función de inicialización
+    init();
     
-    // Recorrer cada artículo y actualizar el enlace "Leer más"
-    articles.forEach((article, index) => {
-        // El ID del artículo es el índice + 1 (para que empiece en 1)
-        const articleId = index + 1;
-        
-        // Encontrar el enlace "Leer más" dentro de este artículo
-        const readMoreLink = article.querySelector('.read-more');
-        
-        if (readMoreLink) {
-            // Actualizar el href con el ID del artículo
-            readMoreLink.href = `blog-article.html?id=${articleId}`;
-        }
-    });
+    // Cargar blogs populares
+    loadPopularBlogs();
+
 });
-
-

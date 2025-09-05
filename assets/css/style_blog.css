@@ -359,12 +359,12 @@ body {
 }
 
 .widget-title {
-    font-size: 1.3rem;
-    margin-top: 0;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--medium-gray);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--light-gray);
     position: relative;
+    margin-top: 0;
 }
 
 .widget-title::after {
@@ -374,7 +374,7 @@ body {
     bottom: -2px;
     width: 50px;
     height: 2px;
-    background-color: var(--accent-color);
+    background: var(--primary-color);
 }
 
 /* Search Widget */
@@ -420,7 +420,7 @@ body {
 }
 
 .search-submit:hover {
-    background-color: var(--secondary-color);
+    background-color: #e47835;
     transform: rotate(10deg);
 }
 
@@ -510,29 +510,6 @@ body {
 .post-date {
     font-size: 0.8rem;
     color: var(--dark-gray);
-}
-
-/* Tags Widget */
-.tag-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.tag-cloud a {
-    display: inline-block;
-    background-color: var(--light-gray);
-    color: var(--text-color);
-    font-size: 0.85rem;
-    padding: 5px 12px;
-    border-radius: 20px;
-    transition: var(--transition);
-}
-
-.tag-cloud a:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-2px);
 }
 
 /* Newsletter Widget */
@@ -828,24 +805,6 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-.widget-title {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--light-gray);
-    position: relative;
-}
-
-.widget-title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 50px;
-    height: 2px;
-    background: var(--primary-color);
-}
-
 .category-list {
     list-style: none;
     padding: 0;
@@ -910,28 +869,6 @@ body {
 .popular-posts .post-date {
     font-size: 0.75rem;
     color: #777;
-}
-
-.tag-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.tag-cloud a {
-    display: inline-block;
-    background: var(--light-gray);
-    color: var(--text-color);
-    font-size: 0.8rem;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.tag-cloud a:hover {
-    background: var(--primary-color);
-    color: white;
 }
 
 .newsletter-form {
